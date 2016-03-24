@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { Link } from 'react-router';
 
 class Dashboard extends React.Component {
 
@@ -13,6 +14,13 @@ class Dashboard extends React.Component {
                 </div>
                 <div>
                     <h1>New transaction</h1>
+
+                    <Link to="/sender">
+                        <h3>Sender</h3>
+                    </Link>
+                    <Link to="/traveller">
+                        <h3>Traveller</h3>
+                    </Link>
                 </div>
             </div>
         );
