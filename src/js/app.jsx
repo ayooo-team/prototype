@@ -6,9 +6,13 @@ import { Router, Route, hashHistory } from 'react-router';
 import AppContainer from './components/app-container.jsx';
 
 
+const routes = (
+    <Route path="/" component={ AppContainer } />
+);
+
 ReactDOM.render(
     <Router history={ hashHistory }>
-        <Route path="/" component={ AppContainer } />
+        { routes }
     </Router>,
     document.getElementsByClassName("content")[0]
 );
