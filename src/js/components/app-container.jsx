@@ -9,6 +9,7 @@ class AppContainer extends React.Component {
         return (
             <div>
                 <h1>This is the app container</h1>
+                { this.props.children }
             </div>
         );
     }
