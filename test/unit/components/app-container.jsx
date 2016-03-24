@@ -11,11 +11,8 @@ import AppContainer from '../../../src/js/components/app-container.jsx';
 
 tape('AppContainer exists', (t) => {
 
-    const rendered = mount(<AppContainer />);
+    const rendered = shallow(<AppContainer />);
 
-
-    console.log(rendered.props());
-    // t.equal(text, "Hey", 'They are the same');
-
+    t.equal(rendered.props().className, "app-container", 'AppContainer renders correctly');
     t.end();
 });
