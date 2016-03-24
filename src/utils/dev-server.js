@@ -17,6 +17,6 @@ const options = {
 
 const server = new WebpackDevServer(compiler, options);
 
-server.listen(8008, 'localhost', function () {
+server.listen(8080, 'localhost', function () {
     console.log('webpack-dev-server is running on ');
 });

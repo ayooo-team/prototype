@@ -6,7 +6,7 @@ module.exports = {
     entry: [
         "./src/js/app.jsx",
         "webpack/hot/dev-server",
-        "webpack-dev-server/client?http://localhost:8008/"
+        "webpack-dev-server/client?http://localhost:8080/"
     ],
     output: {
         path: path.join(__dirname, "build"),
