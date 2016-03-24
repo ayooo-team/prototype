@@ -11,7 +11,6 @@ import Dashboard from './components/dashboard.jsx';
 import Sender from './components/sender.jsx';
 import Traveller from './components/traveller.jsx';
 
-
 const routes = (
     <Route path="/" component={ AppContainer } >
         <IndexRoute component={ Login } />

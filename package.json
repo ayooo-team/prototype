@@ -3,6 +3,27 @@
   "version": "1.0.0",
   "description": "Prototype for Ayooo",
   "main": "src/server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "webpack --config webpack.production.config.js --colors --progress",
+    "dev": "node ./src/utils/dev-server.js",
+    "test": "tape --require babel-register --require ./test/utils/jsdom-helper.js 'test/**/*.@(js|jsx)' | tap-spec"
+  },
+  "config": {
+    "ghooks": {
+      "pre-push": "npm run test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayooo-team/prototype.git"
+  },
+  "author": "@minaorangina, @mk4111",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayooo-team/prototype/issues"
+  },
+  "homepage": "https://github.com/ayooo-team/prototype#readme",
   "dependencies": {
     "ghooks": "^1.0.3",
     "hapi": "^13.2.1",
@@ -26,29 +47,10 @@
     "postcss-loader": "^0.8.2",
     "react-addons-test-utils": "^0.14.7",
     "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.5.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
-  },
-  "scripts": {
-    "build": "webpack --config webpack.production.config.js --colors --progress",
-    "dev": "node ./src/utils/dev-server.js",
-    "test": "tape --require babel-register --require ./test/utils/jsdom-helper.js 'test/**/*.@(js|jsx)' | tap-spec"
-  },
-  "config": {
-    "ghooks": {
-      "pre-push": "npm run test"
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ayooo-team/prototype.git"
-  },
-  "author": "@minaorangina, @mk4111",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ayooo-team/prototype/issues"
-  },
-  "homepage": "https://github.com/ayooo-team/prototype#readme"
+  }
 }
