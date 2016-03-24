@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import { Link } from 'react-router';
 
 class Login extends React.Component {
 
@@ -9,6 +10,9 @@ class Login extends React.Component {
         return (
             <div>
                 <h1>Login Page</h1>
+                <Link to="/dashboard">
+                    <h3>Login</h3>
+                </Link>
             </div>
         );
     }
