@@ -11,3 +11,6 @@
         </Route>
     </Router>
 ```
+
+### Unexpected token in React class declaration
+* ES6 React: functions are **not** separated by commas
