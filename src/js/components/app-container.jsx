@@ -7,7 +7,9 @@ class AppContainer extends React.Component {
     render () {
 
         return (
-            <div>This is the app container</div>
+            <div>
+                <h1>This is the app container</h1>
+            </div>
         );
     }
 };
