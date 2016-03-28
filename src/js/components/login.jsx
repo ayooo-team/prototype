@@ -34,6 +34,7 @@ class Login extends React.Component {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.authWithPassword(credentials, (error, authData) => {
+            console.log("authData!" + authData)
             error ? this.isNewUser(error, (callback) => {this.signUserUp(firebaseApp, credentials)}) : window.location = "/#dashboard";
         });
     }
@@ -46,8 +47,16 @@ class Login extends React.Component {
     signUserUp (firebaseApp, credentials) {
 
         firebaseApp.createUser(credentials, (error, userData) => {
-            error ? alert(error) : this.logUserIn(credentials);
+            error ? alert(error) : this.createUserInstance(credentials, userData.uid), this.logUserIn(credentials);
       });
+    }
+
+    createUserInstance (credentials, userId) {
+        console.log("Insider createUserInstance");
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        firebaseApp.child("users").child(userId).set({
+            email: credentials.email
+        });
     }
 
     render () {
