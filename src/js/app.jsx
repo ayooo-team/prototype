@@ -10,6 +10,7 @@ import Login from './components/login.jsx';
 import Dashboard from './components/dashboard.jsx';
 import Sender from './components/sender.jsx';
 import Traveller from './components/traveller.jsx';
+import UserDetails from './components/save-user-details.jsx';
 
 const routes = (
     <Route path="/" component={ AppContainer } >
@@ -17,6 +18,7 @@ const routes = (
         <Route path="/dashboard" component={ Dashboard } />
         <Route path="/sender" component={ Sender } />
         <Route path="/traveller" component={ Traveller } />
+        <Route path="/user-info" component={ UserDetails } />
     </Route>
 );
 

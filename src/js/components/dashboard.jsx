@@ -21,6 +21,9 @@ class Dashboard extends React.Component {
                     <Link to="/traveller">
                         <h3>Traveller</h3>
                     </Link>
+                    <Link to="/user-info">
+                        <h3>User Details</h3>
+                    </Link>
                 </div>
             </div>
         );

@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ayooo-team/prototype#readme",
   "dependencies": {
+    "firebase": "^2.4.1",
     "ghooks": "^1.0.3",
     "hapi": "^13.2.1",
     "hoek": "^3.0.4",
