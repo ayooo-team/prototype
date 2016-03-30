@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Firebase from 'firebase';
+import GhostButton from './ghost-button.jsx';
 
 class Login extends React.Component {
 
@@ -10,6 +11,8 @@ class Login extends React.Component {
 
         super();
         this.checkAuthState();
+
+        this.getFormData = this.getFormData.bind(this);
     }
 
     checkAuthState () {
@@ -19,7 +22,8 @@ class Login extends React.Component {
         isUserAuthenticated ? window.location = "/#dashboard" : console.log('user not logged in');
     }
 
-    getFormData () {
+    getFormData (event) {
+
         event.preventDefault();
 
         const credentials = {
@@ -52,7 +56,7 @@ class Login extends React.Component {
     }
 
     createUserInstance (credentials, userId) {
-        console.log("Insider createUserInstance");
+
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.child("users").child(userId).set({
             email: credentials.email
@@ -62,12 +66,20 @@ class Login extends React.Component {
     render () {
 
         return (
-            <div>
-                <h1>Login Page</h1>
+            <div className="page form">
+                <h1 className="login-title">Log In or Sign Up </h1>
 
-                <input type="text" ref="email"/>
-                <input type="text" ref="password"/>
-                <button onClick={ this.getFormData.bind(this) }>Login</button>
+                <div className="form-block">
+                    <label className="form-label login-width-adjust">Email:</label>
+                    <input className="form-input" type="text" ref="email" />
+                </div>
+
+                <div className="form-block">
+                    <label className="form-label">Password:</label>
+                    <input className="form-input" type="text" ref="password" />
+                </div>
+
+                <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />
 
             </div>
         );
