@@ -11,5 +11,14 @@ module.exports = [
                 path: Path.join(__dirname, 'build')
             }
         }
+    },
+    {
+        method: 'POST',
+        path: '/post-request',
+        handler: function (request, reply) {
+
+            console.log(request.payload);
+            console.log(request.params);
+        }
     }
-]
+];
