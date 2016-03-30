@@ -2,9 +2,9 @@
   "name": "prototype",
   "version": "1.0.0",
   "description": "Prototype for Ayooo",
-  "main": "src/server.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/index.js",
     "build": "webpack --config webpack.production.config.js --colors --progress",
     "dev": "node ./src/utils/dev-server.js",
     "test": "tape --require babel-register --require ./test/utils/jsdom-helper.js 'test/**/*.@(js|jsx)' | tap-spec"
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ayooo-team/prototype#readme",
   "dependencies": {
+    "elasticsearch": "^10.1.3",
     "firebase": "^2.4.1",
     "ghooks": "^1.0.3",
     "hapi": "^13.2.1",
