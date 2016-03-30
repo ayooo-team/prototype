@@ -11,7 +11,8 @@
   },
   "config": {
     "ghooks": {
-      "pre-push": "npm run test"
+      "pre-push": "npm run test",
+      "post-merge": "npm install"
     }
   },
   "repository": {
