@@ -24,5 +24,5 @@ server.register(Inert, function (error) {
             throw error;
         }
         console.log('Server running at: ', server.info.uri);
-    })
-})
+    });
+});
