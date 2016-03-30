@@ -2,16 +2,17 @@
   "name": "prototype",
   "version": "1.0.0",
   "description": "Prototype for Ayooo",
-  "main": "src/server.js",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/index.js",
     "build": "webpack --config webpack.production.config.js --colors --progress",
     "dev": "node ./src/utils/dev-server.js",
     "test": "tape --require babel-register --require ./test/utils/jsdom-helper.js 'test/**/*.@(js|jsx)' | tap-spec"
   },
   "config": {
     "ghooks": {
-      "pre-push": "npm run test"
+      "pre-push": "npm run test",
+      "post-merge": "npm install"
     }
   },
   "repository": {
