@@ -69,9 +69,6 @@ class Login extends React.Component {
                 <input type="text" ref="password"/>
                 <button onClick={ this.getFormData.bind(this) }>Login</button>
 
-                <Link to="/dashboard">
-                    <h3>Login</h3>
-                </Link>
             </div>
         );
     }
