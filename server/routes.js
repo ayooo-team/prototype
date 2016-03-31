@@ -1,6 +1,11 @@
 'use strict';
 
-const Path = require('path');
+const path = require('path');
+const elasticsearch = require('./db/client.js');
+
+const filePaths = {
+    build: path.resolve(__dirname, '../build'),
+}
 
 module.exports = [
     {
@@ -8,7 +13,7 @@ module.exports = [
         path: '/{params*}',
         handler: {
             directory: {
-                path: Path.join(__dirname, 'build')
+                path: filePaths.build
             }
         }
     },
@@ -16,9 +21,8 @@ module.exports = [
         method: 'POST',
         path: '/delivery',
         handler: function (request, reply) {
-
-            console.log(request.payload);
-            console.log(request.params);
+            var result = elasticsearch.addDocument(request.payload);
+            console.log('result!!' + JSON.stringify(result));
         }
     }
 ];
