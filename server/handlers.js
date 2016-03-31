@@ -18,23 +18,55 @@ function addDeliveryRequest (request, reply) {
     });
 }
 
-function getData (request, reply) {
+function getData (request, reply, callback) {
 
     elasticsearch.search().then((result) => {
 
         var data = result.hits.hits;
 
-        var newResult = data.map((element) => {
+        var res =  data.map((element) => {
             // console.log(element);
             return element._source;
         });
 
-        reply(JSON.stringify(newResult, null, 4));
+        callback(res);
     });
+}
+
+function toCSV (data) {
+
+    if (typeof data === 'string') {
+
+        data = JSON.parse(data);
+    }
+
+	var headers = Object.keys(data[0]);
+	var topRow = headers.join(",") + "\r\n";
+
+    var result = data.reduce(function (previous, datapoint, index) {
+
+
+        for (var i = 0; i < headers.length; i++) {
+
+            previous += datapoint[headers[i]];
+
+            if (index === topRow.length - 1) {
+
+                previous += "\r\n";
+            } else {
+                previous += ",";
+            }
+        }
+
+        return previous;
+    }, topRow);
+
+    return result;
 }
 
 module.exports = {
 
     addDeliveryRequest: addDeliveryRequest,
-    getData: getData
+    getData: getData,
+    toCSV: toCSV
 };
