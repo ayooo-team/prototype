@@ -30,6 +30,13 @@ function indexExists () {
     });
 }
 
+function search () {
+
+    return client.search({
+        index: indexName
+    });
+}
+
 function addDocument (type, payload) {
 
     return client.index({
@@ -47,5 +54,6 @@ module.exports = {
      initIndex: initIndex,
      deleteIndex: deleteIndex,
      indexExists: indexExists,
-     addDocument: addDocument
+     addDocument: addDocument,
+     search: search
  };

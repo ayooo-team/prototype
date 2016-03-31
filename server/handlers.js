@@ -18,7 +18,23 @@ function addDeliveryRequest (request, reply) {
     });
 }
 
+function getData (request, reply) {
+
+    elasticsearch.search().then((result) => {
+
+        var data = result.hits.hits;
+
+        var newResult = data.map((element) => {
+            // console.log(element);
+            return element._source;
+        });
+
+        reply(JSON.stringify(newResult, null, 4));
+    });
+}
+
 module.exports = {
 
-    addDeliveryRequest: addDeliveryRequest
+    addDeliveryRequest: addDeliveryRequest,
+    getData: getData
 };

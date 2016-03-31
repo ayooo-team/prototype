@@ -20,5 +20,10 @@ module.exports = [
         method: 'POST',
         path: '/delivery',
         handler: handlers.addDeliveryRequest
+    },
+    {
+        method: 'GET',
+        path: '/get-data',
+        handler: handlers.getData
     }
 ];
