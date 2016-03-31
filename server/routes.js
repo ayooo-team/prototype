@@ -14,7 +14,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/post-request',
+        path: '/delivery',
         handler: function (request, reply) {
 
             console.log(request.payload);

@@ -16,7 +16,7 @@ class GhostButton extends React.Component {
                 </a>
             </div>
 
-            ) : (
+          ) : (
 
             <div className="ghost-button" onClick={ this.props.onClick }>
                 { this.props.buttonText }
