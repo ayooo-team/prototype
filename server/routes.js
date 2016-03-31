@@ -5,8 +5,7 @@ const elasticsearch = require('./db/client.js');
 
 const filePaths = {
     build: path.resolve(__dirname, '../build'),
-}
-
+};
 module.exports = [
     {
         method: 'GET',
@@ -21,6 +20,7 @@ module.exports = [
         method: 'POST',
         path: '/delivery',
         handler: function (request, reply) {
+            
             var result = elasticsearch.addDocument(request.payload);
             console.log('result!!' + JSON.stringify(result));
         }

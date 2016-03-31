@@ -44,8 +44,8 @@ function addDocument (payload) {
 }
 
 module.exports = {
-    initIndex: initIndex,
-    deleteIndex: deleteIndex,
-    indexExists: indexExists,
-    addDocument: addDocument
-};
+     initIndex: initIndex,
+     deleteIndex: deleteIndex,
+     indexExists: indexExists,
+     addDocument: addDocument
+ };
