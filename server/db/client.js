@@ -1,6 +1,6 @@
 'use strict';
 
-import elasticsearch from 'elasticsearch';
+var elasticsearch = require('elasticsearch');
 
 const client = new elasticsearch.Client({
     host: 'localhost:9200',
@@ -43,4 +43,9 @@ function addDocument (payload) {
     });
 }
 
-export { initIndex, deleteIndex, indexExists, addDocument };
+module.exports = {
+    initIndex: initIndex,
+    deleteIndex: deleteIndex,
+    indexExists: indexExists,
+    addDocument: addDocument
+};
