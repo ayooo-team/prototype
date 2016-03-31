@@ -7,7 +7,7 @@ const client = new elasticsearch.Client({
     log: 'error'
 });
 
-const indexName = "package";
+const indexName = "ayooo";
 
 function initIndex () {
 
@@ -16,7 +16,7 @@ function initIndex () {
     });
 }
 
-function deleteIndex () {
+function deleteIndex (indexName) {
 
     return client.indices.delete({
         index: indexName
@@ -30,11 +30,11 @@ function indexExists () {
     });
 }
 
-function addDocument (payload) {
+function addDocument (type, payload) {
 
     return client.index({
         index: indexName,
-        type: "post",
+        type: type,
         body: payload,
         suggest: {
             input: payload.item.split(" "),

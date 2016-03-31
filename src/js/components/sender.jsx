@@ -67,12 +67,20 @@ class Sender extends React.Component {
         });
     }
 
+    getUserID () {
+
+        const storage = localStorage.getItem("firebase:session::ayooo");
+
+        return JSON.parse(storage).uid;
+    }
+
     saveToDB (data) {
 
-        console.log('saving to DB');
+        const userID = this.getUserID();
+
         $.ajax({
             method: 'POST',
-            url: "/delivery",
+            url: "/delivery?type=sender&userID=" + userID,
             data: data,
             success: function (reply) {
                 console.log('YAY' + JSON.stringify(reply));
