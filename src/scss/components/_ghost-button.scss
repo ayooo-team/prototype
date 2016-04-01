@@ -1,7 +1,8 @@
 .ghost-button {
     text-align: center;
     font-size: 0.8em;
-    width: auto;
+    width: 300px;
+    height: 30px;
     padding: 0.7em;
     margin: 3em auto 0em auto;
     border-color: $dark-green;
@@ -9,11 +10,12 @@
     border-width: thin;
     border-radius: 6px;
     cursor: pointer;
+
     a:link, a:visited {
         text-decoration: none;
         color: $dark-green;
     }
-}
-.ghost-button:hover {
-    border-color: $light-green;
+    &:hover {
+        border-color: $light-green;
+    }
 }
