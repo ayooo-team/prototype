@@ -25,10 +25,9 @@ module.exports = [
         method: 'GET',
         path: '/get-data',
         handler: function (request, reply) {
-
+            
             var data = handlers.getData(function (data) {
 
-                console.log(data);
                 reply(handlers.toCSV(data));
             });
         }

@@ -18,18 +18,16 @@ function addDeliveryRequest (request, reply) {
     });
 }
 
-function getData (request, reply, callback) {
+function getData (callback) {
 
     elasticsearch.search().then((result) => {
 
-        var data = result.hits.hits;
-
-        var res =  data.map((element) => {
+        var data = result.hits.hits.map((element) => {
             // console.log(element);
             return element._source;
         });
 
-        callback(res);
+        callback(data);
     });
 }
 
