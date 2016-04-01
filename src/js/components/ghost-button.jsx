@@ -22,7 +22,7 @@ class GhostButton extends React.Component {
                 { this.props.buttonText }
             </button>
 
-            )
+        );
     }
 }
 
