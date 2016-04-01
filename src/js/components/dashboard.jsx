@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
         return(
             <div className="page dashboard-container">
 
-                <GhostButton pageLink="/journey" buttonText="TRAVELLER" />
+                <GhostButton pageLink="/travel-post" buttonText="TRAVELLER" />
 
                 <GhostButton pageLink="/pickup" buttonText="SHIPPER" />
 
