@@ -30,7 +30,7 @@ class Space extends React.Component {
                     <span className="flex-item" type="text">Kg</span>
                 </div>
 
-                <GhostButton pageLink={ "/confirm-travel" } buttonText={ "POST" } />
+                <GhostButton pageLink={ "/price" } buttonText={ "NEXT" } />
 
             </div>
         )
