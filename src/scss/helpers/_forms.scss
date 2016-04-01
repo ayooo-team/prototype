@@ -11,9 +11,13 @@ label {
     margin: 1em;
 }
 
+.form-block {
+    width: 100vw;
+}
+
 .form-input {
     font-size: 1.2em;
-    line-height: 2em;
+    line-height: 1.5em;
     min-width: 100%;
     display: block;
 
@@ -22,14 +26,10 @@ label {
     }
 }
 
-.form-label {
-}
-
 @media (min-width: 460px) {
     label {
         font-size: 1em;
         text-align: left;
-        display: inline-block;
     }
 
     .form-input {
@@ -38,4 +38,20 @@ label {
         min-width: 40%;
         display: inline-block;
     }
+}
+
+
+.flex-container {
+    display: flex;
+}
+
+.flex-wrapper {
+    display: flex;
+    flex: 1;
+    margin: auto;
+}
+
+.flex-item {
+    flex: 1;
+    max-width: 10vw;
 }
