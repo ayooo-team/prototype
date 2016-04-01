@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import GhostButton from './ghost-button.jsx';
+import GhostButton from '../ghost-button.jsx';
 
 class Sender extends React.Component {
 
@@ -83,10 +83,10 @@ class Sender extends React.Component {
             url: "/delivery?type=sender&userID=" + userID,
             data: data,
             success: function (reply) {
-                console.log('YAY' + JSON.stringify(reply));
+                console.log('SUCCESS: ' + JSON.stringify(reply));
             },
             error: function (error) {
-                console.log('ERROR:' + JSON.stringify(error));
+                console.log('ERROR: ' + JSON.stringify(error));
             }
         });
     }
