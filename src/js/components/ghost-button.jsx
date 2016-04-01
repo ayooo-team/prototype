@@ -10,17 +10,17 @@ class GhostButton extends React.Component {
 
         return this.props.href ? (
 
-            <div className="ghost-button">
+            <button className="ghost-button">
                 <a href={ this.props.href }>
                     { this.props.buttonText }
                 </a>
-            </div>
+            </button>
 
-            ) : (
+          ) : (
 
-            <div className="ghost-button" onClick={ this.props.onClick }>
+            <button className="ghost-button" onClick={ this.props.onClick }>
                 { this.props.buttonText }
-            </div>
+            </button>
 
             )
     }

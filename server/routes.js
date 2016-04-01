@@ -1,24 +1,36 @@
 'use strict';
 
-const Path = require('path');
+const path = require('path');
+const handlers = require('./handlers.js');
 
+const filePaths = {
+    build: path.resolve(__dirname, '../build'),
+};
 module.exports = [
     {
         method: 'GET',
         path: '/{params*}',
         handler: {
             directory: {
-                path: Path.join(__dirname, 'build')
+                path: filePaths.build
             }
         }
     },
     {
         method: 'POST',
-        path: '/post-request',
+        path: '/delivery',
+        handler: handlers.addDeliveryRequest
+    },
+    {
+        method: 'GET',
+        path: '/get-data',
         handler: function (request, reply) {
 
-            console.log(request.payload);
-            console.log(request.params);
+            var data = handlers.getData(function (data) {
+
+                console.log(data);
+                reply(handlers.toCSV(data));
+            });
         }
     }
 ];
