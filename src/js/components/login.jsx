@@ -38,7 +38,6 @@ class Login extends React.Component {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.authWithPassword(credentials, (error, authData) => {
-            console.log("authData!" + authData)
             error ? this.isNewUser(error, (callback) => {this.signUserUp(firebaseApp, credentials)}) : window.location = "/#dashboard";
         });
     }
@@ -67,7 +66,7 @@ class Login extends React.Component {
 
         return (
             <div className="page form">
-                <h1 className="login-title">Log In or Sign Up </h1>
+                <h1 className="login-title">Log In or Sign Up</h1>
 
                 <div className="form-block">
                     <label className="form-label login-width-adjust">Email:</label>

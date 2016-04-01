@@ -12,6 +12,9 @@ const options = {
     filename: 'bundle.js',
     stats: {
         colors: true
+    },
+    proxy: {
+        "*": "http://localhost:9000"
     }
 };
 

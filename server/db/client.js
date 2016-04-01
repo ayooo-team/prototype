@@ -1,13 +1,13 @@
 'use strict';
 
-import elasticsearch from 'elasticsearch';
+var elasticsearch = require('elasticsearch');
 
 const client = new elasticsearch.Client({
     host: 'localhost:9200',
     log: 'error'
 });
 
-const indexName = "package";
+const indexName = "ayooo";
 
 function initIndex () {
 
@@ -16,7 +16,7 @@ function initIndex () {
     });
 }
 
-function deleteIndex () {
+function deleteIndex (indexName) {
 
     return client.indices.delete({
         index: indexName
@@ -30,11 +30,18 @@ function indexExists () {
     });
 }
 
-function addDocument (payload) {
+function search () {
+
+    return client.search({
+        index: indexName
+    });
+}
+
+function addDocument (type, payload) {
 
     return client.index({
         index: indexName,
-        type: "post",
+        type: type,
         body: payload,
         suggest: {
             input: payload.item.split(" "),
@@ -43,4 +50,10 @@ function addDocument (payload) {
     });
 }
 
-export { initIndex, deleteIndex, indexExists, addDocument };
+module.exports = {
+     initIndex: initIndex,
+     deleteIndex: deleteIndex,
+     indexExists: indexExists,
+     addDocument: addDocument,
+     search: search
+ };
