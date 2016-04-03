@@ -16,7 +16,7 @@ class PriceSuggestion extends React.Component {
 
         event.preventDefault();
         this.refs.price.value ? (
-          this.saveDataToParentState(), window.location=this.props.pricePage["confirmationPageLink"]
+          this.saveDataToParentState(), window.location=this.props.pageType + "/confirm"
           ) : (
           alert("Please provide a price in GBP")
         );
@@ -24,6 +24,7 @@ class PriceSuggestion extends React.Component {
 
     saveDataToParentState() {
 
+        console.log("this price>>>", this.refs.price.value)
         const savePriceData = this.props.savePriceData;
         savePriceData({
             price: this.refs.price.value
@@ -36,7 +37,7 @@ class PriceSuggestion extends React.Component {
 
             <div className="page">
 
-                <h3>{ this.props.pricePage["pricePageDescription"] }</h3>
+                <h3>{ this.props.pricePageDescription }</h3>
 
                 <div className="form-block">
                     <label className="form-block-title">PRICE:</label>
