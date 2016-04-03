@@ -7,6 +7,19 @@ import GhostButton from '../ghost-button.jsx';
 
 class Space extends React.Component {
 
+    constructor() {
+      super();
+
+      this.saveDataToParentState = this.saveDataToParentState.bind(this);
+    }
+
+    saveDataToParentState() {
+
+        const saveLuggageData = this.props.saveLuggageData;
+        saveLuggageData("LUGGAGE");
+    }
+
+
     render () {
 
         var radioDiv = data["space"].map( (element, index, array) => {
@@ -30,8 +43,7 @@ class Space extends React.Component {
                     <span className="flex-item" type="text">Kg</span>
                 </div>
 
-                <GhostButton pageLink={ "/price" } buttonText={ "NEXT" } />
-
+                <GhostButton onClick={ this.saveDataToParentState } pageLink="/travel-post/price" buttonText="NEXT" />
             </div>
         )
     }
