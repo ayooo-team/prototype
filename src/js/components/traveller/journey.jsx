@@ -9,6 +9,7 @@ class Journey extends React.Component {
 
       super();
       this.getFormData = this.getFormData.bind(this);
+      this.saveDataToParentState = this.saveDataToParentState.bind(this);
     }
 
     getFormData (event) {
@@ -36,7 +37,7 @@ class Journey extends React.Component {
 
         this.checkInput(journeyData, (result) => {
 
-            result ? (this.saveDataToParentState(journeyData), window.location="/#/travel-post/luggage-allowance") : alert("Please complete all fields.");
+            result ? (this.saveDataToParentState(journeyData), window.location="/#/travel-post/parcel-size") : alert("Please complete all fields.");
         });
     }
 
