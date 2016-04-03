@@ -13,34 +13,43 @@ class TravelPost extends React.Component {
     constructor (props) {
         super();
 
-        this.getCurrentPage = this.getCurrentPage.bind(this);
-
-        this.state = {
-            currentPage: 0,
-            postDetails: {
-                departureCity: "",
-                departurePostCode: "",
-                departureDate: "",
-                departureTime: "",
-                arrivalCity: "",
-                arrivalPostCode: "",
-                arrivalDate: "",
-                arrivalTime: "",
-            }
-        };
+        this.saveJourneyData = this.saveJourneyData.bind(this);
+        this.saveLuggageData = this.saveLuggageData.bind(this);
+        this.savePriceData = this.savePriceData.bind(this);
+        this.attachActionsTo = this.attachActionsTo.bind(this);
     }
 
-    getCurrentPage () {
-        console.log('STATE' + pages[this.state.currentPage]);
-        return <pages[this.state.currentPage] />;
+    saveJourneyData (journeyData) {
+        console.log("save journey data");
+        this.setState({
+            journeyData
+        });
+    }
+
+    saveLuggageData (luggageAllowanceData) {
+        this.setState({
+            luggageAllowanceData
+        });
+    }
+
+    savePriceData (priceData) {
+        this.setState({
+            priceData
+        });
+    }
+
+    attachActionsTo (component) {
+        return React.cloneElement(component, {
+          saveJourneyData: this.saveJourneyData,
+          saveLuggageData: this.saveLuggageData,
+          savePriceData: this.savePriceData
+        });
     }
 
     render () {
 
         return (
-            <div>
-                { this.getCurrentPage() }
-            </div>
+            this.attachActionsTo(this.props.children)
         );
     }
 }
