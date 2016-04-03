@@ -13,36 +13,28 @@ class TravelPost extends React.Component {
     constructor (props) {
         super();
 
-        this.saveJourneyData = this.saveJourneyData.bind(this);
-        this.saveLuggageData = this.saveLuggageData.bind(this);
-        this.savePriceData = this.savePriceData.bind(this);
+        this.createComponentDataSaverFor = this.createComponentDataSaverFor.bind(this);
         this.attachActionsTo = this.attachActionsTo.bind(this);
     }
 
-    saveJourneyData (journeyData) {
-        console.log("save journey data");
-        this.setState({
-            journeyData
-        });
-    }
+    createComponentDataSaverFor (formName) {
 
-    saveLuggageData (luggageAllowanceData) {
-        this.setState({
-            luggageAllowanceData
-        });
-    }
+        return (formData) => {
 
-    savePriceData (priceData) {
-        this.setState({
-            priceData
-        });
+            this.setState({
+
+              [formName]: formData
+            })
+        }
     }
 
     attachActionsTo (component) {
+
         return React.cloneElement(component, {
-          saveJourneyData: this.saveJourneyData,
-          saveLuggageData: this.saveLuggageData,
-          savePriceData: this.savePriceData
+
+          saveJourneyData: this.createComponentDataSaverFor("journeyData"),
+          saveLuggageData: this.createComponentDataSaverFor("luggageData"),
+          savePriceData: this.createComponentDataSaverFor("priceData")
         });
     }
 
