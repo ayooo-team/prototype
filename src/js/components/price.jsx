@@ -11,7 +11,7 @@ class PriceSuggestion extends React.Component {
 
             <div className="page">
 
-                <h3>{ this.props.description }</h3>
+                <h3>{ this.props.pricePage["pricePageDescription"] }</h3>
 
                 <div className="form-block">
                     <label className="form-block-title">PRICE:</label>
@@ -19,7 +19,7 @@ class PriceSuggestion extends React.Component {
                     <input className="flex-item" type="text" ref="price" placeholder="HOUR" />
                 </div>
 
-                <GhostButton pageLink={ this.props.confirmationPage } buttonText={ "POST" } />
+                <GhostButton pageLink={ this.props.pricePage["confirmationPageLink"] } buttonText={ "NEXT" } />
 
             </div>
         );
