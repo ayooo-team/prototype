@@ -1,17 +1,19 @@
 'use strict';
 
 import React from 'react';
-import Page1 from './journey.jsx';
-import Page2 from './luggage-allowance.jsx';
-import Page3 from '../price.jsx';
-import Page4 from './confirm-travel.jsx';
-
-const pages = [Page1, Page2, Page3, Page4];
 
 class TravelPost extends React.Component {
 
     constructor (props) {
         super();
+
+        this.state = {
+          pricePage: {
+            pricePageDescription: "What is the minimum ",
+            confirmationPageLink: "/travel-post/confirm-travel"
+          },
+          formData: {}
+        }
 
         this.createComponentDataSaverFor = this.createComponentDataSaverFor.bind(this);
         this.attachActionsTo = this.attachActionsTo.bind(this);
@@ -22,8 +24,9 @@ class TravelPost extends React.Component {
         return (formData) => {
 
             this.setState({
-
-              [formName]: formData
+                formData : {
+                    [formName]: formData
+                }
             })
         }
     }
@@ -34,7 +37,9 @@ class TravelPost extends React.Component {
 
           saveJourneyData: this.createComponentDataSaverFor("journeyData"),
           saveLuggageData: this.createComponentDataSaverFor("luggageData"),
-          savePriceData: this.createComponentDataSaverFor("priceData")
+          savePriceData: this.createComponentDataSaverFor("priceData"),
+          formData: this.state.formData,
+          confirmationPageLink: this.state.confirmationPageLink
         });
     }
 
