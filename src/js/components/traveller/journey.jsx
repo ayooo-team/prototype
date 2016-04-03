@@ -72,4 +72,4 @@ class Journey extends React.Component {
     }
 }
 
-export default Journey
+export default Journey;

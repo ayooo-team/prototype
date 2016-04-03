@@ -7,3 +7,18 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.flex-container {
+    display: flex;
+}
+
+.flex-wrapper {
+    display: flex;
+    flex: 1;
+    margin: auto;
+}
+
+.flex-item {
+    flex: 1;
+    max-width: 10vw;
+}
