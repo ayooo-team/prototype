@@ -8,12 +8,11 @@ class TravelPost extends React.Component {
         super();
 
         this.state = {
-          pricePage: {
-            pricePageDescription: "What is the minimum price you would make a delivery for?",
-            confirmationPageLink: "/#travel-post/confirm-travel"
-          },
+          type: "travel",
+          pageType: "/#travel-post",
+          pricePageDescription: "What is the minimum price you would make a delivery for?",
           journeyData: "default",
-          luggageData: "default",
+          parcelSize: "default",
           priceData: "default"
         }
 
@@ -35,12 +34,14 @@ class TravelPost extends React.Component {
 
         return React.cloneElement(component, {
 
+          type: this.state.type,
+          pageType: this.state.pageType,
+          pricePageDescription: this.state.pricePageDescription,
           saveJourneyData: this.createComponentDataSaverFor("journeyData"),
-          saveLuggageData: this.createComponentDataSaverFor("luggageData"),
+          saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
           savePriceData: this.createComponentDataSaverFor("priceData"),
-          pricePage: this.state.pricePage,
           journeyData: this.state.journeyData,
-          luggageData: this.state.luggageData,
+          parcelSize: this.state.parcelSize,
           priceData: this.state.priceData
         });
     }
