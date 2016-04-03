@@ -1,16 +1,11 @@
 'use strict';
 
 import React from 'react';
-import Page1 from './journey.jsx';
-import Page2 from './luggage-allowance.jsx';
-import Page3 from '../price.jsx';
-import Page4 from './confirm-travel.jsx';
-
-const pages = [Page1, Page2, Page3, Page4];
 
 class TravelPost extends React.Component {
 
     constructor (props) {
+
         super();
 
         this.saveJourneyData = this.saveJourneyData.bind(this);
@@ -39,10 +34,11 @@ class TravelPost extends React.Component {
     }
 
     attachActionsTo (component) {
+
         return React.cloneElement(component, {
-          saveJourneyData: this.saveJourneyData,
-          saveLuggageData: this.saveLuggageData,
-          savePriceData: this.savePriceData
+            saveJourneyData: this.saveJourneyData,
+            saveLuggageData: this.saveLuggageData,
+            savePriceData: this.savePriceData
         });
     }
 
@@ -54,4 +50,4 @@ class TravelPost extends React.Component {
     }
 }
 
-export default TravelPost
+export default TravelPost;
