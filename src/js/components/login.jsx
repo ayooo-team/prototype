@@ -38,17 +38,27 @@ class Login extends React.Component {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.authWithPassword(credentials, (error, authData) => {
-            error ? this.isNewUser(error, (callback) => {this.signUserUp(firebaseApp, credentials)}) : window.location = "/#dashboard";
+                error ?
+                ( error.toString() === "Error: The specified user does not exist." ?
+                this.newUserEmailCheck(credentials) : alert(error)) :
+                window.location = "/#dashboard";
         });
     }
 
-    isNewUser (error, callback) {
+    newUserEmailCheck (credentials) {
 
-        error.toString() === "Error: The specified user does not exist." ? callback("new user") : alert(error);
+        const isEmailSame = prompt(`Welcome to Ayooo!
+Type in your email address again to make sure there are no typos!`);
+
+        isEmailSame === credentials.email ?
+        this.signUserUp(credentials) :
+        alert("Email addresses do not match. Please check and try again.");
     }
 
-    signUserUp (firebaseApp, credentials) {
+    signUserUp (credentials) {
 
+        console.log('signing up new user');
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.createUser(credentials, (error, userData) => {
             error ? alert(error) : this.createUserInstance(credentials, userData.uid), this.logUserIn(credentials);
       });
@@ -75,7 +85,7 @@ class Login extends React.Component {
 
                 <div className="form-block">
                     <label className="form-label">Password:</label>
-                    <input className="form-input" type="text" ref="password" />
+                    <input className="form-input" type="password" ref="password" />
                 </div>
 
                 <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />

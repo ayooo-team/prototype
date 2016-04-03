@@ -3,6 +3,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import GhostButton from './ghost-button.jsx';
+
 class Dashboard extends React.Component {
 
     constructor (props) {
@@ -22,22 +24,11 @@ class Dashboard extends React.Component {
 
         return(
             <div className="page dashboard-container">
-                <div>
-                    <h1>Past transactions</h1>
-                </div>
-                <div>
-                    <h1>New transaction</h1>
 
-                    <Link to="/sender">
-                        <h3>Sender</h3>
-                    </Link>
-                    <Link to="/traveller">
-                        <h3>Traveller</h3>
-                    </Link>
-                    <Link to="/user-info">
-                        <h3>User Details</h3>
-                    </Link>
-                </div>
+                <GhostButton pageLink="/travel-post" buttonText="TRAVELLER" />
+
+                <GhostButton pageLink="/pickup" buttonText="SHIPPER" />
+
             </div>
         );
     }

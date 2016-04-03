@@ -23,13 +23,19 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/get-data',
+        path: '/download',
         handler: function (request, reply) {
 
             var data = handlers.getData(function (data) {
 
-                console.log(data);
-                reply(handlers.toCSV(data));
+                var sortedByTime = data.sort(function (a, b) {
+
+                    return a.timestamp < b.timestamp;
+                });
+
+                var csvFile = handlers.toCSV(sortedByTime);
+                
+                reply(csvFile);
             });
         }
     }

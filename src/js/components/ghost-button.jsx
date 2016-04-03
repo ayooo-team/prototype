@@ -1,20 +1,28 @@
 'use strict';
 
 import React from 'react';
+import { Link } from 'react-router';
 
 class GhostButton extends React.Component {
 
-
-
     render () {
 
-        return this.props.href ? (
+        return this.props.pageLink && this.props.onClick ? (
 
-            <button className="ghost-button">
-                <a href={ this.props.href }>
+          <Link to={ this.props.pageLink }>
+              <button className="ghost-button" onClick={ this.props.onClick } >
+                  { this.props.buttonText }
+              </button>
+          </Link>
+
+
+        ) : this.props.pageLink ? (
+
+            <Link to={ this.props.pageLink }>
+                <button className="ghost-button" >
                     { this.props.buttonText }
-                </a>
-            </button>
+                </button>
+            </Link>
 
           ) : (
 
@@ -22,7 +30,7 @@ class GhostButton extends React.Component {
                 { this.props.buttonText }
             </button>
 
-            )
+        );
     }
 }
 

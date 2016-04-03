@@ -1,8 +1,8 @@
 @import "base/base";
 @import "base/reset";
 @import "base/colours";
-@import "helpers/ghost-button";
 @import "helpers/center-on-page";
-@import "helpers/forms";
-@import "base/app-container";
+@import "components/app-container";
+@import "components/ghost-button";
+@import "components/forms";
 @import "components/login"

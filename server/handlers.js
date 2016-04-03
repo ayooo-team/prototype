@@ -18,22 +18,28 @@ function addDeliveryRequest (request, reply) {
     });
 }
 
-function getData (request, reply, callback) {
+function getData (callback) {
 
     elasticsearch.search().then((result) => {
 
-        var data = result.hits.hits;
+        var data = result.hits.hits.map((element) => {
 
-        var res =  data.map((element) => {
-            // console.log(element);
             return element._source;
         });
 
-        callback(res);
+        callback(data);
+    }).catch((error) => {
+
+        console.error("Error:", error.message);
     });
 }
 
 function toCSV (data) {
+
+    if (typeof data !== 'string' && typeof data !== 'object') {
+
+        throw new Error("Argument must be a string or an object");
+    }
 
     if (typeof data === 'string') {
 
@@ -45,18 +51,16 @@ function toCSV (data) {
 
     var result = data.reduce(function (previous, datapoint, index) {
 
+        headers.forEach(function (header, headerIndex) {
 
-        for (var i = 0; i < headers.length; i++) {
-
-            previous += datapoint[headers[i]];
-
-            if (index === topRow.length - 1) {
+            previous += datapoint[header];
+            if (headerIndex === headers.length - 1) {
 
                 previous += "\r\n";
             } else {
                 previous += ",";
             }
-        }
+        });
 
         return previous;
     }, topRow);
