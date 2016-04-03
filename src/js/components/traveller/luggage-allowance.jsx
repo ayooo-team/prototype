@@ -16,7 +16,7 @@ class Space extends React.Component {
 
         return (
 
-            <div className="page">
+            <div className="data-collection-page">
 
                 <div className="form-block">
                     <h3 className="form-block-title">DEFINE YOUR CAPACITY</h3>
@@ -33,8 +33,8 @@ class Space extends React.Component {
                 <GhostButton pageLink={ "/price" } buttonText={ "NEXT" } />
 
             </div>
-        )
+        );
     }
 }
 
-export default Space
+export default Space;

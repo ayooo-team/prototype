@@ -8,7 +8,7 @@ class PickUp extends React.Component {
     render () {
 
         return(
-          <div className="page">
+          <div className="data-collection-page">
               <h1 className="login-title">SEND A PACKAGE</h1>
           </div>
         );

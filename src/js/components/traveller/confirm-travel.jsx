@@ -8,7 +8,7 @@ class ConfirmTravel extends React.Component {
     render () {
 
         return (
-            <div className="page">
+            <div className="data-collection-page">
                 <h1>CONFIRM TRAVEL</h1>
             </div>
         )
