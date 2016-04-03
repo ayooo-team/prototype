@@ -1,0 +1,25 @@
+.radio-block {
+
+    margin: 20px;
+    width: 90vw;
+
+    .description {
+
+        flex-grow: 2;
+        margin: auto;
+
+        h4, p {
+            // width: 60vw;
+        }
+
+        * {
+            text-align: left;
+        }
+    }
+
+    .radio-block-image {
+        width: 30%;
+        height: 30%;
+        margin-right: 20px;
+    }
+}
