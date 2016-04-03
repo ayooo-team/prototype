@@ -9,10 +9,13 @@ class ConfirmTravel extends React.Component {
 
         super();
         this.confirmPost = this.confirmPost.bind(this);
+
+        //CHECK IF USER PROFILE EXISTS ON FIREBASE
     }
 
     confirmPost () {
 
+        //MAKE AJAX REQUEST TO SAVE DATA TO ESDB
         alert("Thank you! AYOOO will be in touch soon!");
     }
 
@@ -28,7 +31,7 @@ class ConfirmTravel extends React.Component {
                       { "City: " + this.props.journeyData.departureCity }
                       </p>
                       <p className="form-input-data">
-                      { "PostCode: " + this.props.journeyData.departurePostcode }
+                      { "PostCode: " + this.props.journeyData.departurePostCode }
                       </p>
                       <p className="form-input-data">
                       { "Date(DD/MM/YYYY): " + this.props.journeyData.departureDay + "/" + this.props.journeyData.departureMonth + "/" + this.props.journeyData.departureYear }
@@ -36,7 +39,6 @@ class ConfirmTravel extends React.Component {
                       <p className="form-input-data">
                       { "Time(HH:MM): " + this.props.journeyData.departureHour + ":" + this.props.journeyData.departureMinutes }
                       </p>
-                      }
                   </div>
 
                   <div className="form-block">
@@ -45,7 +47,7 @@ class ConfirmTravel extends React.Component {
                       { "City: " + this.props.journeyData.arrivalCity }
                       </p>
                       <p className="form-input-data">
-                      { "PostCode: " + this.props.journeyData.arrivalPostcode }
+                      { "PostCode: " + this.props.journeyData.arrivalPostCode }
                       </p>
                       <p className="form-input-data">
                       { "Date(DD/MM/YYYY): " + this.props.journeyData.arrivalDay + "/" + this.props.journeyData.arrivalMonth + "/" + this.props.journeyData.arrivalYear }
@@ -58,10 +60,10 @@ class ConfirmTravel extends React.Component {
                   <div className="form-block">
                       <label className="form-block-title">LUGGAGE ALLOWANCE:</label>
                       <p className="form-input-data">{
-                          "Size: " + this.props.luggageData.chosenOption
+                          "Size: " + this.props.parcelSize.chosenOption
                       } </p>
                       <p>{
-                          "Weight: " + this.props.luggageData.weightAllowance
+                          "Weight: " + this.props.parcelSize.weightAllowance
                       } </p>
                   </div>
 
