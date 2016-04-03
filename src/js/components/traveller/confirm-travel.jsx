@@ -5,9 +5,15 @@ import GhostButton from '../ghost-button.jsx';
 
 class ConfirmTravel extends React.Component {
 
-    checkAllInputFieldsComplete () {
+    constructor(props) {
 
-        console.log('input fields complete ? submitToDB: no');
+        super();
+        this.confirmPost = this.confirmPost.bind(this);
+    }
+
+    confirmPost () {
+
+        alert("Thank you! AYOOO will be in touch soon!");
     }
 
     render () {
@@ -17,11 +23,57 @@ class ConfirmTravel extends React.Component {
               <div className="page form">
 
                   <div className="form-block">
-                      <label className="form-block-title">DEPARTURE LOCATION:</label>
-                      <span className="form-input-data"></span>
+                      <label className="form-block-title">DEPARTURE:</label>
+                      <p className="form-input-data">
+                      { "City: " + this.props.journeyData.departureCity }
+                      </p>
+                      <p className="form-input-data">
+                      { "PostCode: " + this.props.journeyData.departurePostcode }
+                      </p>
+                      <p className="form-input-data">
+                      { "Date(DD/MM/YYYY): " + this.props.journeyData.departureDay + "/" + this.props.journeyData.departureMonth + "/" + this.props.journeyData.departureYear }
+                      </p>
+                      <p className="form-input-data">
+                      { "Time(HH:MM): " + this.props.journeyData.departureHour + ":" + this.props.journeyData.departureMinutes }
+                      </p>
+                      }
                   </div>
 
-                  <GhostButton onClick={this.checkAllInputFieldsComplete} buttonText="CONFIRM" />
+                  <div className="form-block">
+                      <label className="form-block-title">ARRIVAL:</label>
+                      <p className="form-input-data">
+                      { "City: " + this.props.journeyData.arrivalCity }
+                      </p>
+                      <p className="form-input-data">
+                      { "PostCode: " + this.props.journeyData.arrivalPostcode }
+                      </p>
+                      <p className="form-input-data">
+                      { "Date(DD/MM/YYYY): " + this.props.journeyData.arrivalDay + "/" + this.props.journeyData.arrivalMonth + "/" + this.props.journeyData.arrivalYear }
+                      </p>
+                      <p className="form-input-data">
+                      { "Time(HH:MM): " + this.props.journeyData.arrivalHour + ":" + this.props.journeyData.arrivalMinutes }
+                      </p>
+                  </div>
+
+                  <div className="form-block">
+                      <label className="form-block-title">LUGGAGE ALLOWANCE:</label>
+                      <p className="form-input-data">{
+                          "Size: " + this.props.luggageData.chosenOption
+                      } </p>
+                      <p>{
+                          "Weight: " + this.props.luggageData.weightAllowance
+                      } </p>
+                  </div>
+
+                  <div className="form-block">
+                      <label className="form-block-title">ASKING PRICE:</label>
+                      <p className="form-input-data">{
+                          "Price(£): " + this.props.priceData.price
+                      } </p>
+                  </div>
+
+                  <GhostButton onClick={this.confirmPost} buttonText="CONFIRM" />
+
               </div>
         )
     }
