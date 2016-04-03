@@ -9,10 +9,12 @@ class TravelPost extends React.Component {
 
         this.state = {
           pricePage: {
-            pricePageDescription: "What is the minimum ",
-            confirmationPageLink: "/travel-post/confirm-travel"
+            pricePageDescription: "What is the minimum price you would make a delivery for?",
+            confirmationPageLink: "/#travel-post/confirm-travel"
           },
-          formData: {}
+          journeyData: "default",
+          luggageData: "default",
+          priceData: "default"
         }
 
         this.createComponentDataSaverFor = this.createComponentDataSaverFor.bind(this);
@@ -23,11 +25,9 @@ class TravelPost extends React.Component {
 
         return (formData) => {
 
-            this.setState({
-                formData : {
-                    [formName]: formData
-                }
-            })
+          this.setState({
+              [formName]: formData
+          })
         }
     }
 
@@ -38,8 +38,10 @@ class TravelPost extends React.Component {
           saveJourneyData: this.createComponentDataSaverFor("journeyData"),
           saveLuggageData: this.createComponentDataSaverFor("luggageData"),
           savePriceData: this.createComponentDataSaverFor("priceData"),
-          formData: this.state.formData,
-          confirmationPageLink: this.state.confirmationPageLink
+          pricePage: this.state.pricePage,
+          journeyData: this.state.journeyData,
+          luggageData: this.state.luggageData,
+          priceData: this.state.priceData
         });
     }
 
