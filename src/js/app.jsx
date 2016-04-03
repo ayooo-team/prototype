@@ -23,11 +23,13 @@ const routes = (
         <Route path="/dashboard" component={ Dashboard } />
         <Route path="/pickup" component={ Sender } />
         <Route path="/user-info" component={ UserDetails } />
-        <Route path="/journey" component={ Traveller } />
-        <Route path="/luggage-allowance" component={ Space } />
-        <Route path="/confirm-travel" component={ ConfirmTravel } />
+        <Route path="/travel-post" component={ TravelPost }>
+            <IndexRoute component={ Traveller } />
+            <Route path="luggage-allowance" component={ Space } />
+            <Route path="confirm-travel" component={ ConfirmTravel } />
+            <Route path="price" component={ PriceSuggestion } />
+        </Route>
         <Route path="/price" component={ PriceSuggestion } />
-        <Route path="/travel-post" component={ TravelPost } />
         <Route path="/admin" component={ Admin } />
     </Route>
 );
