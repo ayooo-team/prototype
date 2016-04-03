@@ -6,15 +6,15 @@ import GhostButton from '../ghost-button.jsx';
 class Journey extends React.Component {
 
     constructor() {
-      super();
 
-      this.submit = this.submit.bind(this);
+      super();
+      this.saveDataToParentState = this.saveDataToParentState.bind(this);
     }
 
-    submit() {
-      const saveJourneyData = this.props.saveJourneyData;
+    saveDataToParentState() {
 
-      saveJourneyData("TEST");
+      const saveJourneyData = this.props.saveJourneyData;
+      saveJourneyData("JOURNEY");
     }
 
     render () {
@@ -65,7 +65,7 @@ class Journey extends React.Component {
                     </div>
                 </div>
 
-                <GhostButton onClick={this.submit} pageLink="travel-post/luggage-allowance" buttonText="NEXT" />
+                <GhostButton onClick={ this.saveDataToParentState } pageLink="travel-post/luggage-allowance" buttonText="NEXT" />
             </div>
         )
     }
