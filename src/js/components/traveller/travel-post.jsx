@@ -43,7 +43,7 @@ class TravelPost extends React.Component {
     }
 
     render () {
-
+    
         return (
             this.attachActionsTo(this.props.children)
         );
