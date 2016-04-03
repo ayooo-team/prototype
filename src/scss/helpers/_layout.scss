@@ -5,6 +5,18 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+
+    h4 {
+        margin: 10px 0;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .form-block-title {
+        margin: 20px 0;
+    }
 }
 
 .flex-container {
