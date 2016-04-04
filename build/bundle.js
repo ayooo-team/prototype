@@ -68,21 +68,57 @@
 
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 
-	var _sender = __webpack_require__(221);
+	var _userDetails = __webpack_require__(221);
 
-	var _sender2 = _interopRequireDefault(_sender);
+	var _userDetails2 = _interopRequireDefault(_userDetails);
 
-	var _traveller = __webpack_require__(222);
+	var _admin = __webpack_require__(222);
 
-	var _traveller2 = _interopRequireDefault(_traveller);
+	var _admin2 = _interopRequireDefault(_admin);
 
-	var _saveUserDetails = __webpack_require__(223);
+	var _sendPost = __webpack_require__(224);
 
-	var _saveUserDetails2 = _interopRequireDefault(_saveUserDetails);
+	var _sendPost2 = _interopRequireDefault(_sendPost);
+
+	var _pickup = __webpack_require__(225);
+
+	var _pickup2 = _interopRequireDefault(_pickup);
+
+	var _parcelDetails = __webpack_require__(226);
+
+	var _parcelDetails2 = _interopRequireDefault(_parcelDetails);
+
+	var _parcelSize = __webpack_require__(227);
+
+	var _parcelSize2 = _interopRequireDefault(_parcelSize);
+
+	var _price = __webpack_require__(230);
+
+	var _price2 = _interopRequireDefault(_price);
+
+	var _setDeliveryDate = __webpack_require__(231);
+
+	var _setDeliveryDate2 = _interopRequireDefault(_setDeliveryDate);
+
+	var _confirmParcel = __webpack_require__(232);
+
+	var _confirmParcel2 = _interopRequireDefault(_confirmParcel);
+
+	var _travelPost = __webpack_require__(233);
+
+	var _travelPost2 = _interopRequireDefault(_travelPost);
+
+	var _journey = __webpack_require__(234);
+
+	var _journey2 = _interopRequireDefault(_journey);
+
+	var _confirmTravel = __webpack_require__(235);
+
+	var _confirmTravel2 = _interopRequireDefault(_confirmTravel);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(224);
+	__webpack_require__(236);
 
 
 	var routes = _react2.default.createElement(
@@ -90,9 +126,26 @@
 	    { path: '/', component: _appContainer2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _login2.default }),
 	    _react2.default.createElement(_reactRouter.Route, { path: '/dashboard', component: _dashboard2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/sender', component: _sender2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/traveller', component: _traveller2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/user-info', component: _saveUserDetails2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/user-info', component: _userDetails2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/admin', component: _admin2.default }),
+	    _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: '/send-post', component: _sendPost2.default },
+	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _pickup2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'parcel-details', component: _parcelDetails2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'parcel-size', component: _parcelSize2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'price', component: _price2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'set-delivery-date', component: _setDeliveryDate2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'confirm', component: _confirmParcel2.default })
+	    ),
+	    _react2.default.createElement(
+	        _reactRouter.Route,
+	        { path: '/travel-post', component: _travelPost2.default },
+	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _journey2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'parcel-size', component: _parcelSize2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'price', component: _price2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: 'confirm', component: _confirmTravel2.default })
+	    )
 	);
 
 	_reactDom2.default.render(_react2.default.createElement(
@@ -24893,22 +24946,24 @@
 
 	            var firebaseApp = new _firebase2.default("https://ayooo.firebaseio.com/");
 	            firebaseApp.authWithPassword(credentials, function (error, authData) {
-	                error ? _this2.isNewUser(error, function (callback) {
-	                    _this2.signUserUp(firebaseApp, credentials);
-	                }) : window.location = "/#dashboard";
+	                error ? error.toString() === "Error: The specified user does not exist." ? _this2.newUserEmailCheck(credentials) : alert(error) : window.location = "/#dashboard";
 	            });
 	        }
 	    }, {
-	        key: 'isNewUser',
-	        value: function isNewUser(error, callback) {
+	        key: 'newUserEmailCheck',
+	        value: function newUserEmailCheck(credentials) {
 
-	            error.toString() === "Error: The specified user does not exist." ? callback("new user") : alert(error);
+	            var isEmailSame = prompt('Welcome to Ayooo!\nType in your email address again to make sure there are no typos!');
+
+	            isEmailSame === credentials.email ? this.signUserUp(credentials) : alert("Email addresses do not match. Please check and try again.");
 	        }
 	    }, {
 	        key: 'signUserUp',
-	        value: function signUserUp(firebaseApp, credentials) {
+	        value: function signUserUp(credentials) {
 	            var _this3 = this;
 
+	            console.log('signing up new user');
+	            var firebaseApp = new _firebase2.default("https://ayooo.firebaseio.com/");
 	            firebaseApp.createUser(credentials, function (error, userData) {
 	                error ? alert(error) : _this3.createUserInstance(credentials, userData.uid), _this3.logUserIn(credentials);
 	            });
@@ -24952,7 +25007,7 @@
 	                        { className: 'form-label' },
 	                        'Password:'
 	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'password' })
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'password', ref: 'password' })
 	                ),
 	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: "LOG IN / SIGN UP" })
 	            );
@@ -25292,17 +25347,25 @@
 	        value: function render() {
 
 	            return this.props.pageLink ? _react2.default.createElement(
-	                _reactRouter.Link,
-	                { to: this.props.pageLink },
+	                'button',
+	                { className: 'ghost-button' },
 	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'ghost-button' },
-	                    this.props.buttonText
+	                    _reactRouter.Link,
+	                    { to: this.props.pageLink },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        this.props.buttonText
+	                    )
 	                )
 	            ) : _react2.default.createElement(
 	                'button',
 	                { className: 'ghost-button', onClick: this.props.onClick },
-	                this.props.buttonText
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    this.props.buttonText
+	                )
 	            );
 	        }
 	    }]);
@@ -25368,9 +25431,13 @@
 
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'page dashboard-container' },
-	                _react2.default.createElement(_ghostButton2.default, { pageLink: '/traveller', buttonText: 'TRAVELLER' }),
-	                _react2.default.createElement(_ghostButton2.default, { pageLink: '/sender', buttonText: 'SHIPPER' })
+	                { className: 'dashboard-container' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'button-wrapper' },
+	                    _react2.default.createElement(_ghostButton2.default, { pageLink: '/travel-post', buttonText: 'TRAVELLER' }),
+	                    _react2.default.createElement(_ghostButton2.default, { pageLink: '/send-post', buttonText: 'SHIPPER' })
+	                )
 	            );
 	        }
 	    }]);
@@ -25382,466 +25449,6 @@
 
 /***/ },
 /* 221 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _ghostButton = __webpack_require__(219);
-
-	var _ghostButton2 = _interopRequireDefault(_ghostButton);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Sender = function (_React$Component) {
-	    _inherits(Sender, _React$Component);
-
-	    function Sender(props) {
-	        _classCallCheck(this, Sender);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Sender).call(this));
-
-	        _this.checkAuthState();
-
-	        _this.getFormData = _this.getFormData.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(Sender, [{
-	        key: 'checkAuthState',
-	        value: function checkAuthState() {
-
-	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
-	            var isUserAuthenticated = firebaseApp.getAuth();
-	            isUserAuthenticated ? console.log('user logged in') : window.location = "/#";
-	        }
-	    }, {
-	        key: 'getSelectedRadio',
-	        value: function getSelectedRadio() {
-
-	            var allOptions = [this.refs.pocket, this.refs.small, this.refs.medium, this.refs.large];
-
-	            var chosenRadio = allOptions.filter(function (option) {
-	                return option.checked;
-	            });
-
-	            return chosenRadio.length > 0 ? chosenRadio[0].value : false;
-	        }
-	    }, {
-	        key: 'checkInput',
-	        value: function checkInput(data, callback) {
-	            data["item"] && data["size"] && data["weight"] && data["origin"] && data["destination"] && data["date"] && data["price"] ? callback(true) : callback(false);
-	        }
-	    }, {
-	        key: 'getFormData',
-	        value: function getFormData(event) {
-	            var _this2 = this;
-
-	            event.preventDefault();
-
-	            var data = {
-	                item: this.refs.item.value,
-	                size: this.getSelectedRadio(),
-	                weight: this.refs.weight.value,
-	                origin: this.refs.origin.value,
-	                destination: this.refs.destination.value,
-	                date: this.refs.date.value,
-	                price: this.refs.price.value
-	            };
-
-	            this.checkInput(data, function (result) {
-
-	                result ? _this2.saveToDB(data) : alert("Please complete all fields.");
-	            });
-	        }
-	    }, {
-	        key: 'getUserID',
-	        value: function getUserID() {
-
-	            var storage = localStorage.getItem("firebase:session::ayooo");
-
-	            return JSON.parse(storage).uid;
-	        }
-	    }, {
-	        key: 'saveToDB',
-	        value: function saveToDB(data) {
-
-	            var userID = this.getUserID();
-
-	            $.ajax({
-	                method: 'POST',
-	                url: "/delivery?type=sender&userID=" + userID,
-	                data: data,
-	                success: function success(reply) {
-	                    console.log('SUCCESS: ' + JSON.stringify(reply));
-	                },
-	                error: function error(_error) {
-	                    console.log('ERROR: ' + JSON.stringify(_error));
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'page form' },
-	                _react2.default.createElement(
-	                    'h1',
-	                    { className: 'login-title' },
-	                    'SEND A PACKAGE'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label login-width-adjust' },
-	                        'Item Description:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'item' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Item Size:'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Pocket', ref: 'pocket' }),
-	                        'Pocket'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Small', ref: 'small' }),
-	                        'Small'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Medium', ref: 'medium' }),
-	                        'Medium'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Large', ref: 'large' }),
-	                        'Large'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Item Weight:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'weight' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Origin:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'origin' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Destination:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'destination' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Date to Deliver By:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'date' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Maximum price you are willing to offer:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'price' })
-	                ),
-	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: "SUBMIT" })
-	            );
-	        }
-	    }]);
-
-	    return Sender;
-	}(_react2.default.Component);
-
-	exports.default = Sender;
-
-/***/ },
-/* 222 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _ghostButton = __webpack_require__(219);
-
-	var _ghostButton2 = _interopRequireDefault(_ghostButton);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Traveller = function (_React$Component) {
-	    _inherits(Traveller, _React$Component);
-
-	    function Traveller(props) {
-	        _classCallCheck(this, Traveller);
-
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Traveller).call(this));
-
-	        _this.checkAuthState();
-
-	        _this.getFormData = _this.getFormData.bind(_this);
-	        return _this;
-	    }
-
-	    _createClass(Traveller, [{
-	        key: 'checkAuthState',
-	        value: function checkAuthState() {
-
-	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
-	            var isUserAuthenticated = firebaseApp.getAuth();
-	            isUserAuthenticated ? console.log('user logged in') : window.location = "/#";
-	        }
-	    }, {
-	        key: 'getSelectedRadio',
-	        value: function getSelectedRadio() {
-
-	            var allOptions = [this.refs.pocket, this.refs.small, this.refs.medium, this.refs.large];
-
-	            var chosenRadio = allOptions.filter(function (option) {
-	                return option.checked;
-	            });
-
-	            return chosenRadio.length > 0 ? chosenRadio[0].value : false;
-	        }
-	    }, {
-	        key: 'checkInput',
-	        value: function checkInput(data, callback) {
-	            data["size"] && data["weight"] && data["origin"] && data["destination"] && data["departureDate"] && data["arrivalDate"] && data["price"] ? callback(true) : callback(false);
-	        }
-	    }, {
-	        key: 'getFormData',
-	        value: function getFormData(event) {
-	            var _this2 = this;
-
-	            event.preventDefault();
-
-	            var data = {
-	                size: this.getSelectedRadio(),
-	                weight: this.refs.weight.value,
-	                origin: this.refs.origin.value,
-	                destination: this.refs.destination.value,
-	                departureDate: this.refs.departureDate.value,
-	                arrivalDate: this.refs.arrivalDate.value,
-	                price: this.refs.price.value
-	            };
-
-	            this.checkInput(data, function (result) {
-
-	                result ? _this2.saveToDB(data) : alert("Please complete all fields.");
-	            });
-	        }
-	    }, {
-	        key: 'getUserID',
-	        value: function getUserID() {
-
-	            var storage = localStorage.getItem("firebase:session::ayooo");
-
-	            return JSON.parse(storage).uid;
-	        }
-	    }, {
-	        key: 'saveToDB',
-	        value: function saveToDB(data) {
-
-	            var userID = this.getUserID();
-
-	            $.ajax({
-	                method: 'POST',
-	                url: "/delivery?type=traveller&userID=" + userID,
-	                data: data,
-	                success: function success(reply) {
-	                    console.log('SUCCESS: ' + JSON.stringify(reply));
-	                },
-	                error: function error(_error) {
-	                    console.log('ERROR: ' + JSON.stringify(_error));
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-
-	            return _react2.default.createElement(
-	                'div',
-	                { className: 'page form' },
-	                _react2.default.createElement(
-	                    'h1',
-	                    { className: 'login-title' },
-	                    'DELIVER A PACKAGE'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Item size restriction:'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Pocket', ref: 'pocket' }),
-	                        'Pocket'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Small', ref: 'small' }),
-	                        'Small'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Medium', ref: 'medium' }),
-	                        'Medium'
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-query' },
-	                        _react2.default.createElement('input', { className: 'form-radio', type: 'radio', name: 'packageSize', value: 'Large', ref: 'large' }),
-	                        'Large'
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Item weight restriction:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'weight' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Origin of Travel:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'origin' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Departure Time:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'departureDate' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Destination of Travel:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'destination' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Arrival Time:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'arrivalDate' })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Minimum asking price to deliver:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'price' })
-	                ),
-	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: "SUBMIT" })
-	            );
-	        }
-	    }]);
-
-	    return Traveller;
-	}(_react2.default.Component);
-
-	exports.default = Traveller;
-
-/***/ },
-/* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25965,16 +25572,1694 @@
 	exports.default = UserDetails;
 
 /***/ },
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _downloadButton = __webpack_require__(223);
+
+	var _downloadButton2 = _interopRequireDefault(_downloadButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Admin = function (_React$Component) {
+	    _inherits(Admin, _React$Component);
+
+	    function Admin() {
+	        _classCallCheck(this, Admin);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Admin).apply(this, arguments));
+	    }
+
+	    _createClass(Admin, [{
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'page' },
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    'App admin'
+	                ),
+	                _react2.default.createElement('br', null),
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    ' Choose a file to download: '
+	                ),
+	                _react2.default.createElement(_downloadButton2.default, { query: '?filename=senders', filename: 'senders.csv', buttonText: 'Sender requests' }),
+	                _react2.default.createElement(_downloadButton2.default, { query: '?filename=travellers', filename: 'travellers.csv', buttonText: 'Traveller requests' })
+	            );
+	        }
+	    }]);
+
+	    return Admin;
+	}(_react2.default.Component);
+
+	exports.default = Admin;
+
+/***/ },
+/* 223 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var DownloadButton = function DownloadButton(props) {
+
+	    var href = "/download" + props.query;
+
+	    return _react2.default.createElement(
+	        'button',
+	        { className: 'ghost-button' },
+	        _react2.default.createElement(
+	            'a',
+	            { href: href, download: props.filename },
+	            props.buttonText
+	        )
+	    );
+	};
+
+	exports.default = DownloadButton;
+
+/***/ },
 /* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SendPost = function (_React$Component) {
+	    _inherits(SendPost, _React$Component);
+
+	    function SendPost(props) {
+	        _classCallCheck(this, SendPost);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SendPost).call(this));
+
+	        _this.state = {
+	            type: "send",
+	            pageType: "/#send-post",
+	            pricePageDescription: "What is the maximum price you are willing to pay?",
+	            pickUpData: "default",
+	            parcelSize: "default",
+	            parcelDetails: "default",
+	            requestedDate: "default",
+	            priceData: "default"
+	        };
+
+	        _this.createComponentDataSaverFor = _this.createComponentDataSaverFor.bind(_this);
+	        _this.attachActionsTo = _this.attachActionsTo.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(SendPost, [{
+	        key: 'createComponentDataSaverFor',
+	        value: function createComponentDataSaverFor(formName) {
+	            var _this2 = this;
+
+	            return function (formData) {
+
+	                _this2.setState(_defineProperty({}, formName, formData));
+	            };
+	        }
+	    }, {
+	        key: 'attachActionsTo',
+	        value: function attachActionsTo(component) {
+
+	            return _react2.default.cloneElement(component, {
+
+	                type: this.state.type,
+	                pageType: this.state.pageType,
+	                pricePageDescription: this.state.pricePageDescription,
+	                savePickUpData: this.createComponentDataSaverFor("pickUpData"),
+	                saveParcelDetails: this.createComponentDataSaverFor("parcelDetails"),
+	                saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
+	                saveRequestedDate: this.createComponentDataSaverFor("requestedDate"),
+	                savePriceData: this.createComponentDataSaverFor("priceData"),
+	                pickUpData: this.state.pickUpData,
+	                parcelDetails: this.state.parcelDetails,
+	                parcelSize: this.state.parcelSize,
+	                requestedDate: this.state.requestedDate,
+	                priceData: this.state.priceData
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return this.attachActionsTo(this.props.children);
+	        }
+	    }]);
+
+	    return SendPost;
+	}(_react2.default.Component);
+
+	exports.default = SendPost;
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PickUp = function (_React$Component) {
+	    _inherits(PickUp, _React$Component);
+
+	    function PickUp() {
+	        _classCallCheck(this, PickUp);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PickUp).call(this));
+
+	        _this.getFormData = _this.getFormData.bind(_this);
+	        _this.ifSomeoneElse = _this.ifSomeoneElse.bind(_this);
+	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
+
+	        _this.state = {
+	            pickUpIdentity: "none",
+	            recipientIdentity: "none"
+	        };
+	        return _this;
+	    }
+
+	    _createClass(PickUp, [{
+	        key: 'ifSomeoneElse',
+	        value: function ifSomeoneElse(event) {
+
+	            event.target.value === "else" ? this.setState(_defineProperty({}, event.target.id, "inline-block")) : this.setState(_defineProperty({}, event.target.id, "none"));
+	        }
+	    }, {
+	        key: 'getFormData',
+	        value: function getFormData(event) {
+	            var _this2 = this;
+
+	            event.preventDefault();
+
+	            var pickUpIdentity = this.refs.pickUpIdentity.value;
+	            var recipientIdentity = this.refs.recipientIdentity.value;
+	            console.log("pickUpIdentity", pickUpIdentity);
+	            console.log("recipientIdentity", recipientIdentity);
+
+	            var pickUpData = {
+	                fromCity: this.refs.fromCity.value,
+	                fromPostCode: this.refs.fromPostcode.value,
+	                toCity: this.refs.toCity.value,
+	                toPostCode: this.refs.toPostcode.value
+	            };
+
+	            if (pickUpIdentity === "else" && recipientIdentity === "else") {
+	                console.log("NEITHER SELF");
+	                pickUpData["pickUpIdentity"] = this.refs.pickUpElseName.value + " ( " + this.refs.pickUpElseEmail.value + " )";
+	                pickUpData["recipientIdentity"] = this.refs.recipientElseName.value + " ( " + this.refs.recipientElseEmail.value + " )";
+	            } else if (pickUpIdentity === "self" && recipientIdentity === "else") {
+	                console.log("PICKUP");
+	                pickUpData["pickUpIdentity"] = "Me";
+	                pickUpData["recipientIdentity"] = this.refs.recipientElseName.value + " ( " + this.refs.recipientElseEmail.value + " )";
+	            } else if (pickUpIdentity === "else" && recipientIdentity === "self") {
+	                console.log("RECIPIENT");
+	                pickUpData["pickUpIdentity"] = this.refs.pickUpElseName.value + " ( " + this.refs.pickUpElseEmail.value + " )";
+	                pickUpData["recipientIdentity"] = "Me";
+	            } else {
+	                console.log("BOTH SELF");
+	                pickUpData["pickUpIdentity"] = "Me";
+	                pickUpData["recipientIdentity"] = "Me";
+	            }
+
+	            this.checkInput(pickUpData, function (result) {
+
+	                result ? (_this2.saveDataToParentState(pickUpData), window.location = "/#/send-post/parcel-details") : alert("Please complete all fields.");
+	            });
+	        }
+	    }, {
+	        key: 'checkInput',
+	        value: function checkInput(data, callback) {
+
+	            var dataKeys = Object.keys(data);
+	            var counter = 0;
+	            var emptyFields = 0;
+	            dataKeys.forEach(function (element, index, array) {
+	                data[element] === "" ? (counter++, emptyFields++) : counter++;
+	                if (counter === dataKeys.length) {
+	                    emptyFields === 0 ? callback(true) : callback(false);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'saveDataToParentState',
+	        value: function saveDataToParentState(pickUpData) {
+
+	            var savePickUpData = this.props.savePickUpData;
+	            savePickUpData(pickUpData);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'page form' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'FROM:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'fromCity', placeholder: 'CITY' }),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'fromPostcode', placeholder: 'POSTCODE' })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'Who will meet the carrier at the pickup location?'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { ref: 'pickUpIdentity', id: 'pickUpIdentity', onChange: this.ifSomeoneElse },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { className: 'form-input', select: 'selected', value: 'self' },
+	                            'I will'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { className: 'form-input', value: 'else' },
+	                            'Someone Else'
+	                        )
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'pickUpElseName', style: { display: this.state.pickUpIdentity }, placeholder: 'Enter pickup person\'s name' }),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'pickUpElseEmail', style: { display: this.state.pickUpIdentity }, placeholder: 'Enter pickup person\'s email' })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'TO:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'toCity', placeholder: 'CITY' }),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'toPostcode', placeholder: 'POSTCODE' })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'Who will meet the carrier at the delivery location?'
+	                    ),
+	                    _react2.default.createElement(
+	                        'select',
+	                        { ref: 'recipientIdentity', id: 'recipientIdentity', onChange: this.ifSomeoneElse },
+	                        _react2.default.createElement(
+	                            'option',
+	                            { className: 'form-input', select: 'selected', value: 'self' },
+	                            'I will'
+	                        ),
+	                        _react2.default.createElement(
+	                            'option',
+	                            { className: 'form-input', value: 'else' },
+	                            'Someone Else'
+	                        )
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'recipientElseName', style: { display: this.state.recipientIdentity }, placeholder: 'Enter recipient\'s name' }),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'recipientElseEmail', style: { display: this.state.recipientIdentity }, placeholder: 'Enter recipient\'s email' })
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
+	            );
+	        }
+	    }]);
+
+	    return PickUp;
+	}(_react2.default.Component);
+
+	exports.default = PickUp;
+
+/***/ },
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ParcelDetails = function (_React$Component) {
+	    _inherits(ParcelDetails, _React$Component);
+
+	    function ParcelDetails(props) {
+	        _classCallCheck(this, ParcelDetails);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ParcelDetails).call(this));
+
+	        _this.tempSaveFilledFields = _this.tempSaveFilledFields.bind(_this);
+	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
+	        _this.getFormData = _this.getFormData.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(ParcelDetails, [{
+	        key: 'tempSaveFilledFields',
+	        value: function tempSaveFilledFields(event) {
+
+	            var tempData = {
+	                tempDescription: this.refs.parcelDescription.value,
+	                tempWeight: this.refs.parcelWeight.value
+	            };
+
+	            this.saveDataToParentState(tempData);
+	            window.location = "/#/send-post/parcel-size";
+	        }
+	    }, {
+	        key: 'getFormData',
+	        value: function getFormData(event) {
+	            var _this2 = this;
+
+	            event.preventDefault();
+
+	            var parcelData = {
+	                parcelDescription: this.refs.parcelDescription.value,
+	                parcelWeight: this.refs.parcelWeight.value,
+	                parcelSize: this.props.parcelSize["chosenOption"]
+	            };
+
+	            this.checkInput(parcelData, function (result) {
+
+	                result ? (_this2.saveDataToParentState(parcelData), window.location = "/#/send-post/set-delivery-date") : alert("Please complete all fields.");
+	            });
+	        }
+	    }, {
+	        key: 'checkInput',
+	        value: function checkInput(data, callback) {
+
+	            var dataKeys = Object.keys(data);
+	            var counter = 0;
+	            var emptyFields = 0;
+	            dataKeys.forEach(function (element, index, array) {
+	                data[element] === ("" || "default") ? (counter++, emptyFields++) : counter++;
+	                if (counter === dataKeys.length) {
+	                    emptyFields === 0 ? callback(true) : callback(false);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'saveDataToParentState',
+	        value: function saveDataToParentState(pickUpData) {
+
+	            var saveParcelDetails = this.props.saveParcelDetails;
+	            saveParcelDetails(pickUpData);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return this.props.parcelDetails["tempDescription"] || this.props.parcelDetails["tempWeight"] ? _react2.default.createElement(
+	                'div',
+	                { className: 'page form' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'PARCEL DETAILS:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'parcelDescription', placeholder: 'List what is inside the parcel.', defaultValue: this.props.parcelDetails["tempDescription"] })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'Weight:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'flex-item', type: 'text', ref: 'parcelWeight', defaultValue: this.props.parcelDetails["tempWeight"] }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'flex-item', type: 'text' },
+	                        'Kg'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'Size:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-input', type: 'text', ref: 'parcelSize', onClick: this.tempSaveFilledFields },
+	                        this.props.parcelSize["chosenOption"],
+	                        ' >> '
+	                    )
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
+	            ) : _react2.default.createElement(
+	                'div',
+	                { className: 'page form' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'PARCEL DETAILS:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'parcelDescription', placeholder: 'List what is inside the parcel.' })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'Weight:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'flex-item', type: 'text', ref: 'parcelWeight' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'flex-item', type: 'text' },
+	                        'Kg'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'Size:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-input', type: 'text', ref: 'parcelSize', onClick: this.tempSaveFilledFields },
+	                        'Click here to set >> '
+	                    )
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
+	            );
+	        }
+	    }]);
+
+	    return ParcelDetails;
+	}(_react2.default.Component);
+
+	exports.default = ParcelDetails;
+
+/***/ },
+/* 227 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _options = __webpack_require__(228);
+
+	var _options2 = _interopRequireDefault(_options);
+
+	var _travellerSpace = __webpack_require__(229);
+
+	var _travellerSpace2 = _interopRequireDefault(_travellerSpace);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ParcelSize = function (_React$Component) {
+	    _inherits(ParcelSize, _React$Component);
+
+	    function ParcelSize() {
+	        _classCallCheck(this, ParcelSize);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ParcelSize).call(this));
+
+	        _this.setRadioOptionInState = _this.setRadioOptionInState.bind(_this);
+	        _this.storeRadioOptionOnly = _this.storeRadioOptionOnly.bind(_this);
+	        _this.storeRadioOptionAndWeight = _this.storeRadioOptionAndWeight.bind(_this);
+	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(ParcelSize, [{
+	        key: 'setRadioOptionInState',
+	        value: function setRadioOptionInState(event) {
+
+	            event.preventDefault();
+	            this.setState({
+	                chosenOption: event.target.id,
+	                showTick: "block",
+	                hideTick: "none"
+	            });
+	        }
+	    }, {
+	        key: 'storeRadioOptionAndWeight',
+	        value: function storeRadioOptionAndWeight() {
+
+	            this.state && this.state.chosenOption ? this.refs.weight.value ? (this.saveDataToParentState(), window.location = this.props.pageType + "/price") : alert("Please tell us your maximum weight allowance") : alert("Please tell us the capacity you have in your luggage");
+	        }
+	    }, {
+	        key: 'storeRadioOptionOnly',
+	        value: function storeRadioOptionOnly() {
+
+	            this.state && this.state.chosenOption ? (this.saveDataToParentState(), window.location = this.props.pageType + "/parcel-details") : alert("Please tell us the capacity you have in your luggage");
+	        }
+	    }, {
+	        key: 'saveDataToParentState',
+	        value: function saveDataToParentState() {
+
+	            var saveParcelSize = this.props.saveParcelSize;
+	            var optionLowerCase = this.state.chosenOption.charAt(0).toUpperCase() + this.state.chosenOption.substr(1).toLowerCase();
+
+	            this.refs.weight ? saveParcelSize({
+	                chosenOption: optionLowerCase,
+	                weightAllowance: this.refs.weight.value
+	            }) : saveParcelSize({
+	                chosenOption: optionLowerCase
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+
+	            var radioDiv = _travellerSpace2.default["space"].map(function (element, index, array) {
+
+	                return _react2.default.createElement(_options2.default, { onClick: _this2.setRadioOptionInState, key: index, blockTitle: element.title, blockImage: element.image, blockText: element.text });
+	            });
+
+	            return this.props.type === "travel" ? _react2.default.createElement(
+	                'div',
+	                { className: 'data-collection-page' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'radio-container' },
+	                    _react2.default.createElement(
+	                        'h3',
+	                        { className: '' },
+	                        'DEFINE YOUR CAPACITY'
+	                    ),
+	                    radioDiv
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: '' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: '' },
+	                        'WEIGHT:'
+	                    ),
+	                    _react2.default.createElement('input', { className: '', type: 'text', ref: 'weight', placeholder: 'HOUR' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: '', type: 'text' },
+	                        'Kg'
+	                    )
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.storeRadioOptionAndWeight, buttonText: 'NEXT' })
+	            ) : _react2.default.createElement(
+	                'div',
+	                { className: 'data-collection-page' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: '' },
+	                    _react2.default.createElement(
+	                        'h3',
+	                        { className: '' },
+	                        'DEFINE YOUR CAPACITY'
+	                    ),
+	                    radioDiv
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.storeRadioOptionOnly, buttonText: 'BACK' })
+	            );
+	        }
+	    }]);
+
+	    return ParcelSize;
+	}(_react2.default.Component);
+
+	exports.default = ParcelSize;
+
+/***/ },
+/* 228 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Options = function (_React$Component) {
+	    _inherits(Options, _React$Component);
+
+	    function Options() {
+	        _classCallCheck(this, Options);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Options).call(this));
+	    }
+
+	    _createClass(Options, [{
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'radio-row row', id: this.props.blockTitle, onClick: this.props.onClick },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'radio-image-wrapper col-2' },
+	                    _react2.default.createElement('img', { className: "radio-image radio-block-image-" + this.props.blockTitle, src: this.props.blockImage })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'description col-9' },
+	                    _react2.default.createElement(
+	                        'h4',
+	                        { className: 'radio-block-title', id: this.props.blockTitle },
+	                        this.props.blockTitle
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'radio-block-text', id: this.props.blockTitle },
+	                        this.props.blockText
+	                    )
+	                ),
+	                _react2.default.createElement('img', { className: 'radio-selected-tick col-1', id: this.props.blockTitle, src: 'https://cloud.githubusercontent.com/assets/13470325/14233556/3e0f5e2c-f9c4-11e5-8337-17c162b678a1.png' })
+	            );
+	        }
+	    }]);
+
+	    return Options;
+	}(_react2.default.Component);
+
+	exports.default = Options;
+
+/***/ },
+/* 229 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"space": [
+			{
+				"title": "Pocket",
+				"imagereal": "https://cloud.githubusercontent.com/assets/13470325/14210630/c04c222a-f821-11e5-8e3a-09a51ffbe04f.png",
+				"image": "http://placeholders.org/50",
+				"text": "Keys, phone. It fits in a pocket"
+			},
+			{
+				"title": "Small",
+				"image": "http://placeholders.org/50",
+				"text": "Computer, tablet, shirt. It fits in a bag"
+			},
+			{
+				"title": "Medium",
+				"imagereal": "https://cloud.githubusercontent.com/assets/13470325/14211414/e0c6c74a-f825-11e5-9691-efb95a914075.png",
+				"image": "http://placeholders.org/50",
+				"text": "The mum want to send you something"
+			},
+			{
+				"title": "Large",
+				"imagereal": "https://cloud.githubusercontent.com/assets/13470325/14211410/de91d0dc-f825-11e5-8828-d0569bd9376e.png",
+				"image": "http://placeholders.org/50",
+				"text": "A little van is required"
+			}
+		]
+	};
+
+/***/ },
+/* 230 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var PriceSuggestion = function (_React$Component) {
+	    _inherits(PriceSuggestion, _React$Component);
+
+	    function PriceSuggestion(props) {
+	        _classCallCheck(this, PriceSuggestion);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PriceSuggestion).call(this));
+
+	        _this.checkInput = _this.checkInput.bind(_this);
+	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(PriceSuggestion, [{
+	        key: 'checkInput',
+	        value: function checkInput(event) {
+
+	            event.preventDefault();
+	            this.refs.price.value ? (this.saveDataToParentState(), window.location = this.props.pageType + "/confirm") : alert("Please provide a price in GBP");
+	        }
+	    }, {
+	        key: 'saveDataToParentState',
+	        value: function saveDataToParentState() {
+
+	            console.log("this price>>>", this.refs.price.value);
+	            var savePriceData = this.props.savePriceData;
+	            savePriceData({
+	                price: this.refs.price.value
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'data-collection-page flex-column-wrapper' },
+	                _react2.default.createElement(
+	                    'h3',
+	                    null,
+	                    this.props.pricePageDescription
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block flex-container' },
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'input-title flex-item' },
+	                        'PRICE:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'input-wrapper flex-item' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: '', type: 'text' },
+	                            '£'
+	                        ),
+	                        _react2.default.createElement('input', { className: '', type: 'number', ref: 'price' })
+	                    )
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.checkInput, buttonText: "NEXT" })
+	            );
+	        }
+	    }]);
+
+	    return PriceSuggestion;
+	}(_react2.default.Component);
+
+	exports.default = PriceSuggestion;
+
+/***/ },
+/* 231 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SetDeliveryDate = function (_React$Component) {
+	    _inherits(SetDeliveryDate, _React$Component);
+
+	    function SetDeliveryDate() {
+	        _classCallCheck(this, SetDeliveryDate);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SetDeliveryDate).call(this));
+
+	        _this.ifFuture = _this.ifFuture.bind(_this);
+	        _this.getFormData = _this.getFormData.bind(_this);
+	        _this.checkInput = _this.checkInput.bind(_this);
+
+	        _this.state = {
+	            dateSetter: "none"
+	        };
+	        return _this;
+	    }
+
+	    _createClass(SetDeliveryDate, [{
+	        key: 'ifFuture',
+	        value: function ifFuture(event) {
+
+	            event.target.value === "future" ? this.setState({ dateSetter: "inline-block" }) : this.setState({ dateSetter: "none" });
+	        }
+	    }, {
+	        key: 'getFormData',
+	        value: function getFormData(event) {
+	            var _this2 = this;
+
+	            event.preventDefault();
+
+	            var deliveryRequest = {};
+
+	            if (this.refs.setDeliveryDate.value === "today") {
+	                console.log("TODAY");
+	                var now = Date();
+	                deliveryRequest["deliveryDate"] = now.split(" ").splice(1, 3).join(" ");
+	            } else if (this.refs.setDeliveryDate.value === "future") {
+	                console.log("FUTURE");
+	                var day = this.refs.deliveryDateDay.value;
+	                var month = this.refs.deliveryDateMonth.value;
+	                var year = this.refs.deliveryDateYear.value;
+	                var daysInAMonth = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"];
+	                var monthsInAYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	                var fourDigits = /\d{4}/g;
+
+	                if (daysInAMonth.indexOf(day.toString()) <= -1) {
+	                    alert("Please input a valid date in");
+	                } else {
+	                    if (monthsInAYear.indexOf(month) <= -1) {
+	                        alert("Please input a valid month - e.g. 'May' ");
+	                    } else {
+	                        if (year.match(fourDigits)) {
+	                            deliveryRequest["deliveryDate"] = month + " " + day + " " + year;
+	                        } else {
+	                            alert("Please input a valid year");
+	                        }
+	                    }
+	                }
+	            } else {
+	                console.log("ANYTIME");
+	                deliveryRequest["deliveryDate"] = "anytime";
+	            }
+
+	            this.checkInput(deliveryRequest, function (result) {
+
+	                result ? (_this2.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location = "/#/send-post/price") : alert("Please complete all fields.");
+	            });
+	        }
+	    }, {
+	        key: 'checkInput',
+	        value: function checkInput(deliveryDate, callback) {
+
+	            deliveryDate ? callback(true) : callback(false);
+	        }
+	    }, {
+	        key: 'saveDataToParentState',
+	        value: function saveDataToParentState(requestedDate) {
+
+	            var saveRequestedDate = this.props.saveRequestedDate;
+	            saveRequestedDate(requestedDate);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'form-block' },
+	                _react2.default.createElement(
+	                    'label',
+	                    { className: 'form-block-title' },
+	                    'When do you need your parcel to be delivered?'
+	                ),
+	                _react2.default.createElement(
+	                    'select',
+	                    { ref: 'setDeliveryDate', id: 'setDeliveryDate', onChange: this.ifFuture },
+	                    _react2.default.createElement(
+	                        'option',
+	                        { className: 'form-input', select: 'selected', value: 'today' },
+	                        'Today'
+	                    ),
+	                    _react2.default.createElement(
+	                        'option',
+	                        { className: 'form-input', value: 'future' },
+	                        'Future'
+	                    ),
+	                    _react2.default.createElement(
+	                        'option',
+	                        { className: 'form-input', value: 'anytime' },
+	                        'Anytime'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'flex-wrapper' },
+	                    _react2.default.createElement('input', { className: 'form-input flex-item', type: 'text', ref: 'deliveryDateDay', style: { display: this.state.dateSetter }, placeholder: 'DAY' }),
+	                    _react2.default.createElement('input', { className: 'form-input flex-item', type: 'text', ref: 'deliveryDateMonth', style: { display: this.state.dateSetter }, placeholder: 'MONTH' }),
+	                    _react2.default.createElement('input', { className: 'form-input flex-item', type: 'text', ref: 'deliveryDateYear', style: { display: this.state.dateSetter }, placeholder: 'YEAR' })
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
+	            );
+	        }
+	    }]);
+
+	    return SetDeliveryDate;
+	}(_react2.default.Component);
+
+	exports.default = SetDeliveryDate;
+
+/***/ },
+/* 232 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ConfirmParcel = function (_React$Component) {
+	    _inherits(ConfirmParcel, _React$Component);
+
+	    function ConfirmParcel(props) {
+	        _classCallCheck(this, ConfirmParcel);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmParcel).call(this));
+
+	        _this.confirmPost = _this.confirmPost.bind(_this);
+
+	        //CHECK IF USER PROFILE EXISTS ON FIREBASE --> if EXISTS, direct to alert box, else --> populate modal
+	        return _this;
+	    }
+
+	    _createClass(ConfirmParcel, [{
+	        key: 'confirmPost',
+	        value: function confirmPost() {
+
+	            //MAKE AJAX REQUEST TO SAVE DATA TO ESDB
+	            alert("Thank you! AYOOO will be in touch soon!");
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'page form' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'FROM:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "City: " + this.props.pickUpData.fromCity
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "PostCode: " + this.props.pickUpData.fromPostCode
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Person Picking Up: " + this.props.pickUpData.pickUpIdentity
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'TO:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "City: " + this.props.pickUpData.toCity
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "PostCode: " + this.props.pickUpData.toPostCode
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Person Recieving: " + this.props.pickUpData.recipientIdentity
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'PARCEL SIZE:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Description: " + this.props.parcelDetails.parcelDescription,
+	                        ' '
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Size: " + this.props.parcelSize.chosenOption,
+	                        ' '
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        "Weight: " + this.props.parcelSize.weightAllowance,
+	                        ' '
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'ASKING PRICE:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Price(£): " + this.props.priceData.price,
+	                        ' '
+	                    )
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.confirmPost, buttonText: 'CONFIRM' })
+	            );
+	        }
+	    }]);
+
+	    return ConfirmParcel;
+	}(_react2.default.Component);
+
+	exports.default = ConfirmParcel;
+
+/***/ },
+/* 233 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var TravelPost = function (_React$Component) {
+	    _inherits(TravelPost, _React$Component);
+
+	    function TravelPost(props) {
+	        _classCallCheck(this, TravelPost);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TravelPost).call(this));
+
+	        _this.state = {
+	            type: "travel",
+	            pageType: "/#travel-post",
+	            pricePageDescription: "What is the minimum price you would make a delivery for?",
+	            journeyData: "default",
+	            parcelSize: "default",
+	            priceData: "default"
+	        };
+
+	        _this.createComponentDataSaverFor = _this.createComponentDataSaverFor.bind(_this);
+	        _this.attachActionsTo = _this.attachActionsTo.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(TravelPost, [{
+	        key: 'createComponentDataSaverFor',
+	        value: function createComponentDataSaverFor(formName) {
+	            var _this2 = this;
+
+	            return function (formData) {
+
+	                _this2.setState(_defineProperty({}, formName, formData));
+	            };
+	        }
+	    }, {
+	        key: 'attachActionsTo',
+	        value: function attachActionsTo(component) {
+
+	            return _react2.default.cloneElement(component, {
+
+	                type: this.state.type,
+	                pageType: this.state.pageType,
+	                pricePageDescription: this.state.pricePageDescription,
+	                saveJourneyData: this.createComponentDataSaverFor("journeyData"),
+	                saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
+	                savePriceData: this.createComponentDataSaverFor("priceData"),
+	                journeyData: this.state.journeyData,
+	                parcelSize: this.state.parcelSize,
+	                priceData: this.state.priceData
+	            });
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return this.attachActionsTo(this.props.children);
+	        }
+	    }]);
+
+	    return TravelPost;
+	}(_react2.default.Component);
+
+	exports.default = TravelPost;
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Journey = function (_React$Component) {
+	    _inherits(Journey, _React$Component);
+
+	    function Journey() {
+	        _classCallCheck(this, Journey);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Journey).call(this));
+
+	        _this.getFormData = _this.getFormData.bind(_this);
+	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
+	        return _this;
+	    }
+
+	    _createClass(Journey, [{
+	        key: 'getFormData',
+	        value: function getFormData(event) {
+	            var _this2 = this;
+
+	            event.preventDefault();
+
+	            var journeyData = {
+
+	                departureCity: this.refs.departureCity.value,
+	                departurePostCode: this.refs.departurePostcode.value,
+	                departureDay: this.refs.departureDay.value,
+	                departureMonth: this.refs.departureMonth.value,
+	                departureYear: this.refs.departureYear.value,
+	                departureHour: this.refs.departureHour.value,
+	                departureMinutes: this.refs.departureMinutes.value,
+
+	                arrivalCity: this.refs.arrivalCity.value,
+	                arrivalPostCode: this.refs.arrivalPostcode.value,
+	                arrivalDay: this.refs.arrivalDay.value,
+	                arrivalMonth: this.refs.arrivalMonth.value,
+	                arrivalYear: this.refs.arrivalYear.value,
+	                arrivalHour: this.refs.arrivalHour.value,
+	                arrivalMinutes: this.refs.arrivalMinutes.value
+	            };
+
+	            this.checkInput(journeyData, function (result) {
+
+	                result ? (_this2.saveDataToParentState(journeyData), window.location = "/#/travel-post/parcel-size") : alert("Please complete all fields.");
+	            });
+	        }
+	    }, {
+	        key: 'checkInput',
+	        value: function checkInput(data, callback) {
+
+	            data["departureCity"] && data["departurePostCode"] && data["departureDay"] && data["departureMonth"] && data["departureYear"] && data["departureHour"] && data["departureMinutes"] && data["arrivalCity"] && data["arrivalPostCode"] && data["arrivalDay"] && data["arrivalMonth"] && data["arrivalYear"] && data["arrivalHour"] && data["arrivalMinutes"] ? callback(true) : callback(false);
+	        }
+	    }, {
+	        key: 'saveDataToParentState',
+	        value: function saveDataToParentState(journeyData) {
+
+	            var saveJourneyData = this.props.saveJourneyData;
+	            saveJourneyData(journeyData);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'data-collection-page form' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'DEPARTURE LOCATION:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'departureCity', placeholder: 'CITY' }),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'departurePostcode', placeholder: 'POSTCODE' })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'DEPARTURE DATE & TIME:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex-container' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: '' },
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'departureDay', placeholder: 'DAY' }),
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'departureMonth', placeholder: 'MONTH' }),
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'departureYear', placeholder: 'YEAR' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: '' },
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'departureHour', placeholder: 'HOUR' }),
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'departureMinutes', placeholder: 'MINUTES' })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'ARRIVAL LOCATION:'
+	                    ),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'arrivalCity', placeholder: 'CITY' }),
+	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'arrivalPostcode', placeholder: 'POSTCODE' })
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'ARRIVAL DATE & TIME:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex-container' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: '' },
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'arrivalDay', placeholder: 'DAY' }),
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'arrivalMonth', placeholder: 'MONTH' }),
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'arrivalYear', placeholder: 'YEAR' })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: '' },
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'arrivalHour', placeholder: 'HOUR' }),
+	                            _react2.default.createElement('input', { className: 'input-number', type: 'number', ref: 'arrivalMinutes', placeholder: 'MINUTES' })
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
+	            );
+	        }
+	    }]);
+
+	    return Journey;
+	}(_react2.default.Component);
+
+	exports.default = Journey;
+
+/***/ },
+/* 235 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ghostButton = __webpack_require__(219);
+
+	var _ghostButton2 = _interopRequireDefault(_ghostButton);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var ConfirmTravel = function (_React$Component) {
+	    _inherits(ConfirmTravel, _React$Component);
+
+	    function ConfirmTravel(props) {
+	        _classCallCheck(this, ConfirmTravel);
+
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmTravel).call(this));
+
+	        _this.confirmPost = _this.confirmPost.bind(_this);
+
+	        //CHECK IF USER PROFILE EXISTS ON FIREBASE
+	        return _this;
+	    }
+
+	    _createClass(ConfirmTravel, [{
+	        key: 'confirmPost',
+	        value: function confirmPost() {
+
+	            //MAKE AJAX REQUEST TO SAVE DATA TO ESDB
+	            alert("Thank you! AYOOO will be in touch soon!");
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'data-collection-page form' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'DEPARTURE:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "City: " + this.props.journeyData.departureCity
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "PostCode: " + this.props.journeyData.departurePostCode
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Date(DD/MM/YYYY): " + this.props.journeyData.departureDay + "/" + this.props.journeyData.departureMonth + "/" + this.props.journeyData.departureYear
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Time(HH:MM): " + this.props.journeyData.departureHour + ":" + this.props.journeyData.departureMinutes
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'ARRIVAL:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "City: " + this.props.journeyData.arrivalCity
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "PostCode: " + this.props.journeyData.arrivalPostCode
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Date(DD/MM/YYYY): " + this.props.journeyData.arrivalDay + "/" + this.props.journeyData.arrivalMonth + "/" + this.props.journeyData.arrivalYear
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Time(HH:MM): " + this.props.journeyData.arrivalHour + ":" + this.props.journeyData.arrivalMinutes
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'LUGGAGE ALLOWANCE:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Size: " + this.props.parcelSize.chosenOption
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        null,
+	                        "Weight: " + this.props.parcelSize.weightAllowance
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-block' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        { className: 'form-block-title' },
+	                        'ASKING PRICE:'
+	                    ),
+	                    _react2.default.createElement(
+	                        'p',
+	                        { className: 'form-input-data' },
+	                        "Price(£): " + this.props.priceData.price
+	                    )
+	                ),
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.confirmPost, buttonText: 'CONFIRM' })
+	            );
+	        }
+	    }]);
+
+	    return ConfirmTravel;
+	}(_react2.default.Component);
+
+	exports.default = ConfirmTravel;
+
+/***/ },
+/* 236 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(225);
+	var content = __webpack_require__(237);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(227)(content, {});
+	var update = __webpack_require__(239)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -25991,21 +27276,21 @@
 	}
 
 /***/ },
-/* 225 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(226)();
+	exports = module.exports = __webpack_require__(238)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "h1, h2, h3, h4, p {\n  margin: 0;\n  text-align: center; }\n\n* {\n  font-family: 'Roboto', sans-serif; }\n\n.display-none {\n  display: none; }\n\nhtml, body {\n  padding: 0;\n  margin: 0;\n  width: 100%; }\n\n* {\n  box-sizing: border-box; }\n\n*, *:before, *:after {\n  box-sizing: inherit; }\n\nh1, h2, h3, h4 {\n  margin: 0; }\n\nbutton {\n  margin: 0;\n  background-color: transparent; }\n\n.ghost-button {\n  text-align: center;\n  font-size: 0.8em;\n  width: auto;\n  padding: 0.7em;\n  margin: 3em auto 0em auto;\n  border-color: #65b465;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  cursor: pointer; }\n  .ghost-button a:link, .ghost-button a:visited {\n    text-decoration: none;\n    color: #65b465; }\n\n.ghost-button:hover {\n  border-color: #b1e5b1; }\n\n.page {\n  position: absolute;\n  width: 100vw;\n  height: 100%;\n  margin: auto;\n  display: flex;\n  justify-content: center;\n  flex-direction: column; }\n\n.form {\n  width: 100%;\n  margin: auto;\n  text-align: center; }\n\nlabel {\n  font-size: 1.3em;\n  text-align: left;\n  display: block;\n  margin: 1em; }\n\n.form-input {\n  font-size: 1.2em;\n  line-height: 2em;\n  min-width: 100%;\n  display: block; }\n  .form-input:focus {\n    outline: none; }\n\n@media (min-width: 460px) {\n  label {\n    font-size: 1em;\n    text-align: left;\n    display: inline-block; }\n  .form-input {\n    font-size: 1em;\n    line-height: 1.5em;\n    min-width: 40%;\n    display: inline-block; } }\n\n.app-container {\n  background-color: grey; }\n\n.login-title {\n  font-weight: lighter;\n  margin: 40px; }\n\n.login-width-adjust {\n  margin: 1em 2em; }\n", ""]);
+	exports.push([module.id, "h1, h2, h3, h4 {\n  margin: 2vh 0; }\n\nh1, h2, h3, h4, p {\n  text-align: center; }\n\np {\n  font-size: 1em; }\n\n* {\n  font-family: 'Roboto', sans-serif;\n  box-sizing: border-box; }\n\n.display-none {\n  display: none; }\n\nhtml, body {\n  padding: 0;\n  margin: 0; }\n\ninput:focus, textarea:focus {\n  outline: none; }\n\nbutton {\n  margin: 0;\n  background-color: transparent; }\n\n.col-1 {\n  width: 8.33%; }\n\n.col-2 {\n  width: 16.66%; }\n\n.col-3 {\n  width: 25%; }\n\n.col-4 {\n  width: 33.33%; }\n\n.col-5 {\n  width: 41.66%; }\n\n.col-6 {\n  width: 50%; }\n\n.col-7 {\n  width: 58.33%; }\n\n.col-8 {\n  width: 66.66%; }\n\n.col-9 {\n  width: 75%; }\n\n.col-10 {\n  width: 83.33%; }\n\n.col-11 {\n  width: 91.66%; }\n\n.col-12 {\n  width: 100%; }\n\n[class*=\"col-\"] {\n  float: left;\n  border: 1px solid red; }\n\n.row:after {\n  content: \"\";\n  clear: both;\n  display: block; }\n\n.data-collection-page {\n  width: 100vw;\n  margin: auto; }\n  .data-collection-page p {\n    margin: 0; }\n\n.left {\n  text-align: left; }\n\n.flex-column-wrapper {\n  -webkit-flex-direction: column;\n  flex-direction: column;\n  -webkit-align-items: flex-start;\n  align-items: flex-start; }\n\n.flex-container {\n  display: flex; }\n\n.flex-item {\n  flex: 1; }\n\n.app-container {\n  width: 100vw; }\n\n.ghost-button {\n  display: block;\n  text-align: center;\n  font-size: 1.4em;\n  width: 90vw;\n  height: 8vh;\n  margin: 0.7em auto;\n  border-color: #65b465;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  cursor: pointer; }\n  .ghost-button a {\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n    margin: auto 0; }\n  .ghost-button a:link, .ghost-button a:visited {\n    text-decoration: none;\n    color: #65b465; }\n  .ghost-button:focus {\n    outline: 0; }\n  .ghost-button:hover {\n    border-color: #b1e5b1; }\n\n.input-number {\n  width: 10vw; }\n\n/*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/\ninput::-webkit-outer-spin-button,\ninput::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0; }\n\n.radio-container {\n  width: 100%;\n  background-color: grey;\n  margin: auto; }\n  .radio-container .radio-row {\n    background: orange;\n    border: 1px solid black; }\n    .radio-container .radio-row:hover {\n      cursor: pointer; }\n\n.radio-block-title, .radio-block-text {\n  text-align: left; }\n\n.radio-selected-tick {\n  width: 4vh;\n  height: 4vh; }\n\n.login-title {\n  font-weight: lighter;\n  margin: 40px; }\n\n.login-width-adjust {\n  margin: 1em 2em; }\n\n.radio-block {\n  margin: 3vh 2vh;\n  width: 90vw; }\n  .radio-block .description {\n    flex-grow: 3;\n    margin: auto; }\n    .radio-block .description * {\n      text-align: left; }\n  .radio-block .radio-block-image {\n    height: auto;\n    margin: auto; }\n\n.dashboard-container {\n  width: 100vw;\n  margin: auto; }\n", ""]);
 
 	// exports
 
 
 /***/ },
-/* 226 */
+/* 238 */
 /***/ function(module, exports) {
 
 	/*
@@ -26061,7 +27346,7 @@
 
 
 /***/ },
-/* 227 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
