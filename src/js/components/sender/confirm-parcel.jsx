@@ -3,14 +3,14 @@
 import React from 'react';
 import GhostButton from '../ghost-button.jsx';
 
-class ConfirmTravel extends React.Component {
+class ConfirmParcel extends React.Component {
 
     constructor(props) {
 
         super();
         this.confirmPost = this.confirmPost.bind(this);
 
-        //CHECK IF USER PROFILE EXISTS ON FIREBASE
+        //CHECK IF USER PROFILE EXISTS ON FIREBASE --> if EXISTS, direct to alert box, else --> populate modal
     }
 
     confirmPost () {
@@ -26,39 +26,36 @@ class ConfirmTravel extends React.Component {
               <div className="page form">
 
                   <div className="form-block">
-                      <label className="form-block-title">DEPARTURE:</label>
+                      <label className="form-block-title">FROM:</label>
                       <p className="form-input-data">
-                      { "City: " + this.props.journeyData.departureCity }
+                      { "City: " + this.props.pickUpData.fromCity }
                       </p>
                       <p className="form-input-data">
-                      { "PostCode: " + this.props.journeyData.departurePostCode }
+                      { "PostCode: " + this.props.pickUpData.fromPostCode }
                       </p>
                       <p className="form-input-data">
-                      { "Date(DD/MM/YYYY): " + this.props.journeyData.departureDay + "/" + this.props.journeyData.departureMonth + "/" + this.props.journeyData.departureYear }
-                      </p>
-                      <p className="form-input-data">
-                      { "Time(HH:MM): " + this.props.journeyData.departureHour + ":" + this.props.journeyData.departureMinutes }
+                      { "Person Picking Up: " + this.props.pickUpData.pickUpIdentity }
                       </p>
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">ARRIVAL:</label>
+                      <label className="form-block-title">TO:</label>
                       <p className="form-input-data">
-                      { "City: " + this.props.journeyData.arrivalCity }
+                      { "City: " + this.props.pickUpData.toCity }
                       </p>
                       <p className="form-input-data">
-                      { "PostCode: " + this.props.journeyData.arrivalPostCode }
+                      { "PostCode: " + this.props.pickUpData.toPostCode }
                       </p>
                       <p className="form-input-data">
-                      { "Date(DD/MM/YYYY): " + this.props.journeyData.arrivalDay + "/" + this.props.journeyData.arrivalMonth + "/" + this.props.journeyData.arrivalYear }
-                      </p>
-                      <p className="form-input-data">
-                      { "Time(HH:MM): " + this.props.journeyData.arrivalHour + ":" + this.props.journeyData.arrivalMinutes }
+                      { "Person Recieving: " + this.props.pickUpData.recipientIdentity }
                       </p>
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">LUGGAGE ALLOWANCE:</label>
+                      <label className="form-block-title">PARCEL SIZE:</label>
+                      <p className="form-input-data">{
+                          "Description: " + this.props.parcelDetails.parcelDescription
+                      } </p>
                       <p className="form-input-data">{
                           "Size: " + this.props.parcelSize.chosenOption
                       } </p>
@@ -81,4 +78,4 @@ class ConfirmTravel extends React.Component {
     }
 }
 
-export default ConfirmTravel
+export default ConfirmParcel
