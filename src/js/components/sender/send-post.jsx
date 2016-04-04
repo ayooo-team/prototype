@@ -12,7 +12,7 @@ class SendPost extends React.Component {
           pageType: "/#send-post",
           pricePageDescription: "What is the maximum price you are willing to pay?",
           pickUpData: "default",
-          parcelSize: "Click Here To Set",
+          parcelSize: "default",
           parcelDetails: "default",
           requestedDate: "default",
           priceData: "default"
