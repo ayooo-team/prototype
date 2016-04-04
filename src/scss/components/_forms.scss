@@ -9,3 +9,29 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+.radio-container {
+
+    width: 90%;
+    background-color: grey;
+    margin: auto;
+
+    .radio-row {
+
+        background: orange;
+        border: 1px solid black;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+}
+
+.radio-block-title, .radio-block-text {
+    text-align: left;
+}
+
+.radio-selected-tick {
+    width: 4vh;
+    height: 4vh;
+}

@@ -2,7 +2,7 @@
     position: absolute;
     width: 100vw;
     margin: auto;
-    display: flex;
+    // display: flex;
     justify-content: center;
     flex-direction: column;
 
@@ -19,6 +19,9 @@
     }
 }
 
+.left {
+    text-align: left;
+}
 
 
 .flex-column-wrapper {
