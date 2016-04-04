@@ -12,7 +12,8 @@ class SendPost extends React.Component {
           pageType: "/#send-post",
           pricePageDescription: "What is the maximum price you are willing to pay?",
           pickUpData: "default",
-          parcelSize: "default",
+          parcelSize: "Click Here To Set",
+          parcelDetails: "default",
           requestedDate: "default",
           priceData: "default"
         }
@@ -39,12 +40,14 @@ class SendPost extends React.Component {
           pageType: this.state.pageType,
           pricePageDescription: this.state.pricePageDescription,
           savePickUpData: this.createComponentDataSaverFor("pickUpData"),
+          saveParcelDetails: this.createComponentDataSaverFor("parcelDetails"),
           saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
           saveRequestedDate: this.createComponentDataSaverFor("requestedDate"),
           savePriceData: this.createComponentDataSaverFor("priceData"),
           pickUpData: this.state.pickUpData,
+          parcelDetails: this.state.parcelDetails,
           parcelSize: this.state.parcelSize,
-          requestedDateData: this.state.requestedDateData,
+          requestedDate: this.state.requestedDate,
           priceData: this.state.priceData
         });
     }
