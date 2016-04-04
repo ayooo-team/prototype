@@ -94,7 +94,7 @@ class Sender extends React.Component {
     render () {
 
         return(
-          <div className="page form">
+          <div className="data-collection-page form">
               <h1 className="login-title">SEND A PACKAGE</h1>
 
               <div className="form-block">

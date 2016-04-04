@@ -9,9 +9,9 @@ import AppContainer from './components/app-container.jsx';
 import Login from './components/login.jsx';
 import Dashboard from './components/dashboard.jsx';
 import Sender from './components/sender/pickup.jsx';
-import Traveller from './components/traveller/journey.jsx';
-import UserDetails from './components/save-user-details.jsx';
-import Space from './components/traveller/luggage-allowance.jsx';
+import Journey from './components/traveller/journey.jsx';
+import UserDetails from './components/user-details.jsx';
+import LuggageAllowance from './components/traveller/luggage-allowance.jsx';
 import ConfirmTravel from './components/traveller/confirm-travel.jsx';
 import PriceSuggestion from './components/price.jsx';
 import TravelPost from './components/traveller/travel-post.jsx';
@@ -22,10 +22,10 @@ const routes = (
         <IndexRoute component={ Login } />
         <Route path="/dashboard" component={ Dashboard } />
         <Route path="/pickup" component={ Sender } />
-        <Route path="/user-info" component={ UserDetails } />
+        <Route path="/user-details" component={ UserDetails } />
         <Route path="/travel-post" component={ TravelPost }>
-            <IndexRoute component={ Traveller } />
-            <Route path="luggage-allowance" component={ Space } />
+            <IndexRoute component={ Journey } />
+            <Route path="luggage-allowance" component={ LuggageAllowance } />
             <Route path="confirm-travel" component={ ConfirmTravel } />
             <Route path="price" component={ PriceSuggestion } />
         </Route>

@@ -16,25 +16,27 @@ class Space extends React.Component {
 
         return (
 
-            <div className="page">
+            <div className="data-collection-page flex-column-wrapper">
 
                 <div className="form-block">
-                    <h3 className="form-block-title">DEFINE YOUR CAPACITY</h3>
+                    <h2 className="form-block-title">DEFINE YOUR CAPACITY</h2>
                     { radioDiv }
 
                 </div>
 
-                <div className="form-block">
-                    <label className="form-block-title">WEIGHT:</label>
-                    <input className="flex-item" type="text" ref="weight" placeholder="HOUR" />
-                    <span className="flex-item" type="text">Kg</span>
+                <div className="max-weight-container flex-container">
+                    <label className="input-title flex-item">MAX WEIGHT:</label>
+                    <div className="input-wrapper flex-item">
+                        <input className="" type="text" ref="weight" placeholder="" />
+                        <span className="" type="text">kg</span>
+                    </div>
                 </div>
 
                 <GhostButton pageLink={ "/price" } buttonText={ "NEXT" } />
 
             </div>
-        )
+        );
     }
 }
 
-export default Space
+export default Space;
