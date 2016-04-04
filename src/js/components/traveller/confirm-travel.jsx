@@ -7,15 +7,36 @@ class ConfirmTravel extends React.Component {
 
     constructor(props) {
 
-        super();
+        super ();
         this.confirmPost = this.confirmPost.bind(this);
-
+        this.getUserID = this.getUserID.bind(this);
         //CHECK IF USER PROFILE EXISTS ON FIREBASE
+    }
+
+    getUserID () {
+        const storage = localStorage.getItem("firebase:session::ayooo");
+
+        return JSON.parse(storage).uid;
     }
 
     confirmPost () {
 
         //MAKE AJAX REQUEST TO SAVE DATA TO ESDB
+
+        const userID = this.getUserID();
+
+        $.ajax({
+            method: 'POST',
+            url: 'delivery?type=traveller&userID=' + userID,
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log("Error");
+            }
+        });
+
+
         alert("Thank you! AYOOO will be in touch soon!");
     }
 

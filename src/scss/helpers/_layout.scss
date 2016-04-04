@@ -1,14 +1,11 @@
+.page {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
 .data-collection-page {
-    width: 100vw;
-    margin: auto;
-
-    h2, h3, h4 {
-        // margin: 1vh 0;
-    }
-
-    .form-block-title {
-        // margin: 5vh 0 5vh 0;
-    }
 
     p {
         margin: 0;

@@ -22,9 +22,12 @@ class Dashboard extends React.Component {
 
     render () {
 
-        return(
-            <div className="dashboard-container">
+        return (
 
+            <div className="page dashboard-container">
+                <img className="logo" src="/logo.png" />
+                <h1>AYOOO</h1>
+                <h4>How are you using the app today?</h4>
                 <div className="button-wrapper">
                     <GhostButton pageLink="/travel-post" buttonText="TRAVELLER" />
 
