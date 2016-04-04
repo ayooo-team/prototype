@@ -25,9 +25,12 @@ class Dashboard extends React.Component {
         return(
             <div className="dashboard-container">
 
-                <GhostButton pageLink="/travel-post" buttonText="TRAVELLER" />
+                <div className="button-wrapper">
+                    <GhostButton pageLink="/travel-post" buttonText="TRAVELLER" />
 
-                <GhostButton pageLink="/pickup" buttonText="SHIPPER" />
+                    <GhostButton pageLink="/pickup" buttonText="SHIPPER" />
+                </div>
+
 
             </div>
         );
