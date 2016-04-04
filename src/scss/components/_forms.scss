@@ -1,3 +1,14 @@
+.date-container {
+
+}
+
+.time-container {
+
+}
+
+.label {
+    display: inline-block;
+}
 
 .input-number {
     width: 10vw;
@@ -47,9 +58,11 @@ input::-webkit-inner-spin-button {
     //     justify-content: flex-end;
     // }
 
-    label {
+    .label {
         font-weight: 500;
     }
+
+    .input-wrapper
 
     .input-title {
         font-size: 1.3em;

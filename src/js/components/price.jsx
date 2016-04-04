@@ -22,7 +22,7 @@ class PriceSuggestion extends React.Component {
         );
     }
 
-    saveDataToParentState() {
+    saveDataToParentState () {
 
         console.log("this price>>>", this.refs.price.value)
         const savePriceData = this.props.savePriceData;
@@ -35,14 +35,15 @@ class PriceSuggestion extends React.Component {
 
         return (
 
-            <div className="data-collection-page flex-column-wrapper">
+            <div className="data-collection-page">
 
                 <h3>{ this.props.pricePageDescription }</h3>
 
-                <div className="form-block flex-container">
-                    <p className="input-title flex-item">PRICE:</p>
-                    <div className="input-wrapper flex-item">
-                        <span className="" type="text">£</span>
+                <div className="form-block row">
+
+                    <p className="input-title col-6">PRICE:</p>
+                    <div className="input-wrapper col-6">
+                        <span className="label" type="text">£</span>
                         <input className="" type="number" ref="price" />
                     </div>
                 </div>
