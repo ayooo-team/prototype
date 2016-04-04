@@ -5,6 +5,11 @@ const elasticsearch = require('./db/client.js');
 function addDeliveryRequest (request, reply) {
 
     var data = request.payload;
+    if (!request.query.userID) {
+
+        return new Error('userID not set');
+    }
+    
     data.userID = request.query.userID;
     data.timestamp = Date.now();
 
@@ -45,7 +50,7 @@ function toCSV (data) {
 
         data = JSON.parse(data);
     }
-    
+
     if (!Array.isArray(data)) {
 
         data = [data];
