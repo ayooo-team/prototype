@@ -13,7 +13,9 @@ import Traveller from './components/traveller/journey.jsx';
 import UserDetails from './components/save-user-details.jsx';
 import Space from './components/traveller/luggage-allowance.jsx';
 import ConfirmTravel from './components/traveller/confirm-travel.jsx';
-import Admin        from './components/admin.jsx';
+import PriceSuggestion from './components/price.jsx';
+import TravelPost from './components/traveller/travel-post.jsx';
+import Admin from './components/admin.jsx';
 
 const routes = (
     <Route path="/" component={ AppContainer } >
@@ -21,9 +23,13 @@ const routes = (
         <Route path="/dashboard" component={ Dashboard } />
         <Route path="/pickup" component={ Sender } />
         <Route path="/user-info" component={ UserDetails } />
-        <Route path="/journey" component={ Traveller } />
-        <Route path="/luggage-allowance" component={ Space } />
-        <Route path="/confirm-travel" component={ ConfirmTravel } />
+        <Route path="/travel-post" component={ TravelPost }>
+            <IndexRoute component={ Traveller } />
+            <Route path="luggage-allowance" component={ Space } />
+            <Route path="confirm-travel" component={ ConfirmTravel } />
+            <Route path="price" component={ PriceSuggestion } />
+        </Route>
+        <Route path="/price" component={ PriceSuggestion } />
         <Route path="/admin" component={ Admin } />
     </Route>
 );

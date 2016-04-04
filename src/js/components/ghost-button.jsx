@@ -7,7 +7,16 @@ class GhostButton extends React.Component {
 
     render () {
 
-        return this.props.pageLink ? (
+        return this.props.pageLink && this.props.onClick ? (
+
+          <Link to={ this.props.pageLink }>
+              <button className="ghost-button" onClick={ this.props.onClick } >
+                  { this.props.buttonText }
+              </button>
+          </Link>
+
+
+        ) : this.props.pageLink ? (
 
             <Link to={ this.props.pageLink }>
                 <button className="ghost-button" >
