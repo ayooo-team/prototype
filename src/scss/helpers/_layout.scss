@@ -6,17 +6,24 @@
     justify-content: center;
     flex-direction: column;
 
-    h4 {
-        margin: 10px 0;
+    h2, h3, h4 {
+        // margin: 1vh 0;
+    }
+
+    .form-block-title {
+        // margin: 5vh 0 5vh 0;
     }
 
     p {
         margin: 0;
     }
+}
 
-    .form-block-title {
-        margin: 20px 0;
-    }
+.flex-column-wrapper {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
 }
 
 .flex-container {

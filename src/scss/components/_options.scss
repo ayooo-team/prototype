@@ -1,11 +1,11 @@
 .radio-block {
 
-    margin: 20px;
+    margin: 3vh 2vh;
     width: 90vw;
 
     .description {
 
-        flex-grow: 2;
+        flex-grow: 3;
         margin: auto;
 
         h4, p {
@@ -24,6 +24,5 @@
     .radio-block-image {
         height: auto;
         margin: auto;
-        // margin-right: 20px;
     }
 }

@@ -4,6 +4,10 @@ html, body {
     width: 100%;
 }
 
+input:focus, textarea:focus {
+    outline: none;
+}
+
 button {
     margin: 0;
     background-color: transparent;
