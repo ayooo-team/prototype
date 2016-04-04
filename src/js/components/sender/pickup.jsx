@@ -51,7 +51,7 @@ class PickUp extends React.Component {
             pickUpData["recipientIdentity"]= this.refs.recipientElseName.value + "( " + this.refs.recipientElseEmail.value + " )"
         } else if (pickUpIdentity === "else" && recipientIdentity === "self") {
             console.log("RECIPIENT");
-            pickUpData["pickUpIdentity"]= this.refs.pickUpElseName.value + "( " + this.refs.pickUpElseEmail.value + " )" 
+            pickUpData["pickUpIdentity"]= this.refs.pickUpElseName.value + "( " + this.refs.pickUpElseEmail.value + " )"
             pickUpData["recipientIdentity"]= this.refs.recipientIdentity.value;
         } else {
             console.log("BOTH SELF")
@@ -63,7 +63,7 @@ class PickUp extends React.Component {
 
         this.checkInput(pickUpData, (result) => {
 
-            result ? (this.saveDataToParentState(pickUpData), window.location="/#/send-post/parcel-size") : alert("Please complete all fields.");
+            result ? (this.saveDataToParentState(pickUpData), window.location="/#/send-post/parcel-details") : alert("Please complete all fields.");
         });
     }
 
