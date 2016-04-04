@@ -1,5 +1,17 @@
 .dashboard-container {
 
     width: 100vw;
+    height: 100vh;
     margin: auto;
+
+    .button-wrapper {
+
+        margin: 10vh auto;
+    }
+}
+
+.logo {
+    display: block;
+    height: 20vh;
+    margin: 8vh auto;
 }
