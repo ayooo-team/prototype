@@ -82,13 +82,13 @@ class Journey extends React.Component {
                     <h4 className="form-block-title">DEPARTURE DATE & TIME:</h4>
 
                         <div className="date-container col-6">
-                            <input className="input-number" type="number" ref="departureDay" placeholder="DAY" />
+                            <input className="input-number" type="number" min="1" max="31" ref="departureDay" placeholder="DAY" />
                             <input className="input-number" type="number" min="1" max="12" ref="departureMonth" placeholder="MONTH" />
-                            <input className="input-number" type="number" ref="departureYear" placeholder="YEAR" />
+                            <input className="input-number" type="number" min="2016" ref="departureYear" placeholder="YEAR" />
                         </div>
                         <div className="time-container col-6">
-                            <input className="input-number" type="number" ref="departureHour" placeholder="HOUR" />
-                            <input className="input-number" type="number" ref="departureMinutes" placeholder="MINUTES" />
+                            <input className="input-number" type="number" min="0" max="23" ref="departureHour" placeholder="HOUR" />
+                            <input className="input-number" type="number" min="0" max="59" ref="departureMinutes" placeholder="MINUTES" />
                         </div>
 
                 </div>
@@ -103,13 +103,13 @@ class Journey extends React.Component {
                     <h4 className="form-block-title">ARRIVAL DATE & TIME:</h4>
                     <div className="">
                         <div className="date-container col-6">
-                            <input className="input-number" type="number" ref="arrivalDay" placeholder="DAY" />
+                            <input className="input-number" type="number" min="1" max="31" ref="arrivalDay" placeholder="DAY" />
                             <input className="input-number" type="number" min="1" max="12" ref="arrivalMonth" placeholder="MONTH" />
-                            <input className="input-number" type="number" ref="arrivalYear" placeholder="YEAR" />
+                            <input className="input-number" type="number" min="2016" ref="arrivalYear" placeholder="YEAR" />
                         </div>
                         <div className="time-container col-6">
-                            <input className="input-number" type="number"  ref="arrivalHour" placeholder="HOUR" />
-                            <input className="input-number" type="number" ref="arrivalMinutes" placeholder="MINUTES" />
+                            <input className="input-number" type="number" min="0" max="23" ref="arrivalHour" placeholder="HOUR" />
+                            <input className="input-number" type="number" min="0" max="59" ref="arrivalMinutes" placeholder="MINUTES" />
                         </div>
                     </div>
                 </div>
