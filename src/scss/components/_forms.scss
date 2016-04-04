@@ -1,58 +1,37 @@
-.form {
+
+.input-number {
+    width: 10vw;
+}
+
+/*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.radio-container {
+
     width: 100%;
+    background-color: grey;
     margin: auto;
-    text-align: center;
+
+    .radio-row {
+
+        background: orange;
+        border: 1px solid black;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
 }
 
-label {
-    font-size: 1.3em;
+.radio-block-title, .radio-block-text {
     text-align: left;
-    display: block;
-    margin: 1em;
 }
 
-.form-block {
-    width: 100vw;
-    text-align: center;
-}
-
-.form-input {
-    font-size: 1.2em;
-    line-height: 1.5em;
-    min-width: 100%;
-    display: block;
-
-    &:focus {
-        outline: none;
-    }
-}
-
-@media (min-width: 460px) {
-    label {
-        font-size: 1em;
-        text-align: left;
-    }
-
-    .form-input {
-        font-size: 1em;
-        line-height: 1.5em;
-        min-width: 40%;
-        display: inline-block;
-    }
-}
-
-
-.flex-container {
-    display: flex;
-}
-
-.flex-wrapper {
-    display: flex;
-    flex: 1;
-    margin: auto;
-}
-
-.flex-item {
-    flex: 1;
-    max-width: 10vw;
+.radio-selected-tick {
+    width: 4vh;
+    height: 4vh;
 }

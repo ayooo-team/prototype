@@ -5,6 +5,7 @@ import React from 'react';
 class TravelPost extends React.Component {
 
     constructor (props) {
+
         super();
 
         this.state = {
@@ -33,16 +34,16 @@ class TravelPost extends React.Component {
     attachActionsTo (component) {
 
         return React.cloneElement(component, {
-
-          type: this.state.type,
-          pageType: this.state.pageType,
-          pricePageDescription: this.state.pricePageDescription,
-          saveJourneyData: this.createComponentDataSaverFor("journeyData"),
-          saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
-          savePriceData: this.createComponentDataSaverFor("priceData"),
-          journeyData: this.state.journeyData,
-          parcelSize: this.state.parcelSize,
-          priceData: this.state.priceData
+            
+            type: this.state.type,
+            pageType: this.state.pageType,
+            pricePageDescription: this.state.pricePageDescription,
+            saveJourneyData: this.createComponentDataSaverFor("journeyData"),
+            saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
+            savePriceData: this.createComponentDataSaverFor("priceData"),
+            journeyData: this.state.journeyData,
+            parcelSize: this.state.parcelSize,
+            priceData: this.state.priceData
         });
     }
 
@@ -54,4 +55,4 @@ class TravelPost extends React.Component {
     }
 }
 
-export default TravelPost
+export default TravelPost;

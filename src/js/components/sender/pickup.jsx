@@ -125,7 +125,7 @@ class PickUp extends React.Component {
 
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
             </div>
-        )
+        );
     }
 }
 

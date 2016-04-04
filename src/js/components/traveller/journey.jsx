@@ -5,11 +5,11 @@ import GhostButton from '../ghost-button.jsx';
 
 class Journey extends React.Component {
 
-    constructor() {
+    constructor () {
 
-      super();
-      this.getFormData = this.getFormData.bind(this);
-      this.saveDataToParentState = this.saveDataToParentState.bind(this);
+        super ();
+        this.getFormData = this.getFormData.bind(this);
+        this.saveDataToParentState = this.saveDataToParentState.bind(this);
     }
 
     getFormData (event) {
@@ -41,7 +41,6 @@ class Journey extends React.Component {
         });
     }
 
-
     checkInput (data, callback) {
 
         ( data["departureCity"] &&
@@ -62,15 +61,15 @@ class Journey extends React.Component {
 
     saveDataToParentState(journeyData) {
 
-      const saveJourneyData = this.props.saveJourneyData;
-      saveJourneyData(journeyData);
+        const saveJourneyData = this.props.saveJourneyData;
+        saveJourneyData(journeyData);
     }
 
     render () {
 
         return (
 
-            <div className="page form">
+            <div className="data-collection-page form">
 
                 <div className="form-block">
                     <label className="form-block-title">DEPARTURE LOCATION:</label>
@@ -79,16 +78,17 @@ class Journey extends React.Component {
                 </div>
 
                 <div className="form-block">
+
                     <label className="form-block-title">DEPARTURE DATE & TIME:</label>
                     <div className="flex-container">
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="text" ref="departureDay" placeholder="DAY" />
-                            <input className="flex-item" type="text" ref="departureMonth" placeholder="MONTH" />
-                            <input className="flex-item" type="text" ref="departureYear" placeholder="YEAR" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="departureDay" placeholder="DAY" />
+                            <input className="input-number" type="number" ref="departureMonth" placeholder="MONTH" />
+                            <input className="input-number" type="number" ref="departureYear" placeholder="YEAR" />
                         </div>
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="text" ref="departureHour" placeholder="HOUR" />
-                            <input className="flex-item" type="text" ref="departureMinutes" placeholder="MINUTES" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="departureHour" placeholder="HOUR" />
+                            <input className="input-number" type="number" ref="departureMinutes" placeholder="MINUTES" />
                         </div>
                     </div>
                 </div>
@@ -102,22 +102,23 @@ class Journey extends React.Component {
                 <div className="form-block">
                     <label className="form-block-title">ARRIVAL DATE & TIME:</label>
                     <div className="flex-container">
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="text" ref="arrivalDay" placeholder="DAY" />
-                            <input className="flex-item" type="text" ref="arrivalMonth" placeholder="MONTH" />
-                            <input className="flex-item" type="text" ref="arrivalYear" placeholder="YEAR" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="arrivalDay" placeholder="DAY" />
+                            <input className="input-number" type="number" ref="arrivalMonth" placeholder="MONTH" />
+                            <input className="input-number" type="number" ref="arrivalYear" placeholder="YEAR" />
                         </div>
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="text" ref="arrivalHour" placeholder="HOUR" />
-                            <input className="flex-item" type="text" ref="arrivalMinutes" placeholder="MINUTES" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="arrivalHour" placeholder="HOUR" />
+                            <input className="input-number" type="number" ref="arrivalMinutes" placeholder="MINUTES" />
                         </div>
                     </div>
                 </div>
 
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
+
             </div>
-        )
+        );
     }
 }
 
-export default Journey
+export default Journey;

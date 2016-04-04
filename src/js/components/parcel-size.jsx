@@ -73,17 +73,17 @@ class ParcelSize extends React.Component {
 
         return this.props.type === "travel" ? (
 
-          <div className="page">
+          <div className="data-collection-page">
 
-              <div className="form-block">
-                  <h3 className="form-block-title">DEFINE YOUR CAPACITY</h3>
+              <div className="radio-container">
+                  <h3 className="">DEFINE YOUR CAPACITY</h3>
                   { radioDiv }
               </div>
 
-              <div className="form-block">
-                <label className="form-block-title">WEIGHT:</label>
-                <input className="flex-item" type="text" ref="weight" placeholder="HOUR" />
-                <span className="flex-item" type="text">Kg</span>
+              <div className="">
+                <label className="">WEIGHT:</label>
+                <input className="" type="text" ref="weight" placeholder="HOUR" />
+                <span className="" type="text">Kg</span>
               </div>
 
               <GhostButton onClick={ this.storeRadioOptionAndWeight } buttonText="NEXT" />
@@ -92,10 +92,10 @@ class ParcelSize extends React.Component {
 
           ) : (
 
-          <div className="page">
+          <div className="data-collection-page">
 
-              <div className="form-block">
-                  <h3 className="form-block-title">DEFINE YOUR CAPACITY</h3>
+              <div className="">
+                  <h3 className="">DEFINE YOUR CAPACITY</h3>
                   { radioDiv }
               </div>
 
@@ -103,7 +103,7 @@ class ParcelSize extends React.Component {
 
           </div>
 
-          )
+      );
     }
 }
 
