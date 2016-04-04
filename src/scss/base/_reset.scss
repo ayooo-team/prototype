@@ -11,6 +11,10 @@ input:focus, textarea:focus {
 button {
     margin: 0;
     background-color: transparent;
+
+    &:active {
+        background-color: transparent;
+    }
 }
 
 // div {

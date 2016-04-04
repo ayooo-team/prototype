@@ -6,15 +6,15 @@ class TravelPost extends React.Component {
 
     constructor (props) {
 
-        super();
+        super ();
 
         this.state = {
-          type: "travel",
-          pageType: "/#travel-post",
-          pricePageDescription: "What is the minimum price you would make a delivery for?",
-          journeyData: "default",
-          parcelSize: "default",
-          priceData: "default"
+            type: "travel",
+            pageType: "/#travel-post",
+            pricePageDescription: "What is the minimum price you would make a delivery for?",
+            journeyData: "default",
+            parcelSize: "default",
+            priceData: "default"
         }
 
         this.createComponentDataSaverFor = this.createComponentDataSaverFor.bind(this);
@@ -34,7 +34,7 @@ class TravelPost extends React.Component {
     attachActionsTo (component) {
 
         return React.cloneElement(component, {
-            
+
             type: this.state.type,
             pageType: this.state.pageType,
             pricePageDescription: this.state.pricePageDescription,
