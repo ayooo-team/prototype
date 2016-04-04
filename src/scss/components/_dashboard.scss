@@ -4,14 +4,34 @@
     height: 100vh;
     margin: auto;
 
-    .button-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-        margin: 10vh auto;
+    // .button-wrapper {
+    //
+    //     margin: 10vh auto;
+    // }
+
+    h1, h4 {
+        font-weight: lighter;
+    }
+
+    h4 {
+        letter-spacing: 0.1em;
+        padding-left: 0.1em;
+    }
+
+    h1 {
+        letter-spacing: 0.2em;
+        padding-left: 0.2em;
+        font-size: 3.5em;
     }
 }
 
 .logo {
     display: block;
-    height: 20vh;
-    margin: 8vh auto;
+    height: 25vh;
+    margin: 0 auto;
+    padding-top: 6vh;
 }

@@ -82,7 +82,7 @@ class SetDeliveryDate extends React.Component {
 
         return (
 
-            <div className="form-block">
+            <div className="page form-block">
 
                 <label className="form-block-title">When do you need your parcel to be delivered?</label>
 

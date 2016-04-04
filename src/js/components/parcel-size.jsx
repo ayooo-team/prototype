@@ -73,7 +73,7 @@ class ParcelSize extends React.Component {
 
         return this.props.type === "travel" ? (
 
-          <div className="data-collection-page">
+          <div className="page data-collection-page">
 
               <div className="radio-container">
                   <h3 className="">DEFINE YOUR CAPACITY</h3>

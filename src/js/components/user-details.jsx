@@ -43,7 +43,7 @@ class UserDetails extends React.Component {
     render () {
 
         return (
-            <div>
+            <div className="page">
                 <h1>User Details</h1>
 
                 <div>Name<input type="text" ref="name"/></div>

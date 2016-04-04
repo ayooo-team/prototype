@@ -14,7 +14,9 @@ class ConfirmTravel extends React.Component {
     }
 
     getUserID () {
+        const storage = localStorage.getItem("firebase:session::ayooo");
 
+        return JSON.parse(storage).uid;
     }
 
     confirmPost () {
@@ -32,7 +34,7 @@ class ConfirmTravel extends React.Component {
             error: function () {
                 console.log("Error");
             }
-        })
+        });
 
 
         alert("Thank you! AYOOO will be in touch soon!");

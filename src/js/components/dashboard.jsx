@@ -24,7 +24,7 @@ class Dashboard extends React.Component {
 
         return (
 
-            <div className="dashboard-container">
+            <div className="page dashboard-container">
                 <img className="logo" src="/logo.png" />
                 <h1>AYOOO</h1>
                 <h4>How are you using the app today?</h4>

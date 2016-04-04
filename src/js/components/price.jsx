@@ -35,7 +35,7 @@ class PriceSuggestion extends React.Component {
 
         return (
 
-            <div className="data-collection-page">
+            <div className="page data-collection-page">
 
                 <h3>{ this.props.pricePageDescription }</h3>
 
