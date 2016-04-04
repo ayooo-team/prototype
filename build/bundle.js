@@ -26017,11 +26017,15 @@
 	        key: 'tempSaveFilledFields',
 	        value: function tempSaveFilledFields(event) {
 
-	            var tempData = {
+	            console.log("SAVE STATE");
+
+	            var tempData = this.refs.parcelDescription.value || this.refs.parcelWeight.value ? {
 	                tempDescription: this.refs.parcelDescription.value,
 	                tempWeight: this.refs.parcelWeight.value
+	            } : {
+	                tempDescription: " ",
+	                tempWeight: " "
 	            };
-
 	            this.saveDataToParentState(tempData);
 	            window.location = "/#/send-post/parcel-size";
 	        }
@@ -26038,8 +26042,9 @@
 	                parcelSize: this.props.parcelSize["chosenOption"]
 	            };
 
+	            console.log(parcelData);
 	            this.checkInput(parcelData, function (result) {
-
+	                console.log(result);
 	                result ? (_this2.saveDataToParentState(parcelData), window.location = "/#/send-post/set-delivery-date") : alert("Please complete all fields.");
 	            });
 	        }
@@ -26051,18 +26056,20 @@
 	            var counter = 0;
 	            var emptyFields = 0;
 	            dataKeys.forEach(function (element, index, array) {
-	                data[element] === ("" || "default") ? (counter++, emptyFields++) : counter++;
+	                !data[element] ? (counter++, emptyFields++) : data[element] === " " ? (counter++, emptyFields++) : counter++;
+
 	                if (counter === dataKeys.length) {
+	                    console.log("emptyFields", emptyFields);
 	                    emptyFields === 0 ? callback(true) : callback(false);
 	                }
 	            });
 	        }
 	    }, {
 	        key: 'saveDataToParentState',
-	        value: function saveDataToParentState(pickUpData) {
-
+	        value: function saveDataToParentState(parcelData) {
+	            console.log("parcelData", parcelData);
 	            var saveParcelDetails = this.props.saveParcelDetails;
-	            saveParcelDetails(pickUpData);
+	            saveParcelDetails(parcelData);
 	        }
 	    }, {
 	        key: 'render',
