@@ -43,27 +43,25 @@ class PickUp extends React.Component {
 
         if (pickUpIdentity === "else" && recipientIdentity === "else") {
             console.log("NEITHER SELF");
-            pickUpData["pickUpIdentity"] = this.refs.pickUpElseName.value + "( " + this.refs.pickUpElseEmail.value + " )"
-            pickUpData["recipientIdentity"] = this.refs.recipientElseName.value + "( " + this.refs.recipientElseEmail.value + " )"
+            pickUpData["pickUpIdentity"] = this.refs.pickUpElseName.value + " ( " + this.refs.pickUpElseEmail.value + " )"
+            pickUpData["recipientIdentity"] = this.refs.recipientElseName.value + " ( " + this.refs.recipientElseEmail.value + " )"
         } else if (pickUpIdentity === "self" && recipientIdentity === "else") {
             console.log("PICKUP");
-            pickUpData["pickUpIdentity"]= this.refs.pickUpIdentity.value;
-            pickUpData["recipientIdentity"]= this.refs.recipientElseName.value + "( " + this.refs.recipientElseEmail.value + " )"
+            pickUpData["pickUpIdentity"]= "Me";
+            pickUpData["recipientIdentity"]= this.refs.recipientElseName.value + " ( " + this.refs.recipientElseEmail.value + " )"
         } else if (pickUpIdentity === "else" && recipientIdentity === "self") {
             console.log("RECIPIENT");
-            pickUpData["pickUpIdentity"]= this.refs.pickUpElseName.value + "( " + this.refs.pickUpElseEmail.value + " )"
-            pickUpData["recipientIdentity"]= this.refs.recipientIdentity.value;
+            pickUpData["pickUpIdentity"]= this.refs.pickUpElseName.value + " ( " + this.refs.pickUpElseEmail.value + " )"
+            pickUpData["recipientIdentity"]="Me";
         } else {
             console.log("BOTH SELF")
-            pickUpData["pickUpIdentity"]= this.refs.pickUpIdentity.value;
-            pickUpData["recipientIdentity"]= this.refs.recipientIdentity.value;
+            pickUpData["pickUpIdentity"]="Me";
+            pickUpData["recipientIdentity"]="Me";
         }
-
-        console.log(">>>", pickUpData);
 
         this.checkInput(pickUpData, (result) => {
 
-            result ? (this.saveDataToParentState(pickUpData), window.location="/#/send-post/parcel-size") : alert("Please complete all fields.");
+            result ? (this.saveDataToParentState(pickUpData), window.location="/#/send-post/parcel-details") : alert("Please complete all fields.");
         });
     }
 

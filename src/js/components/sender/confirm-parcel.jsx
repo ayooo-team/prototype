@@ -54,7 +54,13 @@ class ConfirmParcel extends React.Component {
                   <div className="form-block">
                       <label className="form-block-title">PARCEL SIZE:</label>
                       <p className="form-input-data">{
+                          "Description: " + this.props.parcelDetails.parcelDescription
+                      } </p>
+                      <p className="form-input-data">{
                           "Size: " + this.props.parcelSize.chosenOption
+                      } </p>
+                      <p>{
+                          "Weight: " + this.props.parcelSize.weightAllowance
                       } </p>
                   </div>
 

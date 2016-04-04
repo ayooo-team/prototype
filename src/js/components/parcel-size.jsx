@@ -40,7 +40,7 @@ class ParcelSize extends React.Component {
     storeRadioOptionOnly () {
 
         this.state && this.state.chosenOption ? (
-            this.saveDataToParentState(), window.location=(this.props.pageType+"/price")
+            this.saveDataToParentState(), window.location=(this.props.pageType + "/parcel-details")
         ) : (
             alert("Please tell us the capacity you have in your luggage")
         )
@@ -49,15 +49,17 @@ class ParcelSize extends React.Component {
     saveDataToParentState () {
 
         const saveParcelSize = this.props.saveParcelSize;
+        const optionLowerCase = this.state.chosenOption.charAt(0).toUpperCase() + this.state.chosenOption.substr(1).toLowerCase();
 
         this.refs.weight ? (
+
             saveParcelSize({
-              chosenOption: this.state.chosenOption,
+              chosenOption: optionLowerCase,
               weightAllowance: this.refs.weight.value
             })
         ) : (
             saveParcelSize({
-              chosenOption: this.state.chosenOption,
+              chosenOption: optionLowerCase
             })
         )
     }
@@ -97,7 +99,7 @@ class ParcelSize extends React.Component {
                   { radioDiv }
               </div>
 
-              <GhostButton onClick={ this.storeRadioOptionOnly } buttonText="NEXT" />
+              <GhostButton onClick={ this.storeRadioOptionOnly } buttonText="BACK" />
 
           </div>
 
