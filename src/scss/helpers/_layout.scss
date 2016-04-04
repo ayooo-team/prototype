@@ -1,0 +1,36 @@
+.data-collection-page {
+    width: 100vw;
+    margin: auto;
+
+    h2, h3, h4 {
+        // margin: 1vh 0;
+    }
+
+    .form-block-title {
+        // margin: 5vh 0 5vh 0;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.left {
+    text-align: left;
+}
+
+
+.flex-column-wrapper {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-item {
+    flex: 1;
+}
