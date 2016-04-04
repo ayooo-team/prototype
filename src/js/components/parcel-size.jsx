@@ -49,15 +49,17 @@ class ParcelSize extends React.Component {
     saveDataToParentState () {
 
         const saveParcelSize = this.props.saveParcelSize;
+        const optionLowerCase = this.state.chosenOption.charAt(0).toUpperCase() + this.state.chosenOption.substr(1).toLowerCase();
 
         this.refs.weight ? (
+
             saveParcelSize({
-              chosenOption: this.state.chosenOption,
+              chosenOption: optionLowerCase,
               weightAllowance: this.refs.weight.value
             })
         ) : (
             saveParcelSize({
-              chosenOption: this.state.chosenOption,
+              chosenOption: optionLowerCase
             })
         )
     }
