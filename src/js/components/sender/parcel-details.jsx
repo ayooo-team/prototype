@@ -15,12 +15,20 @@ class ParcelDetails extends React.Component {
 
     tempSaveFilledFields (event) {
 
-        let tempData = {
-            tempDescription: this.refs.parcelDescription.value,
-            tempWeight: this.refs.parcelWeight.value
-        }
+        console.log("SAVE STATE");
 
-        this.saveDataToParentState(tempData);
+        let tempData = (this.refs.parcelDescription.value || this.refs.parcelWeight.value) ? (
+            {
+                tempDescription: this.refs.parcelDescription.value,
+                tempWeight: this.refs.parcelWeight.value
+            }
+        ) : (
+            {
+                tempDescription: " ",
+                tempWeight: " "
+            }
+        )
+        this.saveDataToParentState(tempData)
         window.location = "/#/send-post/parcel-size"
     }
 
@@ -34,8 +42,9 @@ class ParcelDetails extends React.Component {
             parcelSize: this.props.parcelSize["chosenOption"]
         };
 
+        console.log(parcelData);
         this.checkInput(parcelData, (result) => {
-
+            console.log(result);
             result ? (this.saveDataToParentState(parcelData), window.location="/#/send-post/set-delivery-date") : alert("Please complete all fields.");
         });
     }
@@ -47,17 +56,22 @@ class ParcelDetails extends React.Component {
         var counter = 0;
         var emptyFields = 0;
         dataKeys.forEach( (element, index, array) => {
-            data[element] === ("" || "default")  ? (counter++, emptyFields++) : (counter++)
+            !(data[element])  ?
+            (counter++, emptyFields++) : data[element]===(" ") ?
+            (counter++, emptyFields++) : counter++
+
             if (counter === dataKeys.length) {
+                console.log("emptyFields", emptyFields)
                 emptyFields === 0 ? callback(true) : callback(false);
             }
+
         } );
     }
 
-    saveDataToParentState(pickUpData) {
-
-      const saveParcelDetails = this.props.saveParcelDetails;
-      saveParcelDetails(pickUpData);
+    saveDataToParentState(parcelData) {
+        console.log("parcelData", parcelData);
+        const saveParcelDetails = this.props.saveParcelDetails;
+        saveParcelDetails(parcelData);
     }
 
     render () {
