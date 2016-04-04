@@ -80,7 +80,7 @@ class Journey extends React.Component {
                 <div className="form-block row">
 
                     <h4 className="form-block-title">DEPARTURE DATE & TIME:</h4>
-                    <div className="">
+
                         <div className="date-container col-6">
                             <input className="input-number" type="number" ref="departureDay" placeholder="DAY" />
                             <input className="input-number" type="number" ref="departureMonth" placeholder="MONTH" />
@@ -90,7 +90,7 @@ class Journey extends React.Component {
                             <input className="input-number" type="number" ref="departureHour" placeholder="HOUR" />
                             <input className="input-number" type="number" ref="departureMinutes" placeholder="MINUTES" />
                         </div>
-                    </div>
+                
                 </div>
 
                 <div className="form-block">

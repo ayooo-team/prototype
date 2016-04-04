@@ -1,3 +1,12 @@
+.form-block {
+
+    padding: 3vh 0;
+}
+
+.form-block-title {
+    text-align: left;
+}
+
 .date-container {
 
 }
@@ -10,8 +19,13 @@
     display: inline-block;
 }
 
+.form-input { // input-text
+    height: 6vh;
+}
+
 .input-number {
-    width: 10vw;
+    width: 15vw;
+    height: 7vw;
 
     &.large {
         width: 20vw;

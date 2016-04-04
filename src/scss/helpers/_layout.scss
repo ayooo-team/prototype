@@ -1,6 +1,9 @@
 .data-collection-page {
     width: 100vw;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
     h2, h3, h4 {
         // margin: 1vh 0;
