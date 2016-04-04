@@ -60,7 +60,7 @@ class ConfirmParcel extends React.Component {
                           "Size: " + this.props.parcelSize.chosenOption
                       } </p>
                       <p>{
-                          "Weight: " + this.props.parcelSize.weightAllowance
+                          "Weight: " + this.props.parcelDetails.parcelWeight
                       } </p>
                   </div>
 
