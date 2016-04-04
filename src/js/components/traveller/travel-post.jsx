@@ -8,42 +8,47 @@ class TravelPost extends React.Component {
 
         super();
 
-        this.saveJourneyData = this.saveJourneyData.bind(this);
-        this.saveLuggageData = this.saveLuggageData.bind(this);
-        this.savePriceData = this.savePriceData.bind(this);
+        this.state = {
+          type: "travel",
+          pageType: "/#travel-post",
+          pricePageDescription: "What is the minimum price you would make a delivery for?",
+          journeyData: "default",
+          parcelSize: "default",
+          priceData: "default"
+        }
+
+        this.createComponentDataSaverFor = this.createComponentDataSaverFor.bind(this);
         this.attachActionsTo = this.attachActionsTo.bind(this);
     }
 
-    saveJourneyData (journeyData) {
-        console.log("save journey data");
-        this.setState({
-            journeyData
-        });
-    }
+    createComponentDataSaverFor (formName) {
 
-    saveLuggageData (luggageAllowanceData) {
-        this.setState({
-            luggageAllowanceData
-        });
-    }
+        return (formData) => {
 
-    savePriceData (priceData) {
-        this.setState({
-            priceData
-        });
+          this.setState({
+              [formName]: formData
+          })
+        }
     }
 
     attachActionsTo (component) {
 
         return React.cloneElement(component, {
-            saveJourneyData: this.saveJourneyData,
-            saveLuggageData: this.saveLuggageData,
-            savePriceData: this.savePriceData
+            
+            type: this.state.type,
+            pageType: this.state.pageType,
+            pricePageDescription: this.state.pricePageDescription,
+            saveJourneyData: this.createComponentDataSaverFor("journeyData"),
+            saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
+            savePriceData: this.createComponentDataSaverFor("priceData"),
+            journeyData: this.state.journeyData,
+            parcelSize: this.state.parcelSize,
+            priceData: this.state.priceData
         });
     }
 
     render () {
-    
+
         return (
             this.attachActionsTo(this.props.children)
         );

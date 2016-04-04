@@ -6,16 +6,63 @@ import GhostButton from '../ghost-button.jsx';
 class Journey extends React.Component {
 
     constructor () {
-      super();
 
-      this.submit = this.submit.bind(this);
+        super ();
+        this.getFormData = this.getFormData.bind(this);
+        this.saveDataToParentState = this.saveDataToParentState.bind(this);
     }
 
-    submit () {
+    getFormData (event) {
 
-      const saveJourneyData = this.props.saveJourneyData;
+        event.preventDefault();
 
-      saveJourneyData("TEST");
+        let journeyData = {
+
+            departureCity: this.refs.departureCity.value,
+            departurePostCode: this.refs.departurePostcode.value,
+            departureDay: this.refs.departureDay.value,
+            departureMonth: this.refs.departureMonth.value,
+            departureYear: this.refs.departureYear.value,
+            departureHour: this.refs.departureHour.value,
+            departureMinutes: this.refs.departureMinutes.value,
+
+            arrivalCity: this.refs.arrivalCity.value,
+            arrivalPostCode: this.refs.arrivalPostcode.value,
+            arrivalDay: this.refs.arrivalDay.value,
+            arrivalMonth: this.refs.arrivalMonth.value,
+            arrivalYear: this.refs.arrivalYear.value,
+            arrivalHour: this.refs.arrivalHour.value,
+            arrivalMinutes: this.refs.arrivalMinutes.value,
+        };
+
+        this.checkInput(journeyData, (result) => {
+
+            result ? (this.saveDataToParentState(journeyData), window.location="/#/travel-post/parcel-size") : alert("Please complete all fields.");
+        });
+    }
+
+    checkInput (data, callback) {
+
+        ( data["departureCity"] &&
+          data["departurePostCode"] &&
+          data["departureDay"] &&
+          data["departureMonth"] &&
+          data["departureYear"] &&
+          data["departureHour"] &&
+          data["departureMinutes"] &&
+          data["arrivalCity"] &&
+          data["arrivalPostCode"] &&
+          data["arrivalDay"] &&
+          data["arrivalMonth"] &&
+          data["arrivalYear"] &&
+          data["arrivalHour"] &&
+          data["arrivalMinutes"] ) ? callback(true) : callback(false);
+    }
+
+    saveDataToParentState(journeyData) {
+
+        const saveJourneyData = this.props.saveJourneyData;
+        saveJourneyData(journeyData);
     }
 
     render () {
@@ -26,49 +73,51 @@ class Journey extends React.Component {
 
                 <div className="form-block">
                     <label className="form-block-title">DEPARTURE LOCATION:</label>
-                    <input className="form-input" type="text" ref="departure-city" placeholder="CITY" />
-                    <input className="form-input" type="text" ref="departure-postcode" placeholder="POSTCODE" />
+                    <input className="form-input" type="text" ref="departureCity" placeholder="CITY" />
+                    <input className="form-input" type="text" ref="departurePostcode" placeholder="POSTCODE" />
                 </div>
 
                 <div className="form-block">
+
                     <label className="form-block-title">DEPARTURE DATE & TIME:</label>
                     <div className="flex-container">
                         <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="departure-day" placeholder="DAY" />
-                            <input className="flex-item" type="number" ref="departure-month" placeholder="MONTH" />
-                            <input className="flex-item" type="number" ref="departure-year" placeholder="YEAR" />
+                            <input className="flex-item" type="number" ref="departureDay" placeholder="DAY" />
+                            <input className="flex-item" type="number" ref="departureMonth" placeholder="MONTH" />
+                            <input className="flex-item" type="number" ref="departureYear" placeholder="YEAR" />
                         </div>
                         <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="departure-hour" placeholder="HOUR" />
-                            <input className="flex-item" type="number" ref="departure-minutes" placeholder="MINUTES" />
+                            <input className="flex-item" type="number" ref="departureHour" placeholder="HOUR" />
+                            <input className="flex-item" type="number" ref="departureMinutes" placeholder="MINUTES" />
                         </div>
                     </div>
                 </div>
 
                 <div className="form-block">
                     <label className="form-block-title">ARRIVAL LOCATION:</label>
-                    <input className="form-input" type="text" ref="arrival-city" placeholder="CITY" />
-                    <input className="form-input" type="text" ref="arrival-postcode" placeholder="POSTCODE" />
+                    <input className="form-input" type="text" ref="arrivalCity" placeholder="CITY" />
+                    <input className="form-input" type="text" ref="arrivalPostcode" placeholder="POSTCODE" />
                 </div>
 
                 <div className="form-block">
                     <label className="form-block-title">ARRIVAL DATE & TIME:</label>
                     <div className="flex-container">
                         <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="arrival-day" placeholder="DAY" />
-                            <input className="flex-item" type="number" ref="arrival-month" placeholder="MONTH" />
-                            <input className="flex-item" type="number" ref="arrival-year" placeholder="YEAR" />
+                            <input className="flex-item" type="number" ref="arrivalDay" placeholder="DAY" />
+                            <input className="flex-item" type="number" ref="arrivalMonth" placeholder="MONTH" />
+                            <input className="flex-item" type="number" ref="arrivalYear" placeholder="YEAR" />
                         </div>
                         <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="arrival-hour" placeholder="HOUR" />
-                            <input className="flex-item" type="number" ref="arrival-minutes" placeholder="MINUTES" />
+                            <input className="flex-item" type="number" ref="arrivalHour" placeholder="HOUR" />
+                            <input className="flex-item" type="number" ref="arrivalMinutes" placeholder="MINUTES" />
                         </div>
                     </div>
                 </div>
 
-                <GhostButton onClick={ this.submit } pageLink="travel-post/luggage-allowance" buttonText="NEXT" />
+                <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
+
             </div>
-        )
+        );
     }
 }
 
