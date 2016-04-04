@@ -69,7 +69,7 @@ class Journey extends React.Component {
 
         return (
 
-            <div className="page form">
+            <div className="data-collection-page form">
 
                 <div className="form-block">
                     <label className="form-block-title">DEPARTURE LOCATION:</label>
@@ -81,14 +81,14 @@ class Journey extends React.Component {
 
                     <label className="form-block-title">DEPARTURE DATE & TIME:</label>
                     <div className="flex-container">
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="departureDay" placeholder="DAY" />
-                            <input className="flex-item" type="number" ref="departureMonth" placeholder="MONTH" />
-                            <input className="flex-item" type="number" ref="departureYear" placeholder="YEAR" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="departureDay" placeholder="DAY" />
+                            <input className="input-number" type="number" ref="departureMonth" placeholder="MONTH" />
+                            <input className="input-number" type="number" ref="departureYear" placeholder="YEAR" />
                         </div>
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="departureHour" placeholder="HOUR" />
-                            <input className="flex-item" type="number" ref="departureMinutes" placeholder="MINUTES" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="departureHour" placeholder="HOUR" />
+                            <input className="input-number" type="number" ref="departureMinutes" placeholder="MINUTES" />
                         </div>
                     </div>
                 </div>
@@ -102,14 +102,14 @@ class Journey extends React.Component {
                 <div className="form-block">
                     <label className="form-block-title">ARRIVAL DATE & TIME:</label>
                     <div className="flex-container">
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="arrivalDay" placeholder="DAY" />
-                            <input className="flex-item" type="number" ref="arrivalMonth" placeholder="MONTH" />
-                            <input className="flex-item" type="number" ref="arrivalYear" placeholder="YEAR" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="arrivalDay" placeholder="DAY" />
+                            <input className="input-number" type="number" ref="arrivalMonth" placeholder="MONTH" />
+                            <input className="input-number" type="number" ref="arrivalYear" placeholder="YEAR" />
                         </div>
-                        <div className="flex-wrapper">
-                            <input className="flex-item" type="number" ref="arrivalHour" placeholder="HOUR" />
-                            <input className="flex-item" type="number" ref="arrivalMinutes" placeholder="MINUTES" />
+                        <div className="">
+                            <input className="input-number" type="number" ref="arrivalHour" placeholder="HOUR" />
+                            <input className="input-number" type="number" ref="arrivalMinutes" placeholder="MINUTES" />
                         </div>
                     </div>
                 </div>

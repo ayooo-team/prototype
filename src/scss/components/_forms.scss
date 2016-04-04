@@ -1,44 +1,6 @@
-.form {
-    width: 100%;
-    margin: auto;
-    text-align: center;
-}
 
-label {
-    font-size: 1.3em;
-    text-align: left;
-    display: block;
-    margin: 1em;
-}
-
-.form-block {
-    width: 100vw;
-    text-align: center;
-}
-
-.form-input {
-    font-size: 1.2em;
-    line-height: 1.5em;
-    min-width: 100%;
-    display: block;
-
-    &:focus {
-        outline: none;
-    }
-}
-
-@media (min-width: 460px) {
-    label {
-        font-size: 1em;
-        text-align: left;
-    }
-
-    .form-input {
-        font-size: 1em;
-        line-height: 1.5em;
-        min-width: 40%;
-        display: inline-block;
-    }
+.input-number {
+    width: 10vw;
 }
 
 /*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/
