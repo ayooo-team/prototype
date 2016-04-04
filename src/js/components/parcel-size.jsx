@@ -78,10 +78,10 @@ class ParcelSize extends React.Component {
                   { radioDiv }
               </div>
 
-              <div className="">
-                <label className="">WEIGHT:</label>
-                <input className="" type="text" ref="weight" placeholder="HOUR" />
-                <span className="" type="text">Kg</span>
+              <div className="weight-input-container row">
+                  <h4 className="input-title col-8">MAX WEIGHT:</h4>
+                  <input className="input-number large col-3" type="number" ref="weight" placeholder="HOUR" />
+                  <p className="col-1">kg</p>
               </div>
 
               <GhostButton onClick={ this.storeRadioOptionAndWeight } buttonText="NEXT" />

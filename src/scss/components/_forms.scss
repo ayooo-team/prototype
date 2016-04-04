@@ -1,6 +1,11 @@
 
 .input-number {
     width: 10vw;
+
+    &.large {
+        width: 20vw;
+        height: 12vw;
+    }
 }
 
 /*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/
@@ -9,22 +14,19 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 .radio-container {
 
     width: 100%;
-    background-color: grey;
     margin: auto;
+    margin-bottom: 5vh;
 
     .radio-row {
-
-        background: orange;
-        border: 1px solid black;
 
         &:hover {
             cursor: pointer;
         }
     }
-
 }
 
 .radio-block-title, .radio-block-text {
@@ -34,4 +36,22 @@ input::-webkit-inner-spin-button {
 .radio-selected-tick {
     width: 4vh;
     height: 4vh;
+}
+
+.weight-input-container {
+
+    margin: auto;
+    // .input-wrapper {
+    //     flex-grow: 1;
+    //     -webkit-justify-content: flex-end;
+    //     justify-content: flex-end;
+    // }
+
+    label {
+        font-weight: 500;
+    }
+
+    .input-title {
+        font-size: 1.3em;
+    }
 }
