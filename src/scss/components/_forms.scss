@@ -1,18 +1,19 @@
 .form-block {
-    padding: 3vh 0;
-}
 
-.form-block-title {
-    text-align: left;
+    padding: 3vh 0;
+
+    .form-block-title {
+        text-align: left;
+    }
+
+    .form-input { // input-text
+        height: 6vh;
+        font-size: 1em;
+    }
 }
 
 .label {
     display: inline-block;
-}
-
-.form-input { // input-text
-    height: 6vh;
-    font-size: 1em;
 }
 
 .input-number {
@@ -24,6 +25,16 @@
         width: 20vw;
         height: 12vw;
     }
+}
+
+.input-title, .unit {
+    font-size: 1.1em;
+    margin: 1.5vh 0;
+}
+
+.unit {
+    text-align: left;
+    margin-top: 2.5vh;
 }
 
 /*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/
@@ -39,7 +50,6 @@ input::-webkit-inner-spin-button {
 
     .radio-row {
 
-        // margin: 1vh;
         padding: 2vh 1vh;
 
         &.selected {
@@ -75,14 +85,4 @@ input::-webkit-inner-spin-button {
             margin-top: 2vh;
         }
     }
-}
-
-.input-title, .unit {
-    font-size: 1.1em;
-    margin: 1.5vh 0;
-}
-
-.unit {
-    text-align: left;
-    margin-top: 2.5vh;
 }

@@ -2,6 +2,8 @@
 
 import React from 'react';
 import Firebase from 'firebase';
+import classnames from 'classnames';
+import GhostButton from './ghost-button.jsx';
 
 class UserDetails extends React.Component {
 
@@ -42,16 +44,44 @@ class UserDetails extends React.Component {
 
     render () {
 
+        let leftColumn = classnames(
+            "form-block-title",
+            "label",
+            "col-4"
+        );
+        let rightColumn = classnames(
+            "col-6"
+        );
+
         return (
-            <div className="page">
+            <div className="page data-collection-page">
                 <h1>User Details</h1>
 
-                <div>Name<input type="text" ref="name"/></div>
-                <div>Age<input type="text" ref="age"/></div>
-                <div>Profession<input type="text" ref="profession"/></div>
-                <div>Nationality<input type="text" ref="nationality"/></div>
+                <div className="user-details">
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Name</h4>
+                        <input className={ rightColumn } type="text" ref="name"/>
+                    </div>
 
-                <button onClick={ this.getFormData.bind(this) }>Submit</button>
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Age</h4>
+                        <input className={ rightColumn } type="text" ref="age"/>
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Profession</h4>
+                        <input className={ rightColumn } type="text" ref="profession"/>
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Nationality</h4>
+                        <input className={ rightColumn } type="text" ref="nationality"/>
+                    </div>
+                </div>
+
+
+
+                <GhostButton onClick={ this.getFormData.bind(this) } buttonText="Submit" />
             </div>
         );
     }
