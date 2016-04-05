@@ -14,8 +14,13 @@ class Options extends React.Component {
 
         let radioClasses = classnames({
             "radio-row": true,
-            "row": true,
-            "selected": true
+            "row": true
+        });
+
+        let imgClasses = classnames({
+            "radio-selected-tick": true,
+            "col-1": true,
+            "display-none": (this.props.selectedRow !== this.props.blockTitle)
         });
 
         return (
@@ -31,7 +36,7 @@ class Options extends React.Component {
                     <p className="radio-block-text" id={ this.props.blockTitle }>{ this.props.blockText }</p>
                 </div>
 
-                <img className="radio-selected-tick col-1" id={ this.props.blockTitle } src="https://cloud.githubusercontent.com/assets/13470325/14233556/3e0f5e2c-f9c4-11e5-8337-17c162b678a1.png" />
+                <img className={ imgClasses } id={ this.props.blockTitle } src="https://cloud.githubusercontent.com/assets/13470325/14233556/3e0f5e2c-f9c4-11e5-8337-17c162b678a1.png" />
             </div>
         );
     }
