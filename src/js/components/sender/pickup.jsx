@@ -105,14 +105,14 @@ class PickUp extends React.Component {
             <div className="page form">
 
                 <div className="form-block">
-                    <label className="form-block-title">FROM:</label>
-                    <input className="form-input" type="text" ref="fromCity" placeholder="CITY" />
-                    <input className="form-input" type="text" ref="fromPostcode" placeholder="POSTCODE" />
+                    <label className="form-block-title col-12">FROM:</label>
+                    <input className="form-input col-6" type="text" ref="fromCity" placeholder="CITY" />
+                    <input className="form-input col-6" type="text" ref="fromPostcode" placeholder="POSTCODE" />
                 </div>
 
                 <div className="form-block">
-                    <label className="form-block-title">Who will meet the carrier at the pickup location?</label>
-                    <select ref="pickUpIdentity" id="pickUpIdentity" onChange={ this.ifSomeoneElse }>
+                    <label className="form-block-title col-12">Who will meet the carrier at the pickup location?</label>
+                    <select className="col-12" ref="pickUpIdentity" id="pickUpIdentity" onChange={ this.ifSomeoneElse }>
                       <option className="form-input" select="selected" value="self">I will</option>
                       <option className="form-input"value="else">Someone Else</option>
                     </select>
@@ -121,14 +121,14 @@ class PickUp extends React.Component {
                 </div>
 
                 <div className="form-block">
-                    <label className="form-block-title">TO:</label>
-                    <input className="form-input" type="text" ref="toCity" placeholder="CITY" />
-                    <input className="form-input" type="text" ref="toPostcode" placeholder="POSTCODE" />
+                    <label className="form-block-title col-12">TO:</label>
+                    <input className="form-input col-6" type="text" ref="toCity" placeholder="CITY" />
+                    <input className="form-input col-6" type="text" ref="toPostcode" placeholder="POSTCODE" />
                 </div>
 
                 <div className="form-block">
-                    <label className="form-block-title">Who will meet the carrier at the delivery location?</label>
-                    <select ref="recipientIdentity" id="recipientIdentity" onChange={ this.ifSomeoneElse }>
+                    <label className="form-block-title col-12">Who will meet the carrier at the delivery location?</label>
+                    <select className="col-12" ref="recipientIdentity" id="recipientIdentity" onChange={ this.ifSomeoneElse }>
                       <option className="form-input" select="selected" value="self">I will</option>
                       <option className="form-input"value="else">Someone Else</option>
                     </select>

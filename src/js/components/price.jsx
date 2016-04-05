@@ -64,13 +64,14 @@ class PriceSuggestion extends React.Component {
             <div className="page data-collection-page">
 
                 <h3 className="page-header price">{ this.props.pricePageDescription }</h3>
+                <div className="price-area">
+                    <div className="form-block row">
 
-                <div className="form-block row">
-
-                    <p className="input-title col-6">PRICE:</p>
-                    <div className="input-wrapper col-6">
-                        <span className="label" type="text">£</span>
-                        <input className="" type="number" ref="price" />
+                        <p className="input-title col-6">PRICE:</p>
+                        <div className="input-wrapper col-6">
+                            <span className="label" type="text">£</span>
+                            <input className="price-input" type="number" ref="price" />
+                        </div>
                     </div>
                 </div>
 

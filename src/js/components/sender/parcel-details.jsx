@@ -102,19 +102,19 @@ class ParcelDetails extends React.Component {
           <div className="page form">
 
                 <div className="form-block">
-                    <label className="form-block-title">PARCEL DETAILS:</label>
-                    <input className="form-input" type="text" ref="parcelDescription" placeholder="List what is inside the parcel." defaultValue={ this.props.parcelDetails["tempDescription"] } />
+                    <h4 className="form-block-title page-header">PARCEL DETAILS:</h4>
+                    <input className="form-input col-12" type="text" ref="parcelDescription" placeholder="List what is inside the parcel." defaultValue={ this.props.parcelDetails["tempDescription"] } />
                 </div>
 
                 <div className="form-block">
-                  <label className="form-block-title">Weight:</label>
+                  <h4 className="form-block-title col-6">Weight:</h4>
                   <input className="flex-item" type="text" ref="parcelWeight" defaultValue={ this.props.parcelDetails["tempWeight"] } />
                   <span className="flex-item" type="text">Kg</span>
                 </div>
 
                 <div className="form-block">
-                    <label className="form-block-title">Size:</label>
-                    <div className="form-input" type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>{ this.props.parcelSize["chosenOption"] } >> </div>
+                    <h4 className="form-block-title-extra col-6">Size:</h4>
+                    <div className="form-input col-6" type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>{ this.props.parcelSize["chosenOption"] } >> </div>
                 </div>
 
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
@@ -126,18 +126,18 @@ class ParcelDetails extends React.Component {
             <div className="page form">
 
                   <div className="form-block">
-                      <label className="form-block-title">PARCEL DETAILS:</label>
+                      <h4 className="form-block-title page-header">PARCEL DETAILS:</h4>
                       <input className="form-input" type="text" ref="parcelDescription" placeholder="List what is inside the parcel." />
                   </div>
 
                   <div className="form-block">
-                    <label className="form-block-title">Weight:</label>
-                    <input className="flex-item" type="text" ref="parcelWeight" />
-                    <span className="flex-item" type="text">Kg</span>
+                    <h4 className="form-block-title-extra col-6">Weight:</h4>
+                    <input className="flex-item input-number large col-5" type="text" ref="parcelWeight" />
+                    <span className="flex-item unit col-2" type="text">kg</span>
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">Size:</label>
+                      <h4 className="form-block-title">Size:</h4>
                       <div className="form-input" type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>Click here to set >> </div>
                   </div>
 
