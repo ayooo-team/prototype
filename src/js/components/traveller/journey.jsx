@@ -110,8 +110,6 @@ class Journey extends React.Component {
         var arrivalHour = this.refs.arrivalHour.value;
         var arrivalMinutes = this.refs.arrivalMinutes.value;
 
-        console.log(departureHour, "1 ", typeof departureHour);
-
         if ( departureHour && departureMinutes &&
              arrivalHour && arrivalMinutes ) {
 
@@ -119,13 +117,11 @@ class Journey extends React.Component {
              var departureMinutes = parseInt(this.refs.departureMinutes.value, 10);
              var arrivalHour = parseInt(this.refs.arrivalHour.value, 10);
              var arrivalMinutes = parseInt(this.refs.arrivalMinutes.value, 10);
-             console.log(departureHour, "2 ", typeof departureHour);
 
             if ( (Math.floor(departureHour/23) && Math.floor(arrivalHour/23)) === 0 ) {
 
                 if ( (Math.floor(departureMinutes/59) && Math.floor(arrivalHour/59)) === 0 ) {
 
-                    console.log(departureHour, "3 ", typeof departureHour);
                     var departureHour = departureHour <= 10 ? "0" + departureHour.toString() : departureHour.toString();
                     var departureMinutes = departureMinutes <= 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
                     var arrivalHour = arrivalHour <= 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
