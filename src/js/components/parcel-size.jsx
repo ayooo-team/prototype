@@ -75,14 +75,14 @@ class ParcelSize extends React.Component {
 
           <div className="page data-collection-page">
 
+              <h3 className="">DEFINE YOUR CAPACITY</h3>
               <div className="radio-container">
-                  <h3 className="">DEFINE YOUR CAPACITY</h3>
                   { radioDiv }
               </div>
 
               <div className="weight-input-container row">
-                  <h4 className="input-title col-8">MAX WEIGHT:</h4>
-                  <input className="input-number large col-3" type="number" ref="weight" placeholder="HOUR" />
+                  <h4 className="input-title col-7">MAX WEIGHT:</h4>
+                  <input className="input-number large col-4" type="number" ref="weight" placeholder="HOUR" />
                   <p className="col-1">kg</p>
               </div>
 

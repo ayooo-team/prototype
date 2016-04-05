@@ -25,19 +25,29 @@ class ConfirmTravel extends React.Component {
 
         const userID = this.getUserID();
 
+        let totalData = {
+            timestamp: Date.now(),
+            userID: userID,
+            departureDate: this.props.journeyData.departureDate,
+            departureTime: this.props.journeyData.departureTime,
+            arrivalDate: this.props.journeyData.arrivalDate,
+            arrivalTime: this.props.journeyData.arrivalTime
+        };
+
         $.ajax({
             method: 'POST',
             url: 'delivery?type=traveller&userID=' + userID,
-            success: function (data) {
-                console.log(data);
+            data: totalData,
+            success: (data) => {
+
+                alert("Thank you! AYOOO will be in touch soon!");
+
+                window.location = "/#/dashboard";
             },
-            error: function () {
-                console.log("Error");
+            error: () => {
+                alert("There was a problem. Please send your request again.");
             }
         });
-
-
-        alert("Thank you! AYOOO will be in touch soon!");
     }
 
     render () {

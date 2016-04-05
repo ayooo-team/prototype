@@ -1,8 +1,16 @@
 .page {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     height: 100%;
+
+    h1:first-of-type,
+    h2:first-of-type,
+    h3:first-of-type {
+
+        padding: 2vh;
+        // margin: 1vh 0;
+    }
 }
 
 .data-collection-page {
