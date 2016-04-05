@@ -29,7 +29,6 @@ const routes = (
     <Route path="/" component={ AppContainer } >
         <IndexRoute component={ Login } />
         <Route path="/dashboard" component={ Dashboard } />
-        <Route path="/user-info" component={ UserDetails } />
         <Route path="/admin" component={ Admin } />
 
         <Route path="/send-post" component={ SendPost }>
@@ -39,6 +38,7 @@ const routes = (
             <Route path="price" component={ PriceSuggestion } />
             <Route path="set-delivery-date" component={ SetDeliveryDate } />
             <Route path="confirm" component={ ConfirmParcel } />
+            <Route path="user-info" component={ UserDetails } />
         </Route>
 
         <Route path="/travel-post" component={ TravelPost }>
@@ -46,6 +46,7 @@ const routes = (
             <Route path="parcel-size" component={ ParcelSize } />
             <Route path="price" component={ PriceSuggestion } />
             <Route path="confirm" component={ ConfirmTravel } />
+            <Route path="user-info" component={ UserDetails } />
         </Route>
 
     </Route>
