@@ -155,7 +155,7 @@ class Journey extends React.Component {
 
         return (
 
-            <div className="page data-collection-page form">
+            <div className="page data-collection-page">
 
                 <div className="journey-form">
 
@@ -170,6 +170,7 @@ class Journey extends React.Component {
                         <h4 className="form-block-title">DEPARTURE DATE & TIME:</h4>
 
                             <div className="date-container col-8">
+
                                 <input className="input-number" type="text" ref="departureDay" placeholder="DD" />
                                 <input className="input-number" type="text" ref="departureMonth" placeholder="MMMM" />
                                 <input className="input-number" type="text" ref="departureYear" placeholder="YYYY" />
@@ -191,6 +192,7 @@ class Journey extends React.Component {
                         <h4 className="form-block-title">ARRIVAL DATE & TIME:</h4>
                         <div className="">
                             <div className="date-container col-8">
+
                                 <input className="input-number" type="text" ref="arrivalDay" placeholder="DD" />
                                 <input className="input-number" type="text" ref="arrivalMonth" placeholder="MMMM" />
                                 <input className="input-number" type="text" ref="arrivalYear" placeholder="YYYY" />
