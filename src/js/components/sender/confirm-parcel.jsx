@@ -20,9 +20,9 @@ class ConfirmParcel extends React.Component {
 
     checkUserProfileExists () {
 
-        const userId = this.getUserID();
+        const userID = this.getUserID();
 
-        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userId );
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userID );
 
         firebaseApp.once('value', (profileSnapshot) => {
 
@@ -30,15 +30,18 @@ class ConfirmParcel extends React.Component {
 
             ( userProfile["name"] && userProfile["age"] &&
             userProfile["profession"] && userProfile["nationality"] &&
-            userProfile["mobileNumber"] ) ? this.confirmPost(userId) : window.location="/#/send-post/user-info"
+            userProfile["mobileNumber"] ) ? this.confirmPost() : window.location="/#/send-post/user-info"
         });
     }
 
-    confirmPost (userId) {
+    confirmPost () {
+
+        const userID = this.getUserID();
+
 
         let totalData = {
             timestamp: Date.now(),
-            userID: userId,
+            userID: userID,
             fromCity: this.props.pickUpData.fromCity,
             fromPostCode: this.props.pickUpData.fromPostCode,
             toCity: this.props.pickUpData.toCity,

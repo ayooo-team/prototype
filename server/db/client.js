@@ -4,7 +4,7 @@ var elasticsearch = require('elasticsearch');
 var connectionToElasticSearch = process.env.SEARCHBOX_SSL_URL;
 
 const client = new elasticsearch.Client({
-    host: connectionToElasticSearch,
+    host: 'localhost:9200',
     log: 'error'
 });
 
@@ -43,11 +43,7 @@ function addDocument (type, payload) {
     return client.index({
         index: indexName,
         type: type,
-        body: payload,
-        suggest: {
-            input: payload.item.split(" "),
-            output: payload.item
-        }
+        body: payload
     });
 }
 

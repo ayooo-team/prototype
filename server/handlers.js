@@ -13,17 +13,19 @@ function addDeliveryRequest (request, reply) {
 
         return new Error('Payload to server was empty.');
     }
-
+    console.log(data);
     data.userID = request.query.userID;
-    
-    // // elasticsearch.deleteIndex("ayooo")
-    // var result = elasticsearch.addDocument(
-    //     request.query.type,
-    //     data
-    // ).then( (result) => {
-    //
-    //     reply(result);
-    // });
+
+    const type = request.query.type || "type";
+
+    // elasticsearch.deleteIndex("ayooo")
+    var result = elasticsearch.addDocument(
+        "type",
+        data
+    ).then( (result) => {
+
+        reply(result);
+    });
 }
 
 function getCSVFile (request, reply) {
