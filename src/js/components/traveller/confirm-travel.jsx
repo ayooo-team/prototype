@@ -28,6 +28,10 @@ class ConfirmTravel extends React.Component {
         let totalData = {
             timestamp: Date.now(),
             userID: userID,
+            departureDate: this.props.journeyData.departureDate,
+            departureTime: this.props.journeyData.departureTime,
+            arrivalDate: this.props.journeyData.arrivalDate,
+            arrivalTime: this.props.journeyData.arrivalTime
         };
 
         $.ajax({
