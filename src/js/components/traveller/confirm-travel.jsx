@@ -19,19 +19,38 @@ class ConfirmTravel extends React.Component {
         return JSON.parse(storage).uid;
     }
 
-    confirmPost () {
+    checkUserProfileExists () {
 
-        //MAKE AJAX REQUEST TO SAVE DATA TO ESDB
+        const userId = this.getUserID();
 
-        const userID = this.getUserID();
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userId );
+
+        firebaseApp.once('value', (profileSnapshot) => {
+
+            const userProfile = profileSnapshot.val();
+
+            ( userProfile["name"] && userProfile["age"] &&
+            userProfile["profession"] && userProfile["nationality"] &&
+            userProfile["mobileNumber"] ) ? this.confirmPost(userId) : window.location="/#/travel-post/user-info"
+        });
+    }
+
+    confirmPost (userId) {
 
         let totalData = {
             timestamp: Date.now(),
-            userID: userID,
+            userID: userId,
+            departureCity: this.props.journeyData.departureCity,
+            departurePostCode: this.props.journeyData.departurePostCode,
             departureDate: this.props.journeyData.departureDate,
             departureTime: this.props.journeyData.departureTime,
+            arrivalCity: this.props.journeyData.arrivalCity,
+            arrivalPostCode: this.props.journeyData.arrivalPostCode,
             arrivalDate: this.props.journeyData.arrivalDate,
-            arrivalTime: this.props.journeyData.arrivalTime
+            arrivalTime: this.props.journeyData.arrivalTime,
+            parcelSize: this.props.parcelSize.chosenOption,
+            parcelWeight: this.props.parcelSize.parcelWeight,
+            price: this.props.priceData.price
         };
 
         $.ajax({
@@ -65,10 +84,10 @@ class ConfirmTravel extends React.Component {
                       { "PostCode: " + this.props.journeyData.departurePostCode }
                   </p>
                   <p className="form-input-data">
-                      { "Date(DD/MM/YYYY): " + this.props.journeyData.departureDay + "/" + this.props.journeyData.departureMonth + "/" + this.props.journeyData.departureYear }
+                      { "Date(DD/MM/YYYY): " + this.props.journeyData.departureDate }
                   </p>
                   <p className="form-input-data">
-                      { "Time(HH:MM): " + this.props.journeyData.departureHour + ":" + this.props.journeyData.departureMinutes }
+                      { "Time(HH:MM): " + this.props.journeyData.departureTime }
                   </p>
               </div>
 
@@ -81,10 +100,10 @@ class ConfirmTravel extends React.Component {
                       { "PostCode: " + this.props.journeyData.arrivalPostCode }
                   </p>
                   <p className="form-input-data">
-                      { "Date(DD/MM/YYYY): " + this.props.journeyData.arrivalDay + "/" + this.props.journeyData.arrivalMonth + "/" + this.props.journeyData.arrivalYear }
+                      { "Date(DD/MM/YYYY): " + this.props.journeyData.arrivalDate }
                   </p>
                   <p className="form-input-data">
-                      { "Time(HH:MM): " + this.props.journeyData.arrivalHour + ":" + this.props.journeyData.arrivalMinutes }
+                      { "Time(HH:MM): " + this.props.journeyData.arrivalTime }
                   </p>
               </div>
 
@@ -94,7 +113,7 @@ class ConfirmTravel extends React.Component {
                       { "Size: " + this.props.parcelSize.chosenOption }
                   </p>
                   <p>
-                      { "Weight: " + this.props.parcelSize.weightAllowance }
+                      { "Weight: " + this.props.parcelSize.parcelWeight }
                   </p>
               </div>
 
