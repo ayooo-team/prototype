@@ -8,9 +8,30 @@ class ConfirmParcel extends React.Component {
     constructor(props) {
 
         super();
+        this.checkUserProfileExists = this.checkUserProfileExists.bind(this);
         this.confirmPost = this.confirmPost.bind(this);
+    }
 
-        //CHECK IF USER PROFILE EXISTS ON FIREBASE --> if EXISTS, direct to alert box, else --> populate modal
+    getUserID () {
+
+        const storedInfo = localStorage.getItem("firebase:session::ayooo");
+        return JSON.parse(storedInfo).uid;
+    }
+
+    checkUserProfileExists () {
+
+        const userId = this.getUserID();
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userId );
+
+        firebaseApp.once('value', (profileSnapshot) => {
+
+            const userProfile = profileSnapshot.val();
+
+            ( userProfile["name"] && userProfile["age"] &&
+            userProfile["profession"] && userProfile["nationality"] &&
+            userProfile["mobileNumber"] ) ? confirmPost() : window.location="/#/send-post/user-info"
+        });
     }
 
     confirmPost () {
@@ -71,7 +92,7 @@ class ConfirmParcel extends React.Component {
                       } </p>
                   </div>
 
-                  <GhostButton onClick={this.confirmPost} buttonText="CONFIRM" />
+                  <GhostButton onClick={this.checkUserProfileExists} buttonText="CONFIRM" />
 
               </div>
         )
