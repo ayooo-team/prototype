@@ -30,14 +30,42 @@ class ConfirmParcel extends React.Component {
 
             ( userProfile["name"] && userProfile["age"] &&
             userProfile["profession"] && userProfile["nationality"] &&
-            userProfile["mobileNumber"] ) ? confirmPost() : window.location="/#/send-post/user-info"
+            userProfile["mobileNumber"] ) ? this.confirmPost(userId) : window.location="/#/send-post/user-info"
         });
     }
 
-    confirmPost () {
+    confirmPost (userId) {
 
-        //MAKE AJAX REQUEST TO SAVE DATA TO ESDB
-        alert("Thank you! AYOOO will be in touch soon!");
+        let totalData = {
+            timestamp: Date.now(),
+            userID: userId,
+            fromCity: this.props.pickUpData.fromCity,
+            fromPostCode: this.props.pickUpData.fromPostCode,
+            toCity: this.props.pickUpData.toCity,
+            toPostCode: this.props.pickUpData.toPostCode,
+            pickUpIdentity: this.props.pickUpData.pickUpIdentity,
+            recipientIdentity: this.props.pickUpData.recipientIdentity,
+            parcelDescription: this.props.parcelDetails.parcelDescription,
+            parcelSize: this.props.parcelDetails.parcelSize,
+            parcelWeight: this.props.parcelDetails.parcelWeight,
+            requestedDate: this.props.requestedDate,
+            price: this.props.priceData.price
+        };
+
+        $.ajax({
+            method: 'POST',
+            url: 'delivery?type=sender&userID=' + userID,
+            data: totalData,
+            success: (data) => {
+
+                alert("Thank you! AYOOO will be in touch soon!");
+
+                window.location = "/#/dashboard";
+            },
+            error: () => {
+                alert("There was a problem. Please send your request again.");
+            }
+        });
     }
 
     render () {
@@ -89,6 +117,13 @@ class ConfirmParcel extends React.Component {
                       <label className="form-block-title">ASKING PRICE:</label>
                       <p className="form-input-data">{
                           "Price(£): " + this.props.priceData.price
+                      } </p>
+                  </div>
+
+                  <div className="form-block">
+                      <label className="form-block-title">ASKING PRICE:</label>
+                      <p className="form-input-data">{
+                          "Preferred date of delivery: " + this.props.requestedDate
                       } </p>
                   </div>
 
