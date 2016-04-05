@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import classnames from 'classnames';
 
 class Options extends React.Component {
 
@@ -11,9 +12,15 @@ class Options extends React.Component {
 
     render () {
 
+        let radioClasses = classnames({
+            "radio-row": true,
+            "row": true,
+            "selected": true
+        });
+
         return (
 
-            <div className="radio-row row" id={ this.props.blockTitle } onClick={ this.props.onClick }>
+            <div className={ radioClasses } id={ this.props.blockTitle } onClick={ this.props.onClick }>
 
                 <div className="radio-image-wrapper col-2">
                     <img className={ "radio-image radio-block-image-" + this.props.blockTitle } src={ this.props.blockImage } />
