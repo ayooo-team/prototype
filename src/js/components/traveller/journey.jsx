@@ -8,8 +8,21 @@ class Journey extends React.Component {
     constructor () {
 
         super ();
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? console.log("user logged in") : window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
         this.getFormData = this.getFormData.bind(this);
         this.saveDataToParentState = this.saveDataToParentState.bind(this);
+    }
+
+    checkAuthState (callback) {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
     }
 
     getFormData (event) {

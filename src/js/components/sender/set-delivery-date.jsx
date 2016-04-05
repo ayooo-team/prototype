@@ -5,9 +5,19 @@ import GhostButton from '../ghost-button.jsx';
 
 class SetDeliveryDate extends React.Component {
 
-    constructor () {
+    constructor (props) {
 
-        super();
+        super(props);
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? ( this.checkProps((response) => {
+                response === 'goBack' ? window.location=this.props.pageType + "/parcel-details" : console.log("all fields filled so far")
+            })) : window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
+        this.checkProps = this.checkProps.bind(this);
+
         this.ifFuture = this.ifFuture.bind(this);
         this.getFormData = this.getFormData.bind(this);
         this.checkInput = this.checkInput.bind(this);
@@ -15,6 +25,18 @@ class SetDeliveryDate extends React.Component {
         this.state = {
           dateSetter: "none",
         }
+    }
+
+    checkAuthState (callback) {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
+    }
+
+    checkProps (callback) {
+
+        this.props.parcelDetails === "default" ? callback('goBack') : callback('ok');
     }
 
     ifFuture (event) {

@@ -11,18 +11,19 @@ class UserDetails extends React.Component {
 
         super();
 
-        this.checkAuthState();
-        this.getUserProfile();
+        this.checkAuthState((response) => {
+            response === 'yes' ? this.getUserProfile() : window.location = "/"
+        });
 
         this.checkAuthState = this.checkAuthState.bind(this);
         this.getUserProfile = this.getUserProfile.bind(this);
     }
 
-    checkAuthState () {
+    checkAuthState (callback) {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         const isUserAuthenticated = firebaseApp.getAuth();
-        isUserAuthenticated ? console.log("user logged in") : window.location="/";
+        isUserAuthenticated ? callback('yes') : callback('no');
     }
 
     getUserProfile (firebaseApp) {
