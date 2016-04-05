@@ -25503,8 +25503,9 @@
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserDetails).call(this));
 
-	        _this.checkAuthState();
-	        _this.getUserProfile();
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? _this.getUserProfile() : window.location = "/";
+	        });
 
 	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        _this.getUserProfile = _this.getUserProfile.bind(_this);
@@ -25513,11 +25514,11 @@
 
 	    _createClass(UserDetails, [{
 	        key: 'checkAuthState',
-	        value: function checkAuthState() {
+	        value: function checkAuthState(callback) {
 
 	            var firebaseApp = new _firebase2.default("https://ayooo.firebaseio.com/");
 	            var isUserAuthenticated = firebaseApp.getAuth();
-	            isUserAuthenticated ? console.log("user logged in") : window.location = "/";
+	            isUserAuthenticated ? callback('yes') : callback('no');
 	        }
 	    }, {
 	        key: 'getUserProfile',
@@ -26004,6 +26005,11 @@
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PickUp).call(this));
 
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? console.log("user logged in") : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        _this.getFormData = _this.getFormData.bind(_this);
 	        _this.ifSomeoneElse = _this.ifSomeoneElse.bind(_this);
 	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
@@ -26016,6 +26022,14 @@
 	    }
 
 	    _createClass(PickUp, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
 	        key: 'ifSomeoneElse',
 	        value: function ifSomeoneElse(event) {
 
@@ -26207,8 +26221,16 @@
 	    function ParcelDetails(props) {
 	        _classCallCheck(this, ParcelDetails);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ParcelDetails).call(this));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ParcelDetails).call(this, props));
 
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? _this.checkProps(function (response) {
+	                response === 'goBack' ? window.location = _this.props.pageType : console.log("all fields filled so far");
+	            }) : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
+	        _this.checkProps = _this.checkProps.bind(_this);
 	        _this.tempSaveFilledFields = _this.tempSaveFilledFields.bind(_this);
 	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
 	        _this.getFormData = _this.getFormData.bind(_this);
@@ -26216,6 +26238,20 @@
 	    }
 
 	    _createClass(ParcelDetails, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
+	        key: 'checkProps',
+	        value: function checkProps(callback) {
+
+	            this.props.pickUpData === "default" ? callback('goBack') : callback('ok');
+	        }
+	    }, {
 	        key: 'tempSaveFilledFields',
 	        value: function tempSaveFilledFields(event) {
 
@@ -26412,11 +26448,19 @@
 	var ParcelSize = function (_React$Component) {
 	    _inherits(ParcelSize, _React$Component);
 
-	    function ParcelSize() {
+	    function ParcelSize(props) {
 	        _classCallCheck(this, ParcelSize);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ParcelSize).call(this));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ParcelSize).call(this, props));
 
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? _this.checkProps(function (response) {
+	                response === 'goBack' ? window.location = _this.props.pageType : console.log("all fields filled so far");
+	            }) : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
+	        _this.checkProps = _this.checkProps.bind(_this);
 	        _this.setRadioOptionInState = _this.setRadioOptionInState.bind(_this);
 	        _this.storeRadioOptionOnly = _this.storeRadioOptionOnly.bind(_this);
 	        _this.storeRadioOptionAndWeight = _this.storeRadioOptionAndWeight.bind(_this);
@@ -26429,6 +26473,20 @@
 	    }
 
 	    _createClass(ParcelSize, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
+	        key: 'checkProps',
+	        value: function checkProps(callback) {
+
+	            this.props.journeyData === "default" ? callback('goBack') : callback('ok');
+	        }
+	    }, {
 	        key: 'setRadioOptionInState',
 	        value: function setRadioOptionInState(event) {
 	            var _this2 = this;
@@ -26681,14 +26739,36 @@
 	    function PriceSuggestion(props) {
 	        _classCallCheck(this, PriceSuggestion);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PriceSuggestion).call(this));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PriceSuggestion).call(this, props));
 
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? _this.checkProps(function (response) {
+	                response === 'goBack' ? _this.props.type === 'travel' ? window.location = _this.props.pageType + "/parcel-size" : window.location = _this.props.pageType + "/parcel-details" : console.log("all fields filled so far");
+	            }) : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
+	        _this.checkProps = _this.checkProps.bind(_this);
 	        _this.checkInput = _this.checkInput.bind(_this);
 	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(PriceSuggestion, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
+	        key: 'checkProps',
+	        value: function checkProps(callback) {
+
+	            this.props.parcelSize === "default" ? callback('goBack') : callback('ok');
+	        }
+	    }, {
 	        key: 'checkInput',
 	        value: function checkInput(event) {
 
@@ -26777,10 +26857,19 @@
 	var SetDeliveryDate = function (_React$Component) {
 	    _inherits(SetDeliveryDate, _React$Component);
 
-	    function SetDeliveryDate() {
+	    function SetDeliveryDate(props) {
 	        _classCallCheck(this, SetDeliveryDate);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SetDeliveryDate).call(this));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SetDeliveryDate).call(this, props));
+
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? _this.checkProps(function (response) {
+	                response === 'goBack' ? window.location = _this.props.pageType + "/parcel-details" : console.log("all fields filled so far");
+	            }) : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
+	        _this.checkProps = _this.checkProps.bind(_this);
 
 	        _this.ifFuture = _this.ifFuture.bind(_this);
 	        _this.getFormData = _this.getFormData.bind(_this);
@@ -26793,6 +26882,20 @@
 	    }
 
 	    _createClass(SetDeliveryDate, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
+	        key: 'checkProps',
+	        value: function checkProps(callback) {
+
+	            this.props.parcelDetails === "default" ? callback('goBack') : callback('ok');
+	        }
+	    }, {
 	        key: 'ifFuture',
 	        value: function ifFuture(event) {
 
@@ -26938,14 +27041,36 @@
 	    function ConfirmParcel(props) {
 	        _classCallCheck(this, ConfirmParcel);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmParcel).call(this));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmParcel).call(this, props));
 
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? _this.checkProps(function (response) {
+	                response === 'goBack' ? window.location = _this.props.pageType + "/price" : console.log("all fields filled so far");
+	            }) : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
+	        _this.checkProps = _this.checkProps.bind(_this);
 	        _this.checkUserProfileExists = _this.checkUserProfileExists.bind(_this);
 	        _this.confirmPost = _this.confirmPost.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(ConfirmParcel, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
+	        key: 'checkProps',
+	        value: function checkProps(callback) {
+
+	            this.props.priceData === "default" ? callback('goBack') : callback('ok');
+	        }
+	    }, {
 	        key: 'getUserID',
 	        value: function getUserID() {
 
@@ -27251,12 +27376,25 @@
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Journey).call(this));
 
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? console.log("user logged in") : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        _this.getFormData = _this.getFormData.bind(_this);
 	        _this.saveDataToParentState = _this.saveDataToParentState.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Journey, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
 	        key: 'getFormData',
 	        value: function getFormData(event) {
 	            var _this2 = this;
@@ -27512,15 +27650,36 @@
 	    function ConfirmTravel(props) {
 	        _classCallCheck(this, ConfirmTravel);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmTravel).call(this));
+	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ConfirmTravel).call(this, props));
 
+	        _this.checkAuthState(function (response) {
+	            response === 'yes' ? _this.checkProps(function (response) {
+	                response === 'goBack' ? window.location = _this.props.pageType + "/price" : console.log("all fields filled so far");
+	            }) : window.location = "/";
+	        });
+
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
+	        _this.checkProps = _this.checkProps.bind(_this);
 	        _this.confirmPost = _this.confirmPost.bind(_this);
 	        _this.getUserID = _this.getUserID.bind(_this);
-	        //CHECK IF USER PROFILE EXISTS ON FIREBASE
 	        return _this;
 	    }
 
 	    _createClass(ConfirmTravel, [{
+	        key: 'checkAuthState',
+	        value: function checkAuthState(callback) {
+
+	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+	            var isUserAuthenticated = firebaseApp.getAuth();
+	            isUserAuthenticated ? callback('yes') : callback('no');
+	        }
+	    }, {
+	        key: 'checkProps',
+	        value: function checkProps(callback) {
+
+	            this.props.priceData === "default" ? callback('goBack') : callback('ok');
+	        }
+	    }, {
 	        key: 'getUserID',
 	        value: function getUserID() {
 	            var storage = localStorage.getItem("firebase:session::ayooo");
@@ -27724,7 +27883,7 @@
 
 
 	// module
-	exports.push([module.id, "h1, h2, h3, h4 {\n  margin: 0;\n  font-weight: normal; }\n\nh1, h2, h3, h4, p {\n  text-align: center; }\n\np {\n  font-size: 1em; }\n\n* {\n  font-family: 'Roboto', sans-serif;\n  box-sizing: border-box; }\n\n.display-none {\n  display: none; }\n\nhtml, body {\n  padding: 0;\n  margin: 0; }\n\ninput:focus, textarea:focus {\n  outline: none; }\n\nbutton {\n  margin: 0;\n  background-color: transparent; }\n  button:active {\n    background-color: transparent; }\n\n.col-1 {\n  width: 8.33%; }\n\n.col-2 {\n  width: 16.66%; }\n\n.col-3 {\n  width: 25%; }\n\n.col-4 {\n  width: 33.33%; }\n\n.col-5 {\n  width: 41.66%; }\n\n.col-6 {\n  width: 50%; }\n\n.col-7 {\n  width: 58.33%; }\n\n.col-8 {\n  width: 66.66%; }\n\n.col-9 {\n  width: 75%; }\n\n.col-10 {\n  width: 83.33%; }\n\n.col-11 {\n  width: 91.66%; }\n\n.col-12 {\n  width: 100%; }\n\n[class*=\"col-\"] {\n  float: left; }\n\n.row:after {\n  content: \"\";\n  clear: both;\n  display: block; }\n\n.page {\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  height: 100%; }\n  .page h1:first-of-type,\n  .page h2:first-of-type,\n  .page h3:first-of-type {\n    padding: 2vh; }\n  .page .page-header {\n    font-size: 1.3em; }\n\n.left {\n  text-align: left; }\n\n.flex-column-wrapper {\n  -webkit-flex-direction: column;\n  flex-direction: column;\n  -webkit-align-items: flex-start;\n  align-items: flex-start; }\n\n.flex-container {\n  display: flex; }\n\n.flex-item {\n  flex: 1; }\n\n.app-container {\n  width: 100vw;\n  height: 100vh; }\n\n.ghost-button {\n  display: block;\n  text-align: center;\n  font-size: 1.4em;\n  width: 90vw;\n  height: 8vh;\n  margin: 1em auto;\n  border-color: #65b465;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  cursor: pointer; }\n  .ghost-button a {\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n    margin: auto 0; }\n  .ghost-button span {\n    height: 8vh;\n    line-height: 8vh; }\n  .ghost-button a:link, .ghost-button a:visited {\n    text-decoration: none;\n    color: #65b465; }\n  .ghost-button:focus {\n    outline: 0; }\n  .ghost-button:hover {\n    border-color: #b1e5b1; }\n\n.form {\n  margin: 5vw;\n  height: 100%; }\n\n.form-block {\n  padding: 1vh 0; }\n  .form-block .form-block-title {\n    text-align: left;\n    margin: 1.5vh 0; }\n  .form-block .form-input {\n    height: 6vh;\n    font-size: 1em; }\n\n.label {\n  display: inline-block; }\n\n.input-number {\n  width: 15vw;\n  height: 7vw;\n  font-size: 1em; }\n  .input-number.large {\n    width: 20vw;\n    height: 12vw; }\n\n.input-title, .unit {\n  font-size: 1.1em;\n  margin: 1.5vh 0; }\n\n.unit {\n  text-align: left;\n  margin-top: 2.5vh; }\n\n/*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/\ninput::-webkit-outer-spin-button,\ninput::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0; }\n\n.radio-container {\n  width: 100%; }\n  .radio-container .radio-row {\n    padding: 2vh 1vh; }\n    .radio-container .radio-row.selected {\n      background-color: #b1e5b1; }\n    .radio-container .radio-row:hover {\n      cursor: pointer; }\n    .radio-container .radio-row .radio-block-title, .radio-container .radio-row .radio-block-text {\n      text-align: left;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-block-title {\n      font-weight: 600;\n      border-top: 1px solid grey; }\n    .radio-container .radio-row p {\n      margin: 0;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-selected-tick {\n      width: 4vh;\n      height: 4vh;\n      margin-top: 2vh; }\n\n.login-title {\n  font-weight: lighter;\n  margin: 40px; }\n\n.login-width-adjust {\n  margin: 1em 2em; }\n\n.radio-block {\n  margin: 3vh 2vh;\n  width: 90vw; }\n  .radio-block .description {\n    flex-grow: 3;\n    margin: auto; }\n    .radio-block .description * {\n      text-align: left; }\n  .radio-block .radio-block-image {\n    height: auto;\n    margin: auto; }\n\n.dashboard-container {\n  width: 100vw;\n  height: 100vh;\n  margin: auto;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between; }\n  .dashboard-container h1, .dashboard-container h4 {\n    font-weight: lighter; }\n  .dashboard-container h4 {\n    letter-spacing: 0.1em;\n    padding-left: 0.1em; }\n  .dashboard-container h1 {\n    letter-spacing: 0.2em;\n    padding-left: 0.2em;\n    font-size: 3.5em; }\n\n.logo {\n  display: block;\n  height: 25vh;\n  margin: 0 auto;\n  padding-top: 6vh; }\n\n.user-details {\n  margin: 5vw; }\n\n.input.col-6 {\n  width: 60%; }\n\n.download-button-wrapper {\n  margin-bottom: 10vh; }\n\n.admin-header {\n  margin-top: 5vh; }\n\n.journey-form {\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  height: 90%;\n  margin: 5vw; }\n", ""]);
+	exports.push([module.id, "h1, h2, h3, h4 {\n  margin: 0;\n  font-weight: normal; }\n\nh1, h2, h3, h4, p {\n  text-align: center; }\n\np {\n  font-size: 1em; }\n\n* {\n  font-family: 'Roboto', sans-serif;\n  box-sizing: border-box; }\n\n.display-none {\n  display: none; }\n\nhtml, body {\n  padding: 0;\n  margin: 0; }\n\ninput:focus, textarea:focus {\n  outline: none; }\n\nbutton {\n  margin: 0;\n  background-color: transparent; }\n  button:active {\n    background-color: transparent; }\n\n.col-1 {\n  width: 8.33%; }\n\n.col-2 {\n  width: 16.66%; }\n\n.col-3 {\n  width: 25%; }\n\n.col-4 {\n  width: 33.33%; }\n\n.col-5 {\n  width: 41.66%; }\n\n.col-6 {\n  width: 50%; }\n\n.col-7 {\n  width: 58.33%; }\n\n.col-8 {\n  width: 66.66%; }\n\n.col-9 {\n  width: 75%; }\n\n.col-10 {\n  width: 83.33%; }\n\n.col-11 {\n  width: 91.66%; }\n\n.col-12 {\n  width: 100%; }\n\n[class*=\"col-\"] {\n  float: left; }\n\n.row:after {\n  content: \"\";\n  clear: both;\n  display: block; }\n\n.page {\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  height: 100%; }\n  .page h1:first-of-type,\n  .page h2:first-of-type,\n  .page h3:first-of-type {\n    padding: 2vh; }\n  .page .page-header {\n    font-size: 1.3em; }\n\n.left {\n  text-align: left; }\n\n.flex-column-wrapper {\n  -webkit-flex-direction: column;\n  flex-direction: column;\n  -webkit-align-items: flex-start;\n  align-items: flex-start; }\n\n.flex-container {\n  display: flex; }\n\n.flex-item {\n  flex: 1; }\n\n.app-container {\n  width: 100vw;\n  height: 100vh; }\n\n.ghost-button {\n  display: block;\n  text-align: center;\n  font-size: 1.4em;\n  width: 90vw;\n  height: 8vh;\n  margin: 0.5em auto;\n  border-color: #65b465;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  cursor: pointer;\n  color: #65b465; }\n  .ghost-button a {\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n    margin: auto 0; }\n  .ghost-button span {\n    height: 8vh;\n    line-height: 8vh; }\n  .ghost-button a:link, .ghost-button a:visited {\n    text-decoration: none; }\n  .ghost-button:focus {\n    outline: 0; }\n  .ghost-button:hover {\n    border-color: #b1e5b1; }\n\n.form {\n  margin: 5vw;\n  height: 100%; }\n\n.form-block {\n  padding: 1vh 0; }\n  .form-block .form-block-title {\n    text-align: left;\n    margin: 1.5vh 0; }\n  .form-block .form-input {\n    height: 6vh;\n    font-size: 0.7em; }\n\n.label {\n  display: inline-block; }\n\n.input-number {\n  width: 15vw;\n  height: 7vw;\n  font-size: 0.7em; }\n  .input-number.large {\n    width: 20vw;\n    height: 12vw; }\n\n.input-title, .unit {\n  font-size: 1.1em;\n  margin: 1.5vh 0; }\n\n.unit {\n  text-align: left;\n  margin-top: 2.5vh; }\n\n/*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/\ninput::-webkit-outer-spin-button,\ninput::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0; }\n\n.radio-container {\n  width: 100%; }\n  .radio-container .radio-row {\n    padding: 2vh 1vh; }\n    .radio-container .radio-row.selected {\n      background-color: #b1e5b1; }\n    .radio-container .radio-row:hover {\n      cursor: pointer; }\n    .radio-container .radio-row .radio-block-title, .radio-container .radio-row .radio-block-text {\n      text-align: left;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-block-title {\n      font-weight: 600;\n      border-top: 1px solid grey; }\n    .radio-container .radio-row p {\n      margin: 0;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-selected-tick {\n      width: 4vh;\n      height: 4vh;\n      margin-top: 2vh; }\n\n.login-title {\n  font-weight: lighter;\n  margin: 40px; }\n\n.login-width-adjust {\n  margin: 1em 2em; }\n\n.radio-block {\n  margin: 3vh 2vh;\n  width: 90vw; }\n  .radio-block .description {\n    flex-grow: 3;\n    margin: auto; }\n    .radio-block .description * {\n      text-align: left; }\n  .radio-block .radio-block-image {\n    height: auto;\n    margin: auto; }\n\n.dashboard-container {\n  width: 100vw;\n  height: 100vh;\n  margin: auto;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between; }\n  .dashboard-container h1, .dashboard-container h4 {\n    font-weight: lighter; }\n  .dashboard-container h4 {\n    letter-spacing: 0.1em;\n    padding-left: 0.1em; }\n  .dashboard-container h1 {\n    letter-spacing: 0.2em;\n    padding-left: 0.2em;\n    font-size: 3.5em; }\n\n.logo {\n  display: block;\n  height: 25vh;\n  margin: 0 auto;\n  padding-top: 6vh; }\n\n.user-details {\n  margin: 5vw; }\n\n.input.col-6 {\n  width: 60%; }\n\n.download-button-wrapper {\n  margin-bottom: 10vh; }\n\n.admin-header {\n  margin-top: 5vh; }\n\n.journey-form {\n  display: flex;\n  justify-content: space-between;\n  flex-direction: column;\n  height: 90%;\n  margin: 5vw; }\n", ""]);
 
 	// exports
 
