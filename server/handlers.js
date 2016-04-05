@@ -9,21 +9,49 @@ function addDeliveryRequest (request, reply) {
 
         return new Error('userID not set');
     }
-    
+    if (!data) {
+
+        return new Error('Payload to server was empty.');
+    }
+
     data.userID = request.query.userID;
-    data.timestamp = Date.now();
+    
+    // // elasticsearch.deleteIndex("ayooo")
+    // var result = elasticsearch.addDocument(
+    //     request.query.type,
+    //     data
+    // ).then( (result) => {
+    //
+    //     reply(result);
+    // });
+}
 
-    // elasticsearch.deleteIndex("ayooo")
-    var result = elasticsearch.addDocument(
-        request.query.type,
-        data
-    ).then( (result) => {
+function getCSVFile (request, reply) {
 
-        reply(result);
+    let type = request.query;
+    console.log(type);
+
+    var data = getData(type, function (data) {
+
+        var sortedByTime = data.sort(function (a, b) {
+
+            return a.timestamp < b.timestamp;
+        });
+
+        data.timestamp = Date(data.timestamp);
+        console.log("FINAL DATA",data);
+
+        var csvFile = toCSV(sortedByTime);
+
+        reply(csvFile);
     });
 }
 
-function getData (callback) {
+function getData (type, callback) {
+
+    var options = {
+        type: ''
+    };
 
     elasticsearch.search().then((result) => {
 
@@ -81,6 +109,7 @@ function toCSV (data) {
 module.exports = {
 
     addDeliveryRequest: addDeliveryRequest,
+    getCSVFile: getCSVFile,
     getData: getData,
     toCSV: toCSV
 };
