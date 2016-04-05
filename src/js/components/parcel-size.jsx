@@ -55,7 +55,7 @@ class ParcelSize extends React.Component {
 
             saveParcelSize({
               chosenOption: optionLowerCase,
-              weightAllowance: this.refs.weight.value
+              parcelWeight: this.refs.weight.value
             })
         ) : (
             saveParcelSize({
