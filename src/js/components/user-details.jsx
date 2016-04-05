@@ -2,6 +2,8 @@
 
 import React from 'react';
 import Firebase from 'firebase';
+import classnames from 'classnames';
+import GhostButton from './ghost-button.jsx';
 
 class UserDetails extends React.Component {
 
@@ -76,6 +78,15 @@ class UserDetails extends React.Component {
 
     render () {
 
+        let leftColumn = classnames(
+            "form-block-title",
+            "label",
+            "col-4"
+        );
+        let rightColumn = classnames(
+            "col-6"
+        );
+
         return this.state ? (
             <div className="page">
                 <h3>
@@ -83,63 +94,67 @@ class UserDetails extends React.Component {
                     To make a post, please fill in the empty fields.
                 </h3>
 
-                <h4>USER DETAILS</h4>
+                <h1>USER DETAILS</h1>
 
                 <div>
-                    <h4>Name</h4>
-                    <input type="text" ref="name" defaultValue={this.state.savedName} />
+                    <h4 className={ leftColumn }>Name</h4>
+                    <input className={ rightColumn } type="text" ref="name" defaultValue={ this.state.savedName } />
                 </div>
-                <div>
-                    <h4>Age</h4>
-                    <input type="text" ref="age" defaultValue={this.state.savedAge} />
-                </div>
-                <div>
-                    <h4>Profession</h4>
-                    <input type="text" ref="profession" defaultValue={this.state.savedProfession} />
-                </div>
-                <div>
-                    <h4>Nationality</h4>
-                    <input type="text" ref="nationality" defaultValue={this.state.savedNationality} />
-                </div>
-                <div>
-                    <h4>Mobile Number</h4>
-                    <input type="text" ref="mobileNumber" defaultValue={this.state.savedMobileNumber} />
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Age</h4>
+                    <input className={ rightColumn } type="text" ref="age" defaultValue={ this.state.savedAge }/>
                 </div>
 
-                <button onClick={ this.getFormData.bind(this) }>Submit</button>
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Profession</h4>
+                    <input className={ rightColumn } type="text" ref="profession" defaultValue={ this.state.savedProfession } />
+                </div>
+
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Nationality</h4>
+                    <input className={ rightColumn } type="text" ref="nationality" defaultValue={ this.state.savedNationality }/>
+                </div>
+
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Mobile Number</h4>
+                    <input className={ rightColumn } type="text" ref="nationality" defaultValue={ this.state.savedMobileNumber }/>
+                </div>
+
+                <GhostButton onClick={ this.getFormData.bind(this) } buttonText="Submit" />
             </div>
         ) : (
-            <div className="page">
+            <div className="page data-collection-page">
                 <h3>
                     To ensure that our community is trustworthy,
                     we record information of every member's identity.
                     To make a post, please tell us who you are.
                 </h3>
 
-                <h4>USER DETAILS</h4>
+                <h1>USER DETAILS</h1>
 
-                <div>
-                    <h4>Name</h4>
-                    <input type="text" ref="name"/>
-                </div>
-                <div>
-                    <h4>Age</h4>
-                    <input type="text" ref="age"/>
-                </div>
-                <div>
-                    <h4>Profession</h4>
-                    <input type="text" ref="profession"/>
-                </div>
-                <div>
-                    <h4>Nationality</h4>
-                    <input type="text" ref="nationality"/>
-                </div>
-                <div>
-                    <h4>Mobile Number</h4>
-                    <input type="text" ref="mobileNumber"/>
+                <div className="user-details">
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Name</h4>
+                        <input className={ rightColumn } type="text" ref="name"/>
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Age</h4>
+                        <input className={ rightColumn } type="text" ref="age"/>
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Profession</h4>
+                        <input className={ rightColumn } type="text" ref="profession"/>
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Nationality</h4>
+                        <input className={ rightColumn } type="text" ref="nationality"/>
+                    </div>
                 </div>
 
-                <button onClick={ this.getFormData.bind(this) }>Submit</button>
+                <GhostButton onClick={ this.getFormData.bind(this) } buttonText="Submit" />
             </div>
         )
     }

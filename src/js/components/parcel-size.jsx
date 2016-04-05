@@ -7,13 +7,17 @@ import GhostButton from './ghost-button.jsx';
 
 class ParcelSize extends React.Component {
 
-    constructor() {
+    constructor () {
 
         super();
         this.setRadioOptionInState = this.setRadioOptionInState.bind(this);
         this.storeRadioOptionOnly = this.storeRadioOptionOnly.bind(this);
         this.storeRadioOptionAndWeight = this.storeRadioOptionAndWeight.bind(this);
         this.saveDataToParentState = this.saveDataToParentState.bind(this);
+
+        this.state = {
+            chosenOption: undefined
+        };
     }
 
     setRadioOptionInState (event) {
@@ -23,7 +27,8 @@ class ParcelSize extends React.Component {
             chosenOption: event.target.id,
             showTick: "block",
             hideTick: "none"
-        });
+
+        }, () => console.log(this.state.chosenOption));
     }
 
     storeRadioOptionAndWeight () {
@@ -68,22 +73,22 @@ class ParcelSize extends React.Component {
 
         var radioDiv = data["space"].map( (element, index, array) => {
 
-            return <Options onClick={ this.setRadioOptionInState } key={ index } blockTitle={ element.title } blockImage={ element.image } blockText={ element.text } />
+            return <Options onClick={ this.setRadioOptionInState } selectedRow={ this.state.chosenOption } key={ index } blockTitle={ element.title } blockImage={ element.image } blockText={ element.text } />
         });
 
         return this.props.type === "travel" ? (
 
           <div className="page data-collection-page">
 
-              <h3 className="">DEFINE YOUR CAPACITY</h3>
+              <h3 className="page-header">DEFINE YOUR CAPACITY</h3>
               <div className="radio-container">
                   { radioDiv }
               </div>
 
               <div className="weight-input-container row">
                   <h4 className="input-title col-7">MAX WEIGHT:</h4>
-                  <input className="input-number large col-4" type="number" ref="weight" placeholder="HOUR" />
-                  <p className="col-1">kg</p>
+                  <input className="input-number large col-5" type="number" ref="weight" placeholder="HOUR" />
+                  <p className="unit col-2">kg</p>
               </div>
 
               <GhostButton onClick={ this.storeRadioOptionAndWeight } buttonText="NEXT" />
@@ -94,8 +99,8 @@ class ParcelSize extends React.Component {
 
           <div className="data-collection-page">
 
-              <div className="">
-                  <h3 className="">DEFINE YOUR CAPACITY</h3>
+              <h3 className="page-header">DEFINE YOUR CAPACITY</h3>
+              <div className="radio-container">
                   { radioDiv }
               </div>
 
@@ -107,4 +112,4 @@ class ParcelSize extends React.Component {
     }
 }
 
-export default ParcelSize
+export default ParcelSize;
