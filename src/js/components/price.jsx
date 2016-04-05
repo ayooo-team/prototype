@@ -63,7 +63,7 @@ class PriceSuggestion extends React.Component {
 
             <div className="page data-collection-page">
 
-                <h3>{ this.props.pricePageDescription }</h3>
+                <h3 className="page-header price">{ this.props.pricePageDescription }</h3>
 
                 <div className="form-block row">
 

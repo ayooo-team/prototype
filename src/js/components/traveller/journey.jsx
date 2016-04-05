@@ -168,53 +168,57 @@ class Journey extends React.Component {
 
         return (
 
-            <div className="page data-collection-page form">
+            <div className="page data-collection-page">
 
-                <div className="form-block row">
-                    <h4 className="form-block-title">DEPARTURE LOCATION:</h4>
-                    <input className="form-input col-6" type="text" ref="departureCity" placeholder="CITY" />
-                    <input className="form-input col-6" type="text" ref="departurePostcode" placeholder="POSTCODE" />
-                </div>
+                <div className="journey-form">
 
-                <div className="form-block row">
+                    <div className="form-block row">
+                        <h4 className="form-block-title">DEPARTURE LOCATION:</h4>
+                        <input className="form-input col-6" type="text" ref="departureCity" placeholder="CITY" />
+                        <input className="form-input col-6" type="text" ref="departurePostcode" placeholder="POSTCODE" />
+                    </div>
 
-                    <h4 className="form-block-title">DEPARTURE DATE & TIME:</h4>
+                    <div className="form-block row">
 
-                        <div className="date-container col-6">
-                            <input className="input-number" type="text" ref="departureDay" placeholder="DAY" />
-                            <input className="input-number" type="text" ref="departureMonth" placeholder="MONTH" />
-                            <input className="input-number" type="text" ref="departureYear" placeholder="YEAR" />
-                        </div>
-                        <div className="time-container col-6">
-                            <input className="input-number" type="text" ref="departureHour" placeholder="HOUR" />
-                            <input className="input-number" type="text" ref="departureMinutes" placeholder="MINUTES" />
-                        </div>
+                        <h4 className="form-block-title">DEPARTURE DATE & TIME:</h4>
 
-                </div>
+                            <div className="date-container col-8">
 
-                <div className="form-block">
-                    <h4 className="form-block-title">ARRIVAL LOCATION:</h4>
-                    <input className="form-input col-6" type="text" ref="arrivalCity" placeholder="CITY" />
-                    <input className="form-input col-6" type="text" ref="arrivalPostcode" placeholder="POSTCODE" />
-                </div>
+                                <input className="input-number" type="text" ref="departureDay" placeholder="DD" />
+                                <input className="input-number" type="text" ref="departureMonth" placeholder="MMMM" />
+                                <input className="input-number" type="text" ref="departureYear" placeholder="YYYY" />
+                            </div>
+                            <div className="time-container col-4">
+                                <input className="input-number" type="text" ref="departureHour" placeholder="HOUR" />
+                                <input className="input-number" type="text" ref="departureMinutes" placeholder="MIN" />
+                            </div>
 
-                <div className="form-block">
-                    <h4 className="form-block-title">ARRIVAL DATE & TIME:</h4>
-                    <div className="">
-                        <div className="date-container col-6">
-                            <input className="input-number" type="text" ref="arrivalDay" placeholder="DAY" />
-                            <input className="input-number" type="text" ref="arrivalMonth" placeholder="MONTH" />
-                            <input className="input-number" type="text" ref="arrivalYear" placeholder="YEAR" />
-                        </div>
-                        <div className="time-container col-6">
-                            <input className="input-number" type="text" ref="arrivalHour" placeholder="HOUR" />
-                            <input className="input-number" type="text" ref="arrivalMinutes" placeholder="MINUTES" />
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className="form-block-title">ARRIVAL LOCATION:</h4>
+                        <input className="form-input col-6" type="text" ref="arrivalCity" placeholder="CITY" />
+                        <input className="form-input col-6" type="text" ref="arrivalPostcode" placeholder="POSTCODE" />
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className="form-block-title">ARRIVAL DATE & TIME:</h4>
+                        <div className="">
+                            <div className="date-container col-8">
+
+                                <input className="input-number" type="text" ref="arrivalDay" placeholder="DD" />
+                                <input className="input-number" type="text" ref="arrivalMonth" placeholder="MMMM" />
+                                <input className="input-number" type="text" ref="arrivalYear" placeholder="YYYY" />
+                            </div>
+                            <div className="time-container col-4">
+                                <input className="input-number" type="text" ref="arrivalHour" placeholder="HOUR" />
+                                <input className="input-number" type="text" ref="arrivalMinutes" placeholder="MIN" />
+                            </div>
                         </div>
                     </div>
+
                 </div>
-
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
-
             </div>
         );
     }

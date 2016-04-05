@@ -41,9 +41,9 @@ class ConfirmTravel extends React.Component {
 
     checkUserProfileExists () {
 
-        const userId = this.getUserID();
+        const userID = this.getUserID();
 
-        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userId );
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userID );
 
         firebaseApp.once('value', (profileSnapshot) => {
 
@@ -51,15 +51,17 @@ class ConfirmTravel extends React.Component {
 
             ( userProfile["name"] && userProfile["age"] &&
             userProfile["profession"] && userProfile["nationality"] &&
-            userProfile["mobileNumber"] ) ? this.confirmPost(userId) : window.location="/#/travel-post/user-info"
+            userProfile["mobileNumber"] ) ? this.confirmPost() : window.location="/#/travel-post/user-info"
         });
     }
 
-    confirmPost (userId) {
+    confirmPost () {
+
+        const userID = this.getUserID();
 
         let totalData = {
             timestamp: Date.now(),
-            userID: userId,
+            userID: userID,
             departureCity: this.props.journeyData.departureCity,
             departurePostCode: this.props.journeyData.departurePostCode,
             departureDate: this.props.journeyData.departureDate,
@@ -83,7 +85,8 @@ class ConfirmTravel extends React.Component {
 
                 window.location = "/#/dashboard";
             },
-            error: () => {
+            error: (error) => {
+                console.log(error);
                 alert("There was a problem. Please send your request again.");
             }
         });
@@ -96,12 +99,12 @@ class ConfirmTravel extends React.Component {
             <div className="data-collection-page form">
 
               <div className="form-block">
-                  <label className="form-block-title">DEPARTURE:</label>
+                  <h3 className="form-block-title">DEPARTURE:</h3>
                   <p className="form-input-data">
                       { "City: " + this.props.journeyData.departureCity }
                   </p>
                   <p className="form-input-data">
-                      { "PostCode: " + this.props.journeyData.departurePostCode }
+                      { "Postcode: " + this.props.journeyData.departurePostCode }
                   </p>
                   <p className="form-input-data">
                       { "Date(DD/MM/YYYY): " + this.props.journeyData.departureDate }
@@ -112,12 +115,12 @@ class ConfirmTravel extends React.Component {
               </div>
 
               <div className="form-block">
-                  <label className="form-block-title">ARRIVAL:</label>
+                  <h3 className="form-block-title">ARRIVAL:</h3>
                   <p className="form-input-data">
                       { "City: " + this.props.journeyData.arrivalCity }
                   </p>
                   <p className="form-input-data">
-                      { "PostCode: " + this.props.journeyData.arrivalPostCode }
+                      { "Postcode: " + this.props.journeyData.arrivalPostCode }
                   </p>
                   <p className="form-input-data">
                       { "Date(DD/MM/YYYY): " + this.props.journeyData.arrivalDate }
@@ -128,7 +131,7 @@ class ConfirmTravel extends React.Component {
               </div>
 
               <div className="form-block">
-                  <label className="form-block-title">LUGGAGE ALLOWANCE:</label>
+                  <h3 className="form-block-title">LUGGAGE ALLOWANCE:</h3>
                   <p className="form-input-data">
                       { "Size: " + this.props.parcelSize.chosenOption }
                   </p>
@@ -138,7 +141,7 @@ class ConfirmTravel extends React.Component {
               </div>
 
               <div className="form-block">
-                  <label className="form-block-title">ASKING PRICE:</label>
+                  <h3 className="form-block-title">ASKING PRICE:</h3>
                   <p className="form-input-data">
                       { "Price(£): " + this.props.priceData.price }
                   </p>
