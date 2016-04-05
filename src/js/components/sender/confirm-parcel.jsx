@@ -8,15 +8,64 @@ class ConfirmParcel extends React.Component {
     constructor(props) {
 
         super();
+        this.checkUserProfileExists = this.checkUserProfileExists.bind(this);
         this.confirmPost = this.confirmPost.bind(this);
-
-        //CHECK IF USER PROFILE EXISTS ON FIREBASE --> if EXISTS, direct to alert box, else --> populate modal
     }
 
-    confirmPost () {
+    getUserID () {
 
-        //MAKE AJAX REQUEST TO SAVE DATA TO ESDB
-        alert("Thank you! AYOOO will be in touch soon!");
+        const storedInfo = localStorage.getItem("firebase:session::ayooo");
+        return JSON.parse(storedInfo).uid;
+    }
+
+    checkUserProfileExists () {
+
+        const userId = this.getUserID();
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userId );
+
+        firebaseApp.once('value', (profileSnapshot) => {
+
+            const userProfile = profileSnapshot.val();
+
+            ( userProfile["name"] && userProfile["age"] &&
+            userProfile["profession"] && userProfile["nationality"] &&
+            userProfile["mobileNumber"] ) ? this.confirmPost(userId) : window.location="/#/send-post/user-info"
+        });
+    }
+
+    confirmPost (userId) {
+
+        let totalData = {
+            timestamp: Date.now(),
+            userID: userId,
+            fromCity: this.props.pickUpData.fromCity,
+            fromPostCode: this.props.pickUpData.fromPostCode,
+            toCity: this.props.pickUpData.toCity,
+            toPostCode: this.props.pickUpData.toPostCode,
+            pickUpIdentity: this.props.pickUpData.pickUpIdentity,
+            recipientIdentity: this.props.pickUpData.recipientIdentity,
+            parcelDescription: this.props.parcelDetails.parcelDescription,
+            parcelSize: this.props.parcelDetails.parcelSize,
+            parcelWeight: this.props.parcelDetails.parcelWeight,
+            requestedDate: this.props.requestedDate,
+            price: this.props.priceData.price
+        };
+
+        $.ajax({
+            method: 'POST',
+            url: 'delivery?type=sender&userID=' + userID,
+            data: totalData,
+            success: (data) => {
+
+                alert("Thank you! AYOOO will be in touch soon!");
+
+                window.location = "/#/dashboard";
+            },
+            error: () => {
+                alert("There was a problem. Please send your request again.");
+            }
+        });
     }
 
     render () {
@@ -71,7 +120,14 @@ class ConfirmParcel extends React.Component {
                       } </p>
                   </div>
 
-                  <GhostButton onClick={this.confirmPost} buttonText="CONFIRM" />
+                  <div className="form-block">
+                      <label className="form-block-title">ASKING PRICE:</label>
+                      <p className="form-input-data">{
+                          "Preferred date of delivery: " + this.props.requestedDate
+                      } </p>
+                  </div>
+
+                  <GhostButton onClick={this.checkUserProfileExists} buttonText="CONFIRM" />
 
               </div>
         )

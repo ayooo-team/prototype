@@ -110,8 +110,6 @@ class Journey extends React.Component {
         var arrivalHour = this.refs.arrivalHour.value;
         var arrivalMinutes = this.refs.arrivalMinutes.value;
 
-        console.log(departureHour, "1 ", typeof departureHour);
-
         if ( departureHour && departureMinutes &&
              arrivalHour && arrivalMinutes ) {
 
@@ -119,13 +117,11 @@ class Journey extends React.Component {
              var departureMinutes = parseInt(this.refs.departureMinutes.value, 10);
              var arrivalHour = parseInt(this.refs.arrivalHour.value, 10);
              var arrivalMinutes = parseInt(this.refs.arrivalMinutes.value, 10);
-             console.log(departureHour, "2 ", typeof departureHour);
 
             if ( (Math.floor(departureHour/23) && Math.floor(arrivalHour/23)) === 0 ) {
 
                 if ( (Math.floor(departureMinutes/59) && Math.floor(arrivalHour/59)) === 0 ) {
 
-                    console.log(departureHour, "3 ", typeof departureHour);
                     var departureHour = departureHour <= 10 ? "0" + departureHour.toString() : departureHour.toString();
                     var departureMinutes = departureMinutes <= 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
                     var arrivalHour = arrivalHour <= 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
@@ -161,7 +157,7 @@ class Journey extends React.Component {
 
             <div className="page data-collection-page">
 
-                <div className="form">
+                <div className="journey-form">
 
                     <div className="form-block row">
                         <h4 className="form-block-title">DEPARTURE LOCATION:</h4>
@@ -174,13 +170,14 @@ class Journey extends React.Component {
                         <h4 className="form-block-title">DEPARTURE DATE & TIME:</h4>
 
                             <div className="date-container col-8">
-                                <input className="input-number" type="text" ref="departureDay" placeholder="dd" />
-                                <input className="input-number" type="text" ref="departureMonth" placeholder="mmmm" />
-                                <input className="input-number" type="text" ref="departureYear" placeholder="yyyy" />
+
+                                <input className="input-number" type="text" ref="departureDay" placeholder="DD" />
+                                <input className="input-number" type="text" ref="departureMonth" placeholder="MMMM" />
+                                <input className="input-number" type="text" ref="departureYear" placeholder="YYYY" />
                             </div>
                             <div className="time-container col-4">
                                 <input className="input-number" type="text" ref="departureHour" placeholder="HOUR" />
-                                <input className="input-number" type="text" ref="departureMinutes" placeholder="MINUTES" />
+                                <input className="input-number" type="text" ref="departureMinutes" placeholder="MIN" />
                             </div>
 
                     </div>
@@ -195,20 +192,20 @@ class Journey extends React.Component {
                         <h4 className="form-block-title">ARRIVAL DATE & TIME:</h4>
                         <div className="">
                             <div className="date-container col-8">
-                                <input className="input-number" type="text" ref="arrivalDay" placeholder="dd" />
-                                <input className="input-number" type="text" ref="arrivalMonth" placeholder="mmmm" />
-                                <input className="input-number" type="text" ref="arrivalYear" placeholder="yyyy" />
+
+                                <input className="input-number" type="text" ref="arrivalDay" placeholder="DD" />
+                                <input className="input-number" type="text" ref="arrivalMonth" placeholder="MMMM" />
+                                <input className="input-number" type="text" ref="arrivalYear" placeholder="YYYY" />
                             </div>
-                            <div className="time-container col-4dd">
+                            <div className="time-container col-4">
                                 <input className="input-number" type="text" ref="arrivalHour" placeholder="HOUR" />
-                                <input className="input-number" type="text" ref="arrivalMinutes" placeholder="MINUTES" />
+                                <input className="input-number" type="text" ref="arrivalMinutes" placeholder="MIN" />
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
-
             </div>
         );
     }

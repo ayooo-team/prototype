@@ -10,14 +10,47 @@ class UserDetails extends React.Component {
     constructor (props) {
 
         super();
+
         this.checkAuthState();
+        this.getUserProfile();
+
+        this.checkAuthState = this.checkAuthState.bind(this);
+        this.getUserProfile = this.getUserProfile.bind(this);
     }
 
     checkAuthState () {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         const isUserAuthenticated = firebaseApp.getAuth();
-        isUserAuthenticated ? console.log(JSON.stringify(isUserAuthenticated)) : console.log('user not logged in');
+        isUserAuthenticated ? console.log("user logged in") : window.location="/";
+    }
+
+    getUserProfile (firebaseApp) {
+
+        const userId = JSON.parse(localStorage.getItem('firebase:session::ayooo')).uid;
+        const firebaseUserProfile = new Firebase("https://ayooo.firebaseio.com/users/" + userId);
+
+        firebaseUserProfile.once('value', (profileSnapshot) => {
+
+            const userProfile = profileSnapshot.val();
+
+            if (userProfile["name"] ) {
+
+                this.setState({
+                    savedName: userProfile["name"],
+                    savedAge: userProfile["age"],
+                    savedProfession: userProfile["profession"],
+                    savedNationality: userProfile["nationality"],
+                    savedMobileNumber: userProfile["mobileNumber"]
+                })
+
+            } else {
+
+                console.log("no state set");
+            }
+
+        });
+
     }
 
     getFormData () {
@@ -27,19 +60,20 @@ class UserDetails extends React.Component {
             name: this.refs.name.value,
             age: this.refs.age.value,
             profession: this.refs.profession.value,
-            nationality: this.refs.nationality.value
+            nationality: this.refs.nationality.value,
+            mobileNumber: this.refs.mobileNumber.value
         };
 
-        console.log(userDetails);
         this.saveUserDetails(userDetails);
     }
 
     saveUserDetails (userDetails) {
 
-        console.log("Inside saveUserDetails");
         const userId = JSON.parse(localStorage.getItem('firebase:session::ayooo')).uid;
         const firebaseUserDetails = new Firebase("https://ayooo.firebaseio.com/users/" + userId);
         firebaseUserDetails.update(userDetails);
+
+        window.location = this.props.pageType + "/confirm";
     }
 
     render () {
@@ -53,9 +87,50 @@ class UserDetails extends React.Component {
             "col-6"
         );
 
-        return (
+        return this.state ? (
+            <div className="page">
+                <h3>
+                    It seems we're missing a few bits of information from you...
+                    To make a post, please fill in the empty fields.
+                </h3>
+
+                <h1>USER DETAILS</h1>
+
+                <div>
+                    <h4 className={ leftColumn }>Name</h4>
+                    <input className={ rightColumn } type="text" ref="name" defaultValue={ this.state.savedName } />
+                </div>
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Age</h4>
+                    <input className={ rightColumn } type="text" ref="age" defaultValue={ this.state.savedAge }/>
+                </div>
+
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Profession</h4>
+                    <input className={ rightColumn } type="text" ref="profession" defaultValue={ this.state.savedProfession } />
+                </div>
+
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Nationality</h4>
+                    <input className={ rightColumn } type="text" ref="nationality" defaultValue={ this.state.savedNationality }/>
+                </div>
+
+                <div className="form-block row">
+                    <h4 className={ leftColumn }>Mobile Number</h4>
+                    <input className={ rightColumn } type="text" ref="nationality" defaultValue={ this.state.savedMobileNumber }/>
+                </div>
+
+                <GhostButton onClick={ this.getFormData.bind(this) } buttonText="Submit" />
+            </div>
+        ) : (
             <div className="page data-collection-page">
-                <h1>User Details</h1>
+                <h3>
+                    To ensure that our community is trustworthy,
+                    we record information of every member's identity.
+                    To make a post, please tell us who you are.
+                </h3>
+
+                <h1>USER DETAILS</h1>
 
                 <div className="user-details">
                     <div className="form-block row">
@@ -79,11 +154,9 @@ class UserDetails extends React.Component {
                     </div>
                 </div>
 
-
-
                 <GhostButton onClick={ this.getFormData.bind(this) } buttonText="Submit" />
             </div>
-        );
+        )
     }
 };
 
