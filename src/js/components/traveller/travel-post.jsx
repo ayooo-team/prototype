@@ -15,7 +15,7 @@ class TravelPost extends React.Component {
             journeyData: "default",
             parcelSize: "default",
             priceData: "default"
-        }
+        };
 
         this.createComponentDataSaverFor = this.createComponentDataSaverFor.bind(this);
         this.attachActionsTo = this.attachActionsTo.bind(this);

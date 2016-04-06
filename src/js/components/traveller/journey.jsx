@@ -169,15 +169,15 @@ class Journey extends React.Component {
 
                         <h4 className="form-block-title">DEPARTURE DATE & TIME:</h4>
 
-                            <div className="date-container col-8">
+                            <div className="date-container col-7">
 
-                                <input className="input-number" type="text" ref="departureDay" placeholder="DD" />
-                                <input className="input-number" type="text" ref="departureMonth" placeholder="MMMM" />
-                                <input className="input-number" type="text" ref="departureYear" placeholder="YYYY" />
+                                <input className="input-number " type="text" ref="departureDay" placeholder="DD" />
+                                <input className="input-number " type="text" ref="departureMonth" placeholder="MM" />
+                                <input className="input-number " type="text" ref="departureYear" placeholder="YYYY" />
                             </div>
-                            <div className="time-container col-4">
-                                <input className="input-number" type="text" ref="departureHour" placeholder="HOUR" />
-                                <input className="input-number" type="text" ref="departureMinutes" placeholder="MIN" />
+                            <div className="time-container col-5">
+                                <input className="input-number " type="text" ref="departureHour" placeholder="HOUR" />
+                                <input className="input-number " type="text" ref="departureMinutes" placeholder="MIN" />
                             </div>
 
                     </div>
@@ -191,13 +191,13 @@ class Journey extends React.Component {
                     <div className="form-block row">
                         <h4 className="form-block-title">ARRIVAL DATE & TIME:</h4>
                         <div className="">
-                            <div className="date-container col-8">
+                            <div className="date-container col-7">
 
                                 <input className="input-number" type="text" ref="arrivalDay" placeholder="DD" />
-                                <input className="input-number" type="text" ref="arrivalMonth" placeholder="MMMM" />
+                                <input className="input-number" type="text" ref="arrivalMonth" placeholder="MM" />
                                 <input className="input-number" type="text" ref="arrivalYear" placeholder="YYYY" />
                             </div>
-                            <div className="time-container col-4">
+                            <div className="time-container col-5">
                                 <input className="input-number" type="text" ref="arrivalHour" placeholder="HOUR" />
                                 <input className="input-number" type="text" ref="arrivalMinutes" placeholder="MIN" />
                             </div>

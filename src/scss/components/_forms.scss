@@ -49,9 +49,10 @@
 }
 
 .input-number {
-    // width: 15vw;
-    // height: 7vw;
-    // font-size: 0.7em;
+    width: 15vw;
+    height: 7vw;
+    font-size: 0.7em;
+    display: inline !important;
 
     &.large {
         // width: 20vw;
