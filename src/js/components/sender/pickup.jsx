@@ -100,8 +100,8 @@ class PickUp extends React.Component {
                 <div className="form-block">
                     <label className="form-block-title col-12">Who will meet the carrier at the pickup location?</label>
                     <select className="col-12" ref="pickUpIdentity" id="pickUpIdentity" onChange={ this.ifSomeoneElse }>
-                      <option className="form-input" select="selected" value="self">I will</option>
-                      <option className="form-input"value="else">Someone Else</option>
+                        <option className="form-input" select="selected" value="self">I will</option>
+                        <option className="form-input"value="else">Someone Else</option>
                     </select>
                     <input className="form-input" type="text" ref="pickUpElseName" style={{ display: this.state.pickUpIdentity}} placeholder="Enter pickup person's name" />
                     <input className="form-input" type="text" ref="pickUpElseEmail" style={{ display: this.state.pickUpIdentity}} placeholder="Enter pickup person's email" />

@@ -19,10 +19,19 @@
     }
 
     .form-input { // input-text
+
+    }
+
+    input[type=text] {
         height: 6vh;
-        font-size: 0.7em;
+        font-size: larger;
+    }
+
+    select {
+        height: 6vh;
     }
 }
+
 
 .label {
     display: inline-block;
