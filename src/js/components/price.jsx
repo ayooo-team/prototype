@@ -41,10 +41,10 @@ class PriceSuggestion extends React.Component {
                 <div className="price-area">
                     <div className="form-block row">
 
-                        <p className="input-title col-6">PRICE:</p>
-                        <div className="input-wrapper col-6">
-                            <span className="label" type="text">£</span>
-                            <input className="price-input" type="number" ref="price" />
+                        <p className="input-title col-5">PRICE:</p>
+                        <div className="input-wrapper">
+                            <span className="label col-2" type="text">£</span>
+                            <input className="price-input col-5" type="number" ref="price" />
                         </div>
                     </div>
                 </div>
