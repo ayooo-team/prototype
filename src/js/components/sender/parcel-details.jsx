@@ -93,6 +93,8 @@ class ParcelDetails extends React.Component {
                     <input className={ inputSize12 } type="text" ref="parcelDescription" placeholder="List what is inside the parcel." defaultValue={ this.props.parcelDetails["tempDescription"] } />
                 </div>
 
+                <LineBreak />
+
                 <div className="form-block">
                     <h4 className={ labelSize6 }>
                         Weight:
@@ -102,6 +104,8 @@ class ParcelDetails extends React.Component {
                         kg
                     </p>
                 </div>
+
+                <LineBreak />
 
                 <div className="form-block">
                     <h4 className={ labelSize6 }>
@@ -128,14 +132,18 @@ class ParcelDetails extends React.Component {
                   <LineBreak />
 
                   <div className="form-block">
-                      <h4 className={ labelSize6 }>
+                      <h4 className="label col-8">
                           Weight:
                       </h4>
-                      <input className="col-4" type="text" ref="parcelWeight" />
-                      <p className=" unit col-2" type="text">
-                          kg
-                      </p>
+                      <div className="input-and-unit">
+                          <input className="col-2" type="text" ref="parcelWeight" />
+                          <p className="unit col-2" type="text">
+                              kg
+                          </p>
+                      </div>
                   </div>
+
+                  <LineBreak />
 
                   <div className="form-block">
                       <h4 className={ labelSize6 }>
