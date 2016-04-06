@@ -3,6 +3,7 @@
 import React from 'react';
 import Options from './options.jsx';
 import data from '../../../data/traveller-space.json';
+import LineBreak from './line-break.jsx';
 import GhostButton from './ghost-button.jsx';
 
 class ParcelSize extends React.Component {
@@ -73,7 +74,19 @@ class ParcelSize extends React.Component {
 
         var radioDiv = data["space"].map( (element, index, array) => {
 
-            return <Options onClick={ this.setRadioOptionInState } selectedRow={ this.state.chosenOption } key={ index } blockTitle={ element.title } blockImage={ element.image } blockText={ element.text } />
+            let lineBreakKey = index + 10;
+
+            return (
+                <div>
+                    <Options onClick={ this.setRadioOptionInState }
+                             selectedRow={ this.state.chosenOption }
+                             key={ index }
+                             blockTitle={ element.title }
+                             blockImage={ element.image }
+                             blockText={ element.text } />
+                    <LineBreak key={ lineBreakKey } />
+                </div>
+            );
         });
 
         return this.props.type === "travel" ? (
