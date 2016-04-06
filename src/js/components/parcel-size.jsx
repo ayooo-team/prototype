@@ -97,7 +97,7 @@ class ParcelSize extends React.Component {
 
           ) : (
 
-          <div className="data-collection-page">
+          <div className="page data-collection-page">
 
               <h3 className="page-header">DEFINE YOUR CAPACITY</h3>
               <div className="radio-container">

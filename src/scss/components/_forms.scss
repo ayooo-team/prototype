@@ -31,8 +31,8 @@
         margin: auto;
     }
 
-    input[type=text][class*="col-2"] { // only targets inputs of col-2
-        margin-top: 1.6em;
+    input[type=text][class*="col-"] { // only targets inputs of col-2
+        margin-top: 6vmin;
     }
 
     select {
@@ -101,11 +101,11 @@ input::-webkit-inner-spin-button {
 
         .radio-block-title {
             font-weight: 600;
-            border-top: 1px solid grey;
+            margin: 0;
         }
 
         p {
-            // margin: 0;
+            margin: 0;
             padding: 1vw;
         }
 

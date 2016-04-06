@@ -2,6 +2,7 @@
 
 import React from 'react';
 import classnames from 'classnames';
+import LineBreak from './line-break.jsx';
 
 class Options extends React.Component {
 
