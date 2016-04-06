@@ -1,11 +1,12 @@
 .ghost-button {
     display: block;
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.2em;
     width: 90vw;
+    max-width: 450px;
     height: 8vh;
     margin: 0.5em auto;
-    border-color: $dark-green;
+    border-color: $light-green;
     border-style: solid;
     border-width: thin;
     border-radius: 6px;
@@ -26,14 +27,10 @@
 
     a:link, a:visited {
         text-decoration: none;
-
+        color: inherit;
     }
 
     &:focus {
         outline: 0;
-    }
-
-    &:hover {
-        border-color: $light-green;
     }
 }
