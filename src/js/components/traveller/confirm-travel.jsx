@@ -30,8 +30,8 @@ class ConfirmTravel extends React.Component {
             const userProfile = profileSnapshot.val();
 
             ( userProfile["name"] && userProfile["age"] &&
-            userProfile["profession"] && userProfile["nationality"] &&
-            userProfile["mobileNumber"] ) ? this.confirmPost() : window.location="/#/travel-post/user-info"
+              userProfile["profession"] && userProfile["nationality"] &&
+              userProfile["mobileNumber"] ) ? this.confirmPost() : window.location="/#/travel-post/user-info"
         });
     }
 
@@ -40,19 +40,19 @@ class ConfirmTravel extends React.Component {
         const userID = this.getUserID();
 
         let totalData = {
-            timestamp: Date.now(),
-            userID: userID,
-            departureCity: this.props.journeyData.departureCity,
+            timestamp:         Date.now(),
+            userID:            userID,
+            departureCity:     this.props.journeyData.departureCity,
             departurePostCode: this.props.journeyData.departurePostCode,
-            departureDate: this.props.journeyData.departureDate,
-            departureTime: this.props.journeyData.departureTime,
-            arrivalCity: this.props.journeyData.arrivalCity,
-            arrivalPostCode: this.props.journeyData.arrivalPostCode,
-            arrivalDate: this.props.journeyData.arrivalDate,
-            arrivalTime: this.props.journeyData.arrivalTime,
-            parcelSize: this.props.parcelSize.chosenOption,
-            parcelWeight: this.props.parcelSize.parcelWeight,
-            price: this.props.priceData.price
+            departureDate:     this.props.journeyData.departureDate,
+            departureTime:     this.props.journeyData.departureTime,
+            arrivalCity:       this.props.journeyData.arrivalCity,
+            arrivalPostCode:   this.props.journeyData.arrivalPostCode,
+            arrivalDate:       this.props.journeyData.arrivalDate,
+            arrivalTime:       this.props.journeyData.arrivalTime,
+            parcelSize:        this.props.parcelSize.chosenOption,
+            parcelWeight:      this.props.parcelSize.parcelWeight,
+            price:             this.props.priceData.price
         };
 
         $.ajax({
@@ -127,7 +127,7 @@ class ConfirmTravel extends React.Component {
                   </p>
               </div>
 
-              <GhostButton onClick={this.confirmPost} buttonText="CONFIRM" />
+              <GhostButton onClick={ this.confirmPost } buttonText="CONFIRM" />
 
             </div>
         );
