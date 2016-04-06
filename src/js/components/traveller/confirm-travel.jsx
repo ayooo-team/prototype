@@ -76,7 +76,7 @@ class ConfirmTravel extends React.Component {
 
         return (
 
-            <div className="data-collection-page form">
+            <div className="page data-collection-page form">
 
               <div className="form-block">
                   <h3 className="form-block-title">DEPARTURE:</h3>
@@ -115,7 +115,7 @@ class ConfirmTravel extends React.Component {
                   <p className="form-input-data">
                       { "Size: " + this.props.parcelSize.chosenOption }
                   </p>
-                  <p>
+                  <p className="form-input-data">
                       { "Weight: " + this.props.parcelSize.parcelWeight }
                   </p>
               </div>

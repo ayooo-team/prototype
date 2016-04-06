@@ -9,7 +9,8 @@
     // justify-content: space-around;
     // flex-direction: row;
 
-    padding: 1vh 0;
+    // padding: 1vh 0;
+    // padding: 3vmin;
     min-height: 10vh;
     border: 1px solid blue;
     position: relative;
@@ -22,6 +23,11 @@
 
     .form-input { // input-text
 
+    }
+
+    .form-input-data {
+        margin: 0;
+        font-size: 5vmin;
     }
 
     input[type=text] {
@@ -73,47 +79,4 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-.radio-container {
-
-    width: 100%;
-
-    .radio-row {
-
-        padding: 2vh 1vh;
-
-        &.selected {
-            background-color: $light-green;
-        }
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        .radio-image-wrapper {
-            // margin-right: 1vw;
-        }
-
-        .radio-block-title, .radio-block-text {
-            text-align: left;
-            padding: 1vw;
-        }
-
-        .radio-block-title {
-            font-weight: 600;
-            margin: 0;
-        }
-
-        p {
-            margin: 0;
-            padding: 1vw;
-        }
-
-        .radio-selected-tick {
-            width: 4vh;
-            height: 4vh;
-            margin-top: 2vh;
-        }
-    }
 }
