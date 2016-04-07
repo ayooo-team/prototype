@@ -145,7 +145,7 @@ class ConfirmParcel extends React.Component {
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">ASKING PRICE:</label>
+                      <label className="form-block-title">REQUESTED DATE:</label>
                       <p className="form-input-data">{
                           "Preferred date of delivery: " + this.props.requestedDate
                       } </p>

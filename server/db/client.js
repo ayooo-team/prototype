@@ -1,10 +1,10 @@
 'use strict';
 
 var elasticsearch = require('elasticsearch');
-var connectionToElasticSearch = process.env.SEARCHBOX_SSL_URL;
+var connectionToElasticSearch = process.env.SEARCHBOX_SSL_URL || 'localhost:9200';
 
 const client = new elasticsearch.Client({
-    host: 'localhost:9200',
+    host: connectionToElasticSearch,
     log: 'error'
 });
 
