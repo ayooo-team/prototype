@@ -58,12 +58,50 @@ class SetDeliveryDate extends React.Component {
             deliveryRequest["deliveryDate"] = now.split(" ").splice(1, 3).join(" ");
         } else if (this.refs.setDeliveryDate.value === "future") {
             console.log("FUTURE");
-            const day = this.refs.deliveryDateDay.value;
-            const month = this.refs.deliveryDateMonth.value;
+            let day = this.refs.deliveryDateDay.value;
+            let month = this.refs.deliveryDateMonth.value;
             const year = this.refs.deliveryDateYear.value;
-            const daysInAMonth = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
-            const monthsInAYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const fourDigits = /\d{4}/g;
+
+            if ( departureDay && departureMonth && departureYear &&
+                 arrivalDay && arrivalMonth && arrivalYear ) {
+
+                let day = parseInt(this.refs.departureDay.value, 10);
+                let month = parseInt(this.refs.departureMonth.value, 10);
+
+                if ( isNaN(Math.floor(departureDay)) || isNaN(Math.floor(arrivalDay)) ) {
+
+                    callback("dateInputNaN");
+                } else {
+                    if ( (Math.floor(departureDay/31) || Math.floor(arrivalDay/31)) !== (0) ) {
+
+                        callback("incorrectDateInput");
+                    } else {
+
+                        if ( (Math.floor(departureMonth/12) <= (-1)) ||
+                        (monthsInAYear.indexOf(arrivalMonth) <= (-1)) ) {
+
+                            callback("incorrectMonthInput");
+
+                        } else {
+
+                            if (departureYear.match(fourDigits) && arrivalYear.match(fourDigits)) {
+
+                                data["departureDate"]= departureMonth + " " + departureDay + " " + departureYear;
+                                data["arrivalDate"]= arrivalMonth + " " + arrivalDay + " " + arrivalYear;
+
+                                this.checkTimeInput(data, (response) => (callback(response)));
+
+                            } else {
+
+                                callback("incorrectYearInput");
+                            }
+                        }
+                    }
+                }
+            } else {
+                callback("incomplete");
+            }
 
             if (daysInAMonth.indexOf(day.toString()) <= (-1)) {
                 alert("Please input a valid date in");
