@@ -17,8 +17,8 @@ class ConfirmTravel extends React.Component {
 
         this.checkAuthState = this.checkAuthState.bind(this);
         this.checkProps = this.checkProps.bind(this);
+        this.checkUserProfileExists = this.checkUserProfileExists.bind(this);
         this.confirmPost = this.confirmPost.bind(this);
-        this.getUserID = this.getUserID.bind(this);
     }
 
     checkAuthState (callback) {
@@ -34,8 +34,8 @@ class ConfirmTravel extends React.Component {
     }
 
     getUserID () {
-        const storage = localStorage.getItem("firebase:session::ayooo");
 
+        const storage = localStorage.getItem("firebase:session::ayooo");
         return JSON.parse(storage).uid;
     }
 
@@ -147,7 +147,7 @@ class ConfirmTravel extends React.Component {
                   </p>
               </div>
 
-              <GhostButton onClick={this.confirmPost} buttonText="CONFIRM" />
+              <GhostButton onClick={ this.checkUserProfileExists } buttonText="CONFIRM" />
 
             </div>
         );

@@ -79,14 +79,14 @@ class Journey extends React.Component {
             let departureDay = parseFloat(this.refs.departureDay.value);
             let arrivalDay = parseFloat(this.refs.arrivalDay.value);
             let departureMonth = parseFloat(this.refs.departureMonth.value);
-            let arrivalMonth = parseFloat(this.refs.arrivalYear.value);
+            let arrivalMonth = parseFloat(this.refs.arrivalMonth.value);
 
-            if ( (Math.floor(departureDay/31) || Math.floor(arrivalDay/31)) !== (0) ) {
+            if ( (Math.floor(departureDay/32) || Math.floor(arrivalDay/32)) !== (0) ) {
 
                 callback("incorrectDateInput");
             } else {
 
-                if ( Math.floor(departureMonth/12) || Math.floor(arrivalMonth/12) !== (0) ) {
+                if ( Math.floor(departureMonth/13) || Math.floor(arrivalMonth/13) !== (0) ) {
 
                     callback("incorrectMonthInput");
                 } else {

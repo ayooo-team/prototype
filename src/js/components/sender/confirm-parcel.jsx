@@ -59,7 +59,6 @@ class ConfirmParcel extends React.Component {
 
         const userID = this.getUserID();
 
-
         let totalData = {
             timestamp: Date.now(),
             userID: userID,
@@ -151,7 +150,7 @@ class ConfirmParcel extends React.Component {
                       } </p>
                   </div>
 
-                  <GhostButton onClick={this.checkUserProfileExists} buttonText="CONFIRM" />
+                  <GhostButton onClick={ this.checkUserProfileExists } buttonText="CONFIRM" />
 
               </div>
         )

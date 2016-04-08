@@ -68,12 +68,12 @@ class SetDeliveryDate extends React.Component {
                 let day = parseFloat(this.refs.deliveryDateDay.value);
                 let month = parseFloat(this.refs.deliveryDateMonth.value);
 
-                if ( Math.floor(day/31) !== (0) ) {
+                if ( Math.floor(day/32) !== (0) ) {
 
                     alert("Please input a valid date in");
                 } else {
 
-                    if ( Math.floor(month/12) !== (0) ) {
+                    if ( Math.floor(month/13) !== (0) ) {
 
                         alert("Please input a valid month in number form, e.g. for \"May\", input 5");
                     } else {
@@ -82,7 +82,7 @@ class SetDeliveryDate extends React.Component {
 
                             deliveryRequest["deliveryDate"]= day + "/" + month + "/" + year;
 
-                            this.checkInput(data, (result) => {
+                            this.checkInput(deliveryRequest, (result) => {
 
                                 result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
                             });
