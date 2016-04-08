@@ -40,9 +40,9 @@ class Journey extends React.Component {
         this.checkInput(journeyData, (result) => {
 
             result === "incomplete" ? alert("Please complete all fields.") :
-            result === "dateInputNaN" ? alert("Please make sure your date is a number") :
+            result === "dateInputNaN" ? alert("Please make sure that you input the date in number form") :
             result === "incorrectDateInput" ? alert("Please input a valid date in") :
-            result === "incorrectMonthInput" ? alert("Please input a valid month - e.g. 'May'") :
+            result === "incorrectMonthInput" ? alert("Please input a valid month in number form, e.g. for "May", input 5") :
             result === "incorrectYearInput" ? alert("Please input a valid year") :
             result === "incorrectHour" ? alert("Please input your time in a 24hour format - e.g. '22' hours") :
             result === "incorrectMinutes" ? alert("Please input a valid time") :
@@ -65,14 +65,13 @@ class Journey extends React.Component {
 
     checkDateInput(data, callback) {
 
-        const monthsInAYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         const fourDigits = /\d{4}/g;
 
         let departureDay = this.refs.departureDay.value;
-        const departureMonth = this.refs.departureMonth.value
+        let departureMonth = this.refs.departureMonth.value
         const departureYear = this.refs.departureYear.value
         let arrivalDay = this.refs.arrivalDay.value;
-        const arrivalMonth = this.refs.arrivalMonth.value
+        let arrivalMonth = this.refs.arrivalMonth.value
         const arrivalYear = this.refs.arrivalYear.value
 
         if ( departureDay && departureMonth && departureYear &&
@@ -80,8 +79,11 @@ class Journey extends React.Component {
 
             let departureDay = parseInt(this.refs.departureDay.value, 10);
             let arrivalDay = parseInt(this.refs.arrivalDay.value, 10);
+            let departureMonth = parseInt(this.refs.departureMonth.value, 10);
+            let arrivalMonth = parseInt(this.refs.arrivalYear.value, 10);
 
-            if ( isNaN(Math.floor(departureDay)) || isNaN(Math.floor(arrivalDay)) ) {
+            if ( isNaN(Math.floor(departureDay)) || isNaN(Math.floor(arrivalDay)) ||
+                 isNan(Math.floor(departureMonth)) || isNaN(Math.floor(arrivalMonth)) ) {
 
                 callback("dateInputNaN");
             } else {
@@ -90,17 +92,15 @@ class Journey extends React.Component {
                     callback("incorrectDateInput");
                 } else {
 
-                    if ( (monthsInAYear.indexOf(departureMonth) <= (-1)) ||
-                    (monthsInAYear.indexOf(arrivalMonth) <= (-1)) ) {
+                    if ( Math.floor(departureMonth/12) || Math.floor(arrivalMonth/12) !== (0) ) {
 
                         callback("incorrectMonthInput");
-
                     } else {
 
                         if (departureYear.match(fourDigits) && arrivalYear.match(fourDigits)) {
 
-                            data["departureDate"]= departureMonth + " " + departureDay + " " + departureYear;
-                            data["arrivalDate"]= arrivalMonth + " " + arrivalDay + " " + arrivalYear;
+                            data["departureDate"]= departureDay + "/" + departureMonth + "/" + departureYear;
+                            data["arrivalDate"]= arrivalDay + "/" + arrivalMonth + "/" + arrivalYear;
 
                             this.checkTimeInput(data, (response) => (callback(response)));
 

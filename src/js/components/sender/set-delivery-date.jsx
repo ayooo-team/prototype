@@ -63,38 +63,36 @@ class SetDeliveryDate extends React.Component {
             const year = this.refs.deliveryDateYear.value;
             const fourDigits = /\d{4}/g;
 
-            if ( departureDay && departureMonth && departureYear &&
-                 arrivalDay && arrivalMonth && arrivalYear ) {
+            if ( day && month && year ) {
 
                 let day = parseInt(this.refs.departureDay.value, 10);
                 let month = parseInt(this.refs.departureMonth.value, 10);
 
-                if ( isNaN(Math.floor(departureDay)) || isNaN(Math.floor(arrivalDay)) ) {
+                if ( isNaN(Math.floor(day)) || isNan(Math.floor(month))) {
 
-                    callback("dateInputNaN");
+                     alert("Please make sure that you input the date in number form");
                 } else {
-                    if ( (Math.floor(departureDay/31) || Math.floor(arrivalDay/31)) !== (0) ) {
+                    if ( (Math.floor(day/31) !== (0) ) {
 
-                        callback("incorrectDateInput");
+                        alert("Please input a valid date in");
                     } else {
 
-                        if ( (Math.floor(departureMonth/12) <= (-1)) ||
-                        (monthsInAYear.indexOf(arrivalMonth) <= (-1)) ) {
+                        if ( Math.floor(month/12) !== (0) ) {
 
-                            callback("incorrectMonthInput");
-
+                            alert("Please input a valid month in number form, e.g. for "May", input 5")                            callback("incorrectMonthInput");
                         } else {
 
-                            if (departureYear.match(fourDigits) && arrivalYear.match(fourDigits)) {
+                            if ( year.match(fourDigits) ) {
 
-                                data["departureDate"]= departureMonth + " " + departureDay + " " + departureYear;
-                                data["arrivalDate"]= arrivalMonth + " " + arrivalDay + " " + arrivalYear;
+                                deliveryRequest["deliveryDate"]= departureDay + "/" + departureMonth + "/" + departureYear;
 
-                                this.checkTimeInput(data, (response) => (callback(response)));
+                                this.checkInput(data, (result) => {
 
+                                    result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
+                                });
                             } else {
 
-                                callback("incorrectYearInput");
+                                alert("Please input a valid year");
                             }
                         }
                     }
@@ -102,29 +100,11 @@ class SetDeliveryDate extends React.Component {
             } else {
                 callback("incomplete");
             }
-
-            if (daysInAMonth.indexOf(day.toString()) <= (-1)) {
-                alert("Please input a valid date in");
-            } else {
-                if ( monthsInAYear.indexOf(month) <= (-1) ) {
-                  alert("Please input a valid month - e.g. 'May' ");
-                } else {
-                  if (year.match(fourDigits)) {
-                    deliveryRequest["deliveryDate"]=month + " " + day + " " + year;
-                  } else {
-                    alert("Please input a valid year")
-                  }
-                }
-            }
         } else {
             console.log("ANYTIME");
             deliveryRequest["deliveryDate"]= "anytime";
         }
 
-        this.checkInput(deliveryRequest, (result) => {
-
-            result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
-        });
     }
 
     checkInput (deliveryDate, callback) {
