@@ -80,7 +80,7 @@ class SetDeliveryDate extends React.Component {
 
                         if ( year.match(fourDigits) ) {
 
-                            deliveryRequest["deliveryDate"]= deliveryDateDay + "/" + deliveryDateMonth + "/" + deliveryDateYear;
+                            deliveryRequest["deliveryDate"]= day + "/" + month + "/" + year;
 
                             this.checkInput(data, (result) => {
 
