@@ -65,35 +65,30 @@ class SetDeliveryDate extends React.Component {
 
             if ( day && month && year ) {
 
-                let day = parseInt(this.refs.departureDay.value, 10);
-                let month = parseInt(this.refs.departureMonth.value, 10);
+                let day = parseFloat(this.refs.deliveryDateDay.value);
+                let month = parseFloat(this.refs.deliveryDateMonth.value);
 
-                if ( isNaN(Math.floor(day)) || isNan(Math.floor(month))) {
+                if ( Math.floor(day/31) !== (0) ) {
 
-                     alert("Please make sure that you input the date in number form");
+                    alert("Please input a valid date in");
                 } else {
-                    if ( (Math.floor(day/31) !== (0) ) {
 
-                        alert("Please input a valid date in");
+                    if ( Math.floor(month/12) !== (0) ) {
+
+                        alert("Please input a valid month in number form, e.g. for \"May\", input 5");
                     } else {
 
-                        if ( Math.floor(month/12) !== (0) ) {
+                        if ( year.match(fourDigits) ) {
 
-                            alert("Please input a valid month in number form, e.g. for "May", input 5")                            callback("incorrectMonthInput");
+                            deliveryRequest["deliveryDate"]= deliveryDateDay + "/" + deliveryDateMonth + "/" + deliveryDateYear;
+
+                            this.checkInput(data, (result) => {
+
+                                result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
+                            });
                         } else {
 
-                            if ( year.match(fourDigits) ) {
-
-                                deliveryRequest["deliveryDate"]= departureDay + "/" + departureMonth + "/" + departureYear;
-
-                                this.checkInput(data, (result) => {
-
-                                    result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
-                                });
-                            } else {
-
-                                alert("Please input a valid year");
-                            }
+                            alert("Please input a valid year");
                         }
                     }
                 }
