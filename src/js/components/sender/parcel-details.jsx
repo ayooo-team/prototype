@@ -38,8 +38,6 @@ class ParcelDetails extends React.Component {
 
     tempSaveFilledFields (event) {
 
-        console.log("SAVE STATE");
-
         let tempData = (this.refs.parcelDescription.value || this.refs.parcelWeight.value) ? (
             {
                 tempDescription: this.refs.parcelDescription.value,
@@ -65,9 +63,8 @@ class ParcelDetails extends React.Component {
             parcelSize: this.props.parcelSize["chosenOption"]
         };
 
-        console.log(parcelData);
         this.checkInput(parcelData, (result) => {
-            console.log(result);
+
             result ? (this.saveDataToParentState(parcelData), window.location="/#/send-post/set-delivery-date") : alert("Please complete all fields.");
         });
     }
@@ -84,7 +81,7 @@ class ParcelDetails extends React.Component {
             (counter++, emptyFields++) : counter++
 
             if (counter === dataKeys.length) {
-                console.log("emptyFields", emptyFields)
+
                 emptyFields === 0 ? callback(true) : callback(false);
             }
 
@@ -92,7 +89,7 @@ class ParcelDetails extends React.Component {
     }
 
     saveDataToParentState(parcelData) {
-        console.log("parcelData", parcelData);
+
         const saveParcelDetails = this.props.saveParcelDetails;
         saveParcelDetails(parcelData);
     }

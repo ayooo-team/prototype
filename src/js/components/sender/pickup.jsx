@@ -44,8 +44,6 @@ class PickUp extends React.Component {
 
         const pickUpIdentity = this.refs.pickUpIdentity.value;
         const recipientIdentity = this.refs.recipientIdentity.value;
-        console.log("pickUpIdentity", pickUpIdentity);
-        console.log("recipientIdentity", recipientIdentity);
 
         let pickUpData = {
           fromCity: this.refs.fromCity.value,

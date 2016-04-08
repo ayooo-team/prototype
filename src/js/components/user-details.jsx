@@ -70,13 +70,10 @@ class UserDetails extends React.Component {
 
     saveUserDetails (userDetails) {
 
-        console.log(">>>>", userDetails);
-
         const userId = JSON.parse(localStorage.getItem('firebase:session::ayooo')).uid;
         const firebaseUserDetails = new Firebase("https://ayooo.firebaseio.com/users/" + userId);
         firebaseUserDetails.update(userDetails);
 
-        console.log('PROPS', this.props.pageType);
         window.location = this.props.pageType + "/confirm";
     }
 

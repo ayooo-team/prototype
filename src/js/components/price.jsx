@@ -50,7 +50,6 @@ class PriceSuggestion extends React.Component {
 
     saveDataToParentState () {
 
-        console.log("this price>>>", this.refs.price.value)
         const savePriceData = this.props.savePriceData;
         savePriceData({
             price: this.refs.price.value
