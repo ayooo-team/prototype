@@ -79,7 +79,7 @@ class Journey extends React.Component {
             let departureDay = parseFloat(this.refs.departureDay.value);
             let arrivalDay = parseFloat(this.refs.arrivalDay.value);
             let departureMonth = parseFloat(this.refs.departureMonth.value);
-            let arrivalMonth = parseFloat(this.refs.arrivalYear.value);
+            let arrivalMonth = parseFloat(this.refs.arrivalMonth.value);
 
             if ( (Math.floor(departureDay/31) || Math.floor(arrivalDay/31)) !== (0) ) {
 
