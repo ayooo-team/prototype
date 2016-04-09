@@ -65,8 +65,6 @@ class ParcelDetails extends React.Component {
 
         this.checkInput(parcelData, (result) => {
 
-            // let newLocation = (this.props.pageType + "/parcel-details");
-
             result ? (this.saveDataToParentState(parcelData), window.location = (this.props.pageType + "/parcel-details")) : alert("Please complete all fields.");
         });
     }

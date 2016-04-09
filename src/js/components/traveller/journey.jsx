@@ -90,7 +90,7 @@ class Journey extends React.Component {
 
                 callback("incorrectDateInput");
             } else {
-                console.log();
+                
                 if ( !departureMonth.inRange(1, 12) || !arrivalMonth.inRange(1, 12) ) {
 
                     callback("incorrectMonthInput");

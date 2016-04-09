@@ -81,12 +81,12 @@ class ParcelSize extends React.Component {
         this.refs.weight ? (
 
             saveParcelSize({
-              chosenOption: optionLowerCase,
-              parcelWeight: this.refs.weight.value
+                chosenOption: optionLowerCase,
+                parcelWeight: this.refs.weight.value
             })
         ) : (
             saveParcelSize({
-              chosenOption: optionLowerCase
+                chosenOption: optionLowerCase
             })
         )
     }
