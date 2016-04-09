@@ -77,15 +77,15 @@ Type in your email address again to make sure there are no typos!`);
         return (
             <div className="page form">
                 <h1 className="login-title">Log In or Sign Up</h1>
+                <div className="login-wrapper">
 
-                <div className="form-block">
-                    <label className="form-label login-width-adjust">Email:</label>
-                    <input className="form-input" type="text" ref="email" />
-                </div>
+                    <div className="form-block">
+                        <label className="col-12 form-label ">Email:</label>
+                        <input className="col-12 form-input" id="login-email-input" type="text" ref="email" />
 
-                <div className="form-block">
-                    <label className="form-label">Password:</label>
-                    <input className="form-input" type="password" ref="password" />
+                        <label className="col-12 form-label">Password:</label>
+                        <input className="col-12 form-input" id="login-password-input" type="password" ref="password" />
+                    </div>
                 </div>
 
                 <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />

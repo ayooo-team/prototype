@@ -1,8 +1,19 @@
 .login-title {
     font-weight: lighter;
-    margin: 40px;
+    // margin: 40px;
 }
 
-.login-width-adjust {
-    margin: 1em 2em;
+#login-email-input, #login-password-input {
+
+        height: 7vh;
+        font-size: 5vmin;
+        display: block;
+        margin: 3vmin 0 7vmin 0;
+}
+
+.login-wrapper {
+    .form-block .form-label {
+        font-size: 7vmin;
+        font-weight: lighter;
+    }
 }
