@@ -120,7 +120,7 @@ class ConfirmParcel extends React.Component {
                           { "Postcode: " + this.props.pickUpData.toPostCode }
                       </p>
                       <p className="form-input-data">
-                          { "Person Recieving: " + this.props.pickUpData.recipientIdentity }
+                          { "Person Receiving: " + this.props.pickUpData.recipientIdentity }
                       </p>
                   </div>
 
@@ -144,7 +144,7 @@ class ConfirmParcel extends React.Component {
                       </p>
                   </div>
 
-                  <div className="form-block">          
+                  <div className="form-block">
                       <label className="form-block-title">REQUESTED DATE (DD/MM/YYYY)</label>
                       <p className="form-input-data">
                           { "Preferred date of delivery: " + this.props.requestedDate }
