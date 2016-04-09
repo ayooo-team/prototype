@@ -5,14 +5,8 @@
 
 .form-block {
 
-    // display: flex;
-    // justify-content: space-around;
-    // flex-direction: row;
-
-    // padding: 1vh 0;
-    // padding: 3vmin;
     min-height: 10vh;
-    border: 1px solid blue;
+    // border: 1px solid blue;
     position: relative;
 
     .form-block-title {
@@ -32,20 +26,15 @@
 
     input[type=text] {
         height: 6vh;
-        font-size: 4vmin;
+        font-size: 5vmin;
         display: block;
         margin: auto;
     }
 
     input[type=text][class*="col-"] { // only targets inputs of col-2
-        margin-top: 6vmin;
-    }
-
-    select {
-        height: 6vh;
+        margin: 3vmin 0;
     }
 }
-
 
 .label {
     display: block;
@@ -76,7 +65,7 @@
 .unit {
     font-size: 1.1em;
     text-align: left;
-    margin-top: 1vmin;
+    margin-top: 3vmin;
     padding-left: 0.5vmin;
 }
 
