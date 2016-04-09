@@ -9,15 +9,34 @@ class ParcelDetails extends React.Component {
 
     constructor (props) {
 
-        super();
+        super(props);
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? ( this.checkProps((response) => {
+                response === 'goBack' ? window.location=this.props.pageType : console.log("all fields filled so far")
+            })) : window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
+        this.checkProps = this.checkProps.bind(this);
         this.tempSaveFilledFields = this.tempSaveFilledFields.bind(this);
         this.saveDataToParentState = this.saveDataToParentState.bind(this);
         this.getFormData = this.getFormData.bind(this);
     }
 
-    tempSaveFilledFields (event) {
+    checkAuthState (callback) {
 
-        console.log("SAVE STATE");
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
+    }
+
+    checkProps (callback) {
+
+        this.props.pickUpData === "default" ? callback('goBack') : callback('ok');
+    }
+
+    tempSaveFilledFields (event) {
 
         let tempData = (this.refs.parcelDescription.value || this.refs.parcelWeight.value) ? (
             {
@@ -44,9 +63,8 @@ class ParcelDetails extends React.Component {
             parcelSize: this.props.parcelSize["chosenOption"]
         };
 
-        console.log(parcelData);
         this.checkInput(parcelData, (result) => {
-            console.log(result);
+
             result ? (this.saveDataToParentState(parcelData), window.location="/#/send-post/set-delivery-date") : alert("Please complete all fields.");
         });
     }
@@ -63,7 +81,7 @@ class ParcelDetails extends React.Component {
             (counter++, emptyFields++) : counter++
 
             if (counter === dataKeys.length) {
-                console.log("emptyFields", emptyFields)
+
                 emptyFields === 0 ? callback(true) : callback(false);
             }
 
@@ -71,7 +89,7 @@ class ParcelDetails extends React.Component {
     }
 
     saveDataToParentState(parcelData) {
-        console.log("parcelData", parcelData);
+
         const saveParcelDetails = this.props.saveParcelDetails;
         saveParcelDetails(parcelData);
     }

@@ -5,9 +5,19 @@ import GhostButton from '../ghost-button.jsx';
 
 class SetDeliveryDate extends React.Component {
 
-    constructor () {
+    constructor (props) {
 
-        super();
+        super(props);
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? ( this.checkProps((response) => {
+                response === 'goBack' ? window.location=this.props.pageType + "/parcel-details" : console.log("all fields filled so far")
+            })) : window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
+        this.checkProps = this.checkProps.bind(this);
+
         this.ifFuture = this.ifFuture.bind(this);
         this.getFormData = this.getFormData.bind(this);
         this.checkInput = this.checkInput.bind(this);
@@ -15,6 +25,18 @@ class SetDeliveryDate extends React.Component {
         this.state = {
           dateSetter: "none",
         }
+    }
+
+    checkAuthState (callback) {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
+    }
+
+    checkProps (callback) {
+
+        this.props.parcelDetails === "default" ? callback('goBack') : callback('ok');
     }
 
     ifFuture (event) {
@@ -36,35 +58,48 @@ class SetDeliveryDate extends React.Component {
             deliveryRequest["deliveryDate"] = now.split(" ").splice(1, 3).join(" ");
         } else if (this.refs.setDeliveryDate.value === "future") {
             console.log("FUTURE");
-            const day = this.refs.deliveryDateDay.value;
-            const month = this.refs.deliveryDateMonth.value;
+            let day = this.refs.deliveryDateDay.value;
+            let month = this.refs.deliveryDateMonth.value;
             const year = this.refs.deliveryDateYear.value;
-            const daysInAMonth = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
-            const monthsInAYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             const fourDigits = /\d{4}/g;
 
-            if (daysInAMonth.indexOf(day.toString()) <= (-1)) {
-                alert("Please input a valid date in");
-            } else {
-                if ( monthsInAYear.indexOf(month) <= (-1) ) {
-                  alert("Please input a valid month - e.g. 'May' ");
+            if ( day && month && year ) {
+
+                let day = parseFloat(this.refs.deliveryDateDay.value);
+                let month = parseFloat(this.refs.deliveryDateMonth.value);
+
+                if ( Math.floor(day/31) !== (0) ) {
+
+                    alert("Please input a valid date in");
                 } else {
-                  if (year.match(fourDigits)) {
-                    deliveryRequest["deliveryDate"]=month + " " + day + " " + year;
-                  } else {
-                    alert("Please input a valid year")
-                  }
+
+                    if ( Math.floor(month/12) !== (0) ) {
+
+                        alert("Please input a valid month in number form, e.g. for \"May\", input 5");
+                    } else {
+
+                        if ( year.match(fourDigits) ) {
+
+                            deliveryRequest["deliveryDate"]= deliveryDateDay + "/" + deliveryDateMonth + "/" + deliveryDateYear;
+
+                            this.checkInput(data, (result) => {
+
+                                result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
+                            });
+                        } else {
+
+                            alert("Please input a valid year");
+                        }
+                    }
                 }
+            } else {
+                callback("incomplete");
             }
         } else {
             console.log("ANYTIME");
             deliveryRequest["deliveryDate"]= "anytime";
         }
 
-        this.checkInput(deliveryRequest, (result) => {
-
-            result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
-        });
     }
 
     checkInput (deliveryDate, callback) {

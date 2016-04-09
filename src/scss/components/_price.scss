@@ -21,3 +21,21 @@
         margin: 5vmin 0 1vmin 0;
     }
 }
+
+.page-header.price {
+    font-size: 7vmin;
+}
+
+.price-area {
+    padding: 5vmin;
+
+    .input-title {
+        font-size: 6vmin
+    }
+
+    span {
+        font-size: 10vmin;
+        text-align: right;
+        padding: 0 2vw 0 0;
+    }
+}

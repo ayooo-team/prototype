@@ -8,9 +8,18 @@ import GhostButton from './ghost-button.jsx';
 
 class ParcelSize extends React.Component {
 
-    constructor () {
+    constructor (props) {
 
-        super();
+        super(props);
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? ( this.checkProps((response) => {
+                response === 'goBack' ? window.location=this.props.pageType : console.log("all fields filled so far")
+            })) : window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
+        this.checkProps = this.checkProps.bind(this);
         this.setRadioOptionInState = this.setRadioOptionInState.bind(this);
         this.storeRadioOptionOnly = this.storeRadioOptionOnly.bind(this);
         this.storeRadioOptionAndWeight = this.storeRadioOptionAndWeight.bind(this);
@@ -19,6 +28,18 @@ class ParcelSize extends React.Component {
         this.state = {
             chosenOption: undefined
         };
+    }
+
+    checkAuthState (callback) {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
+    }
+
+    checkProps (callback) {
+
+        this.props.journeyData === "default" ? callback('goBack') : callback('ok');
     }
 
     setRadioOptionInState (event) {

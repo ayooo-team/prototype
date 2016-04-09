@@ -5,11 +5,37 @@ import GhostButton from './ghost-button.jsx';
 
 class PriceSuggestion extends React.Component {
 
-    constructor(props) {
+    constructor (props) {
 
-        super();
+        super(props);
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? ( this.checkProps((response) => {
+                response === 'goBack' ?
+                ( this.props.type === 'travel' ?
+                window.location=this.props.pageType + "/parcel-size" :
+                window.location=this.props.pageType + "/parcel-details" ) :
+                console.log("all fields filled so far")
+            })) :
+            window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
+        this.checkProps = this.checkProps.bind(this);
         this.checkInput = this.checkInput.bind(this);
         this.saveDataToParentState = this.saveDataToParentState.bind(this);
+    }
+
+    checkAuthState (callback) {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
+    }
+
+    checkProps (callback) {
+
+        this.props.parcelSize === "default" ? callback('goBack') : callback('ok');
     }
 
     checkInput (event) {
@@ -24,7 +50,6 @@ class PriceSuggestion extends React.Component {
 
     saveDataToParentState () {
 
-        console.log("this price>>>", this.refs.price.value)
         const savePriceData = this.props.savePriceData;
         savePriceData({
             price: this.refs.price.value

@@ -11,18 +11,19 @@ class UserDetails extends React.Component {
 
         super();
 
-        this.checkAuthState();
-        this.getUserProfile();
+        this.checkAuthState((response) => {
+            response === 'yes' ? this.getUserProfile() : window.location = "/"
+        });
 
         this.checkAuthState = this.checkAuthState.bind(this);
         this.getUserProfile = this.getUserProfile.bind(this);
     }
 
-    checkAuthState () {
+    checkAuthState (callback) {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         const isUserAuthenticated = firebaseApp.getAuth();
-        isUserAuthenticated ? console.log("user logged in") : window.location="/";
+        isUserAuthenticated ? callback('yes') : callback('no');
     }
 
     getUserProfile (firebaseApp) {
@@ -90,7 +91,7 @@ class UserDetails extends React.Component {
         return this.state ? (
             <div className="page">
                 <h3>
-                    It seems we're missing a few bits of information from you...
+                    It seems we're still missing a few bits of information from you...
                     To make a post, please fill in the empty fields.
                 </h3>
 
@@ -117,7 +118,7 @@ class UserDetails extends React.Component {
 
                 <div className="form-block row">
                     <h4 className={ leftColumn }>Mobile Number</h4>
-                    <input className={ rightColumn } type="text" ref="nationality" defaultValue={ this.state.savedMobileNumber }/>
+                    <input className={ rightColumn } type="text" ref="mobileNumber" defaultValue={ this.state.savedMobileNumber }/>
                 </div>
 
                 <GhostButton onClick={ this.getFormData.bind(this) } buttonText="Submit" />
@@ -150,7 +151,7 @@ class UserDetails extends React.Component {
 
                     <div className="form-block row">
                         <h4 className={ leftColumn }>Nationality</h4>
-                        <input className={ rightColumn } type="text" ref="nationality"/>
+                        <input className={ rightColumn } type="text" ref="mobileNumber"/>
                     </div>
                 </div>
 

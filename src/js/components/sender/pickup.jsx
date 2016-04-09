@@ -8,6 +8,12 @@ class PickUp extends React.Component {
     constructor() {
 
         super();
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? console.log("user logged in") : window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
         this.getFormData = this.getFormData.bind(this);
         this.ifSomeoneElse = this.ifSomeoneElse.bind(this);
         this.saveDataToParentState = this.saveDataToParentState.bind(this);
@@ -16,6 +22,13 @@ class PickUp extends React.Component {
           pickUpIdentity: "none",
           recipientIdentity: "none"
         }
+    }
+
+    checkAuthState (callback) {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
     }
 
     ifSomeoneElse (event) {
@@ -31,8 +44,6 @@ class PickUp extends React.Component {
 
         const pickUpIdentity = this.refs.pickUpIdentity.value;
         const recipientIdentity = this.refs.recipientIdentity.value;
-        console.log("pickUpIdentity", pickUpIdentity);
-        console.log("recipientIdentity", recipientIdentity);
 
         let pickUpData = {
           fromCity: this.refs.fromCity.value,

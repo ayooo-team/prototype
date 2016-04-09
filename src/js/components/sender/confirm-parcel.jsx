@@ -7,9 +7,30 @@ class ConfirmParcel extends React.Component {
 
     constructor(props) {
 
-        super();
+        super(props);
+
+        this.checkAuthState((response) => {
+            response === 'yes' ? ( this.checkProps((response) => {
+                response === 'goBack' ? window.location=this.props.pageType + "/price" : console.log("all fields filled so far")
+            })) : window.location = "/"
+        });
+
+        this.checkAuthState = this.checkAuthState.bind(this);
+        this.checkProps = this.checkProps.bind(this);
         this.checkUserProfileExists = this.checkUserProfileExists.bind(this);
         this.confirmPost = this.confirmPost.bind(this);
+    }
+
+    checkAuthState (callback) {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
+        const isUserAuthenticated = firebaseApp.getAuth();
+        isUserAuthenticated ? callback('yes') : callback('no');
+    }
+
+    checkProps (callback) {
+
+        this.props.priceData === "default" ? callback('goBack') : callback('ok');
     }
 
     getUserID () {
@@ -123,8 +144,8 @@ class ConfirmParcel extends React.Component {
                       </p>
                   </div>
 
-                  <div className="form-block">
-                      <label className="form-block-title">REQUESTED DATE:</label>
+                  <div className="form-block">          
+                      <label className="form-block-title">REQUESTED DATE (DD/MM/YYYY)</label>
                       <p className="form-input-data">
                           { "Preferred date of delivery: " + this.props.requestedDate }
                       </p>
