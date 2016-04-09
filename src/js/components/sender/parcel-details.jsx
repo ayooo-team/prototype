@@ -65,7 +65,9 @@ class ParcelDetails extends React.Component {
 
         this.checkInput(parcelData, (result) => {
 
-            result ? (this.saveDataToParentState(parcelData), window.location="/#/send-post/set-delivery-date") : alert("Please complete all fields.");
+            let newLocation = (this.props.pageType + "/parcel-details");
+
+            result ? (this.saveDataToParentState(parcelData), window.location = newLocation) : alert("Please complete all fields.");
         });
     }
 
@@ -98,7 +100,11 @@ class ParcelDetails extends React.Component {
 
         let inputSize12 = classnames("col-12");
         let inputSize6 = classnames("col-6");
-        let labelSize6 = classnames("label", "col-6");
+        let labelSize4 = classnames("label", "col-4");
+        let labelSize8 = classnames("label", "col-8");
+        let inputNumberSize3 = classnames("input-number", "col-3");
+        let unitSize1 = classnames("unit", "col-1");
+        let setSize = classnames("set-size", "col-8");
 
         return ( this.props.parcelDetails["tempDescription"] || this.props.parcelDetails["tempWeight"] ) ? (
 
@@ -114,22 +120,24 @@ class ParcelDetails extends React.Component {
                 <LineBreak />
 
                 <div className="form-block">
-                    <h4 className={ labelSize6 }>
+                    <h4 className={ labelSize8 }>
                         Weight:
                     </h4>
-                    <input className="" type="text" ref="parcelWeight" defaultValue={ this.props.parcelDetails["tempWeight"] } />
-                    <p className="" type="text">
-                        kg
-                    </p>
+                    <div className="input-and-unit">
+                        <input className={ inputNumberSize3 } type="text" ref="parcelWeight" defaultValue={ this.props.parcelDetails["tempWeight"] } />
+                        <p className={ unitSize1 } type="text">
+                            kg
+                        </p>
+                    </div>
                 </div>
 
                 <LineBreak />
 
                 <div className="form-block">
-                    <h4 className={ labelSize6 }>
+                    <h4 className={ labelSize4 }>
                         Size:
                     </h4>
-                    <div className={ inputSize6 } type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>{ this.props.parcelSize["chosenOption"] } --> </div>
+                    <div className={ setSize } type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>{ this.props.parcelSize["chosenOption"] } &#8594; </div>
                 </div>
 
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
@@ -154,8 +162,8 @@ class ParcelDetails extends React.Component {
                           Weight:
                       </h4>
                       <div className="input-and-unit">
-                          <input className="col-2" type="text" ref="parcelWeight" />
-                          <p className="unit col-2" type="text">
+                          <input className={ inputNumberSize3 } type="text" ref="parcelWeight" />
+                          <p className={ unitSize1 } type="text">
                               kg
                           </p>
                       </div>
@@ -164,11 +172,11 @@ class ParcelDetails extends React.Component {
                   <LineBreak />
 
                   <div className="form-block">
-                      <h4 className={ labelSize6 }>
+                      <h4 className={ labelSize4 }>
                           Size:
                       </h4>
-                      <h4 className={ inputSize6 } type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>
-                          Click here to set -->
+                      <h4 className={ setSize } type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>
+                          Click here to set &#8594;
                       </h4>
                   </div>
 
