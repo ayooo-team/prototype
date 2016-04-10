@@ -5,13 +5,8 @@
 
 .form-block {
 
-    // display: flex;
-    // justify-content: space-around;
-    // flex-direction: row;
-
-    padding: 1vh 0;
     min-height: 10vh;
-    border: 1px solid blue;
+    // border: 1px solid blue;
     position: relative;
 
     .form-block-title {
@@ -24,22 +19,22 @@
 
     }
 
+    .form-input-data {
+        margin: 0;
+        font-size: 5vmin;
+    }
+
     input[type=text] {
         height: 6vh;
-        font-size: 4vmin;
+        font-size: 5vmin;
         display: block;
         margin: auto;
     }
 
     input[type=text][class*="col-"] { // only targets inputs of col-2
-        margin-top: 6vmin;
-    }
-
-    select {
-        height: 6vh;
+        margin: 3vmin 0;
     }
 }
-
 
 .label {
     display: block;
@@ -48,11 +43,18 @@
     font-size: 7vmin;
 }
 
+.weight-input-container {
+    .input-number {
+        font-size: 1em;
+    }
+}
+
 .input-number {
     width: 15vw;
     height: 7vw;
     font-size: 0.7em;
     display: inline !important;
+
 
     &.large {
         // width: 20vw;
@@ -63,7 +65,7 @@
 .unit {
     font-size: 1.1em;
     text-align: left;
-    margin-top: 1vmin;
+    margin-top: 3vmin;
     padding-left: 0.5vmin;
 }
 
@@ -73,47 +75,4 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-
-.radio-container {
-
-    width: 100%;
-
-    .radio-row {
-
-        padding: 2vh 1vh;
-
-        &.selected {
-            background-color: $light-green;
-        }
-
-        &:hover {
-            cursor: pointer;
-        }
-
-        .radio-image-wrapper {
-            // margin-right: 1vw;
-        }
-
-        .radio-block-title, .radio-block-text {
-            text-align: left;
-            padding: 1vw;
-        }
-
-        .radio-block-title {
-            font-weight: 600;
-            margin: 0;
-        }
-
-        p {
-            margin: 0;
-            padding: 1vw;
-        }
-
-        .radio-selected-tick {
-            width: 4vh;
-            height: 4vh;
-            margin-top: 2vh;
-        }
-    }
 }

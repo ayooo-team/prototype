@@ -11,7 +11,7 @@ import Dashboard from './components/dashboard.jsx';
 import UserDetails from './components/user-details.jsx';
 import Admin from './components/admin.jsx';
 import SendPost from './components/sender/send-post.jsx';
-
+// routes nested under SendPost
     import Pickup from './components/sender/pickup.jsx';
     import ParcelDetails from './components/sender/parcel-details.jsx';
     import ParcelSize from './components/parcel-size.jsx';
@@ -20,7 +20,7 @@ import SendPost from './components/sender/send-post.jsx';
     import ConfirmParcel from './components/sender/confirm-parcel.jsx';
 
 import TravelPost from './components/traveller/travel-post.jsx';
-
+// routes nested under TravelPost
     import Traveller from './components/traveller/journey.jsx';
     import ConfirmTravel from './components/traveller/confirm-travel.jsx';
 

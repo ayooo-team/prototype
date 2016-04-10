@@ -29,7 +29,7 @@ class Options extends React.Component {
             <div className={ radioClasses } id={ this.props.blockTitle } onClick={ this.props.onClick }>
 
                 <div className="radio-image-wrapper col-2">
-                    <img className={ "radio-image radio-block-image-" + this.props.blockTitle } src={ this.props.blockImage } />
+                    <img className="radio-image" src={ this.props.blockImage } />
                 </div>
 
                 <div className="description col-9">

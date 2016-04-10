@@ -9,7 +9,7 @@ class PickUp extends React.Component {
 
         super();
 
-        this.checkAuthState((response) => {
+        this.checkAuthState( (response) => {
             response === 'yes' ? console.log("user logged in") : window.location = "/"
         });
 
@@ -19,8 +19,8 @@ class PickUp extends React.Component {
         this.saveDataToParentState = this.saveDataToParentState.bind(this);
 
         this.state = {
-          pickUpIdentity: "none",
-          recipientIdentity: "none"
+            pickUpIdentity: "none",
+            recipientIdentity: "none"
         }
     }
 
@@ -46,10 +46,10 @@ class PickUp extends React.Component {
         const recipientIdentity = this.refs.recipientIdentity.value;
 
         let pickUpData = {
-          fromCity: this.refs.fromCity.value,
-          fromPostCode: this.refs.fromPostcode.value,
-          toCity: this.refs.toCity.value,
-          toPostCode: this.refs.toPostcode.value,
+            fromCity: this.refs.fromCity.value,
+            fromPostCode: this.refs.fromPostcode.value,
+            toCity: this.refs.toCity.value,
+            toPostCode: this.refs.toPostcode.value,
         };
 
         if (pickUpIdentity === "else" && recipientIdentity === "else") {
@@ -83,17 +83,19 @@ class PickUp extends React.Component {
         var counter = 0;
         var emptyFields = 0;
         dataKeys.forEach( (element, index, array) => {
+
             data[element] === "" ? (counter++, emptyFields++) : (counter++)
+
             if (counter === dataKeys.length) {
-              emptyFields === 0 ? callback(true) : callback(false);
+                emptyFields === 0 ? callback(true) : callback(false);
             }
         } );
     }
 
     saveDataToParentState(pickUpData) {
 
-      const savePickUpData = this.props.savePickUpData;
-      savePickUpData(pickUpData);
+        const savePickUpData = this.props.savePickUpData;
+        savePickUpData(pickUpData);
     }
 
     render () {
@@ -114,8 +116,8 @@ class PickUp extends React.Component {
                         <option className="form-input" select="selected" value="self">I will</option>
                         <option className="form-input"value="else">Someone Else</option>
                     </select>
-                    <input className="form-input" type="text" ref="pickUpElseName" style={{ display: this.state.pickUpIdentity}} placeholder="Enter pickup person's name" />
-                    <input className="form-input" type="text" ref="pickUpElseEmail" style={{ display: this.state.pickUpIdentity}} placeholder="Enter pickup person's email" />
+                    <input className="form-input" type="text" ref="pickUpElseName" style={{ display: this.state.pickUpIdentity}} placeholder="Pickup person's name" />
+                    <input className="form-input" type="text" ref="pickUpElseEmail" style={{ display: this.state.pickUpIdentity}} placeholder="Pickup person's email" />
                 </div>
 
                 <div className="form-block">
@@ -130,8 +132,8 @@ class PickUp extends React.Component {
                       <option className="form-input" select="selected" value="self">I will</option>
                       <option className="form-input"value="else">Someone Else</option>
                     </select>
-                    <input className="form-input" type="text" ref="recipientElseName" style={{ display: this.state.recipientIdentity}} placeholder="Enter recipient's name" />
-                    <input className="form-input" type="text" ref="recipientElseEmail" style={{ display: this.state.recipientIdentity}} placeholder="Enter recipient's email" />
+                    <input className="form-input" type="text" ref="recipientElseName" style={{ display: this.state.recipientIdentity}} placeholder="Recipient's name" />
+                    <input className="form-input" type="text" ref="recipientElseEmail" style={{ display: this.state.recipientIdentity}} placeholder="Recipient's email" />
                 </div>
 
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />

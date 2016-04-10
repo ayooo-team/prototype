@@ -3,24 +3,24 @@
         {
           "title": "Pocket",
           "imagereal": "https://cloud.githubusercontent.com/assets/13470325/14210630/c04c222a-f821-11e5-8e3a-09a51ffbe04f.png",
-          "image": "http://placeholders.org/50",
+          "image": "img/key.png",
           "text": "Keys, phone. It fits in a pocket"
         },
         {
           "title": "Small",
-          "image": "http://placeholders.org/50",
+          "image": "img/computer.png",
           "text": "Computer, tablet, shirt. It fits in a bag"
         },
         {
           "title": "Medium",
           "imagereal": "https://cloud.githubusercontent.com/assets/13470325/14211414/e0c6c74a-f825-11e5-9691-efb95a914075.png",
-          "image": "http://placeholders.org/50",
+          "image": "img/suitcase.png",
           "text": "The mum want to send you something"
         },
         {
           "title": "Large",
           "imagereal": "https://cloud.githubusercontent.com/assets/13470325/14211410/de91d0dc-f825-11e5-8828-d0569bd9376e.png",
-          "image": "http://placeholders.org/50",
+          "image": "img/bed.png",
           "text": "A little van is required"
         }
     ]

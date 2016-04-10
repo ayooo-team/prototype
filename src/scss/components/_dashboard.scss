@@ -25,4 +25,6 @@
     height: 25vh;
     margin: 0 auto;
     padding-top: 6vh;
+    -webkit-filter: drop-shadow(0.4em 0.4em 0.4em #555);
+    filter: drop-shadow(0.4em 0.4em 0.4em #555);
 }

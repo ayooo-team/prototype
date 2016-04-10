@@ -23,7 +23,7 @@ class SetDeliveryDate extends React.Component {
         this.checkInput = this.checkInput.bind(this);
 
         this.state = {
-          dateSetter: "none",
+            dateSetter: "none",
         }
     }
 
@@ -117,24 +117,23 @@ class SetDeliveryDate extends React.Component {
 
         return (
 
-            <div className="page form-block">
+            <div className="page form-block set-delivery-date-container">
 
-                <label className="form-block-title">When do you need your parcel to be delivered?</label>
+                    <label className="col-12 page-header">When do you need your parcel to be delivered?</label>
 
-                <select ref="setDeliveryDate" id="setDeliveryDate" onChange={ this.ifFuture }>
-                  <option className="form-input" select="selected"value="today">Today</option>
-                  <option className="form-input" value="future">Future</option>
-                  <option className="form-input" value="anytime">Anytime</option>
-                </select>
+                    <select className="col-12" ref="setDeliveryDate" id="setDeliveryDate" onChange={ this.ifFuture }>
+                        <option className="form-input" select="selected"value="today">Today</option>
+                        <option className="form-input" value="future">Future</option>
+                        <option className="form-input" value="anytime">Anytime</option>
+                    </select>
 
-                <div className="flex-wrapper">
-                    <input className="form-input flex-item" type="text" ref="deliveryDateDay" style={{ display: this.state.dateSetter }} placeholder="DAY" />
-                    <input className="form-input flex-item" type="text" ref="deliveryDateMonth" style={{ display: this.state.dateSetter }} placeholder="MONTH" />
-                    <input className="form-input flex-item" type="text" ref="deliveryDateYear" style={{ display: this.state.dateSetter }} placeholder="YEAR" />
-                </div>
+                    <div className="flex-wrapper">
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateDay" style={{ display: this.state.dateSetter }} placeholder="DAY" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateMonth" style={{ display: this.state.dateSetter }} placeholder="MONTH" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" style={{ display: this.state.dateSetter }} placeholder="YEAR" />
+                    </div>
 
-                <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
-
+                    <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
             </div>
         );
     }

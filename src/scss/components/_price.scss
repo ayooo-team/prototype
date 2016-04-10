@@ -1,5 +1,25 @@
+.page-header.price {
+    font-size: 8vmin;
+}
+
 .price-input {
     height: 9vh;
+    font-size: 10vmin;
+    margin: 1.5vmin 0 1vmin 0;
+}
+
+.price-area {
+    padding: 5vmin;
+
+    .input-title {
+        font-size: 6vmin;
+    }
+    span {
+        font-size: 8vmin;
+        text-align: right;
+        padding: 0 2vw 0 0;
+        margin: 5vmin 0 1vmin 0;
+    }
 }
 
 .page-header.price {
@@ -14,7 +34,7 @@
     }
 
     span {
-        font-size: 10vmin;
+        font-size: 7vmin;
         text-align: right;
         padding: 0 2vw 0 0;
     }

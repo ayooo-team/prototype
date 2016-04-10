@@ -60,19 +60,19 @@ class ConfirmParcel extends React.Component {
         const userID = this.getUserID();
 
         let totalData = {
-            timestamp: Date.now(),
-            userID: userID,
-            fromCity: this.props.pickUpData.fromCity,
-            fromPostCode: this.props.pickUpData.fromPostCode,
-            toCity: this.props.pickUpData.toCity,
-            toPostCode: this.props.pickUpData.toPostCode,
-            pickUpIdentity: this.props.pickUpData.pickUpIdentity,
+            timestamp:         Date.now(),
+            userID:            userID,
+            fromCity:          this.props.pickUpData.fromCity,
+            fromPostCode:      this.props.pickUpData.fromPostCode,
+            toCity:            this.props.pickUpData.toCity,
+            toPostCode:        this.props.pickUpData.toPostCode,
+            pickUpIdentity:    this.props.pickUpData.pickUpIdentity,
             recipientIdentity: this.props.pickUpData.recipientIdentity,
             parcelDescription: this.props.parcelDetails.parcelDescription,
-            parcelSize: this.props.parcelDetails.parcelSize,
-            parcelWeight: this.props.parcelDetails.parcelWeight,
-            requestedDate: this.props.requestedDate,
-            price: this.props.priceData.price
+            parcelSize:        this.props.parcelDetails.parcelSize,
+            parcelWeight:      this.props.parcelDetails.parcelWeight,
+            requestedDate:     this.props.requestedDate,
+            price:             this.props.priceData.price
         };
 
         $.ajax({
@@ -100,54 +100,54 @@ class ConfirmParcel extends React.Component {
                   <div className="form-block">
                       <label className="form-block-title">FROM:</label>
                       <p className="form-input-data">
-                      { "City: " + this.props.pickUpData.fromCity }
+                          { "City: " + this.props.pickUpData.fromCity }
                       </p>
                       <p className="form-input-data">
-                      { "PostCode: " + this.props.pickUpData.fromPostCode }
+                          { "Postcode: " + this.props.pickUpData.fromPostCode }
                       </p>
                       <p className="form-input-data">
-                      { "Person Picking Up: " + this.props.pickUpData.pickUpIdentity }
+                          { "Person Picking Up: " + this.props.pickUpData.pickUpIdentity }
                       </p>
                   </div>
 
                   <div className="form-block">
                       <label className="form-block-title">TO:</label>
                       <p className="form-input-data">
-                      { "City: " + this.props.pickUpData.toCity }
+                          { "City: " + this.props.pickUpData.toCity }
                       </p>
                       <p className="form-input-data">
-                      { "PostCode: " + this.props.pickUpData.toPostCode }
+                          { "Postcode: " + this.props.pickUpData.toPostCode }
                       </p>
                       <p className="form-input-data">
-                      { "Person Recieving: " + this.props.pickUpData.recipientIdentity }
+                          { "Person Receiving: " + this.props.pickUpData.recipientIdentity }
                       </p>
                   </div>
 
                   <div className="form-block">
                       <label className="form-block-title">PARCEL SIZE:</label>
-                      <p className="form-input-data">{
-                          "Description: " + this.props.parcelDetails.parcelDescription
-                      } </p>
-                      <p className="form-input-data">{
-                          "Size: " + this.props.parcelSize.chosenOption
-                      } </p>
-                      <p>{
-                          "Weight: " + this.props.parcelDetails.parcelWeight
-                      } </p>
+                      <p className="form-input-data">
+                          { "Description: " + this.props.parcelDetails.parcelDescription }
+                      </p>
+                      <p className="form-input-data">
+                          { "Size: " + this.props.parcelSize.chosenOption }
+                      </p>
+                      <p className="form-input-data">
+                          { "Weight: " + this.props.parcelDetails.parcelWeight }
+                      </p>
                   </div>
 
                   <div className="form-block">
                       <label className="form-block-title">ASKING PRICE:</label>
-                      <p className="form-input-data">{
-                          "Price(£): " + this.props.priceData.price
-                      } </p>
+                      <p className="form-input-data">
+                          { "Price(£): " + this.props.priceData.price }
+                      </p>
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">REQUESTED DATE (DD/MM/YYYY):</label>
-                      <p className="form-input-data">{
-                          "Preferred date of delivery: " + this.props.requestedDate
-                      } </p>
+                      <label className="form-block-title">REQUESTED DATE (DD/MM/YYYY)</label>
+                      <p className="form-input-data">
+                          { "Preferred date of delivery: " + this.props.requestedDate }
+                      </p>
                   </div>
 
                   <GhostButton onClick={ this.checkUserProfileExists } buttonText="CONFIRM" />

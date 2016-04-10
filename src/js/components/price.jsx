@@ -42,9 +42,9 @@ class PriceSuggestion extends React.Component {
 
         event.preventDefault();
         this.refs.price.value ? (
-          this.saveDataToParentState(), window.location=this.props.pageType + "/confirm"
-          ) : (
-          alert("Please provide a price in GBP")
+            this.saveDataToParentState(), window.location=this.props.pageType + "/confirm"
+            ) : (
+            alert("Please provide a price in GBP")
         );
     }
 

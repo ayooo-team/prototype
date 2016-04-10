@@ -16,6 +16,11 @@ class Journey extends React.Component {
         this.checkAuthState = this.checkAuthState.bind(this);
         this.getFormData = this.getFormData.bind(this);
         this.saveDataToParentState = this.saveDataToParentState.bind(this);
+
+        Number.prototype.inRange = function (lower, upper) {
+
+            return this >= lower && this <= upper;
+        }
     }
 
     checkAuthState (callback) {
@@ -81,12 +86,12 @@ class Journey extends React.Component {
             let departureMonth = parseFloat(this.refs.departureMonth.value);
             let arrivalMonth = parseFloat(this.refs.arrivalMonth.value);
 
-            if ( (Math.floor(departureDay/32) || Math.floor(arrivalDay/32)) !== (0) ) {
+            if ( !departureDay.inRange(1, 31) || !arrivalDay.inRange(1, 31) ) {
 
                 callback("incorrectDateInput");
             } else {
 
-                if ( Math.floor(departureMonth/13) || Math.floor(arrivalMonth/13) !== (0) ) {
+                if ( !departureMonth.inRange(1, 12) || !arrivalMonth.inRange(1, 12) ) {
 
                     callback("incorrectMonthInput");
                 } else {
@@ -124,9 +129,9 @@ class Journey extends React.Component {
              var arrivalHour = parseFloat(this.refs.arrivalHour.value);
              var arrivalMinutes = parseFloat(this.refs.arrivalMinutes.value);
 
-             if ( (Math.floor(departureHour/23) && Math.floor(arrivalHour/23)) === 0 ) {
+             if ( departureHour.inRange(0, 23) && arrivalHour.inRange(0, 23) ) {
 
-                if ( (Math.floor(departureMinutes/59) && Math.floor(arrivalHour/59)) === 0 ) {
+                if ( departureMinutes.inRange(0, 59) && arrivalMinutes.inRange(0, 59) ) {
 
                     var departureHour = departureHour <= 10 ? "0" + departureHour.toString() : departureHour.toString();
                     var departureMinutes = departureMinutes <= 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();

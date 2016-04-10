@@ -41,6 +41,7 @@ function getCSVFile (request, reply) {
         });
 
         data.timestamp = Date(data.timestamp);
+        console.log("new timestamp?", Date(data.timestamp));
         console.log("FINAL DATA",data);
 
         var csvFile = toCSV(sortedByTime);
