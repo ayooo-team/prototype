@@ -8,49 +8,43 @@ class Admin extends React.Component {
 
     constructor (props) {
 
-        super(props);
+        super();
+
+        this.state = {
+            pageReady: false,
+            userLoggedIn: false
+        };
 
         this.getUserID = this.getUserID.bind(this);
-        this.isUserAuthenticated = this.isUserAuthenticated.bind(this);
         this.getFormData = this.getFormData.bind(this);
+    }
 
-        this.state = { loading: false }
+    componentDidMount () {
 
-        this.getUserID((response) => {
-            response ?
-            this.isUserAuthenticated(response, (isAdmin) => {
-                isAdmin === 'admin' ?
-                this.setState({ loading: true, userKnown: true, login: response }) :
-                this.setState({ loading: true, userKnown: false, login: false })
-            }) : console.log("2", "NO ID"), this.state = { loading: true };
-
-        });
+        this.getUserID();
     }
 
     getUserID (callback) {
 
         const storedInfo = localStorage.getItem("firebase:session::ayooo");
-        storedInfo ? callback(JSON.parse(storedInfo).uid) : callback(null);
+
+        storedInfo ?
+        this.checkIfAdmin(JSON.parse(storedInfo).uid) :
+        this.setState({
+            userLoggedIn: true
+        })
     }
 
-    isUserAuthenticated (userID, callback) {
-
-        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userID);
-
-        firebaseApp.once('value', (userInfo) => {
-            const userProfile = userInfo.val();
-            const userEmail = userProfile["email"];
-            this.checkIfAdmin(userEmail, callback);
-        });
-    }
-
-    checkIfAdmin(userEmail, callback) {
+    checkIfAdmin(userID) {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/admin");
+
         firebaseApp.once('value', (adminInfo) => {
             const adminDetails = adminInfo.val();
-            const adminEmail = adminDetails["email"];
-            userEmail === adminEmail ? callback("admin") : callback("notAdmin");
+            const adminID = adminDetails["id"];
+            userID === adminID ?
+            this.setState({ pageReady: true }) :
+            this.setState({ userLoggedIn: true })
         });
     }
 
@@ -70,49 +64,34 @@ class Admin extends React.Component {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.authWithPassword(credentials, (error, authData) => {
-
+            if (authData) {
+                const userID = authData.uid;
+                this.checkIfAdmin(userID);
+            } else {
+                alert(error);
+            }
         });
     }
 
     render () {
 
-        return this.state && this.state.loading ?
+        return this.state && this.state.pageReady ? (
 
-        this.state.userKnown ?
+            <div className="page">
 
-            this.state.login === '1d662c56-9470-4704-8ea6-5ea27f55ee98' ? (
-
-                <div className="page">
-
-                    <h1 className="admin-header flex-item">App admin</h1><br/>
-                    <h3 className="flex-item"> Choose a file to download: </h3>
-                    <div className="download-button-wrapper flex-item">
-                        <DownloadButton query="?filename=senders" filename="senders.csv" buttonText="Sender requests" />
-                        <DownloadButton query="?filename=travellers" filename="travellers.csv" buttonText="Traveller requests" />
-                    </div>
+                <h1 className="admin-header flex-item">App admin</h1><br/>
+                <h3 className="flex-item"> Choose a file to download: </h3>
+                <div className="download-button-wrapper flex-item">
+                    <DownloadButton query="?filename=senders" filename="senders.csv" buttonText="Sender requests" />
+                    <DownloadButton query="?filename=travellers" filename="travellers.csv" buttonText="Traveller requests" />
                 </div>
-            ) : (
-                <div className="page form">
+            </div>
 
-                    <h1 className="login-title">Please Log In:</h1>
+        ) : this.state && this.state.userLoggedIn ? (
 
-                    <div className="form-block">
-                        <label className="form-label login-width-adjust">Email:</label>
-                        <input className="form-input" type="text" ref="email" />
-                    </div>
-
-                    <div className="form-block">
-                        <label className="form-label">Password:</label>
-                        <input className="form-input" type="password" ref="password" />
-                    </div>
-
-                    <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />
-
-                </div>
-        ) : (
             <div className="page form">
 
-                <h1 className="login-title">Please Log In:</h1>
+                <h1 className="login-title">Log In:</h1>
 
                 <div className="form-block">
                     <label className="form-label login-width-adjust">Email:</label>
@@ -124,16 +103,19 @@ class Admin extends React.Component {
                     <input className="form-input" type="password" ref="password" />
                 </div>
 
-                <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />
+                <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN" } />
 
             </div>
+
         ) : (
+
             <div className="page">
                 <h1>LOADING...</h1>
             </div>
-        )
 
+        )
     }
+
 }
 
 export default Admin;
