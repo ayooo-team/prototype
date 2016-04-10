@@ -40,19 +40,9 @@ class Login extends React.Component {
         firebaseApp.authWithPassword(credentials, (error, authData) => {
                 error ?
                 ( error.toString() === "Error: The specified user does not exist." ?
-                this.newUserEmailCheck(credentials) : alert(error)) :
+                this.signUserUp(credentials) : alert(error)) :
                 window.location = "/#dashboard";
         });
-    }
-
-    newUserEmailCheck (credentials) {
-
-        const isEmailSame = prompt(`Welcome to Ayooo!
-Type in your email address again to make sure there are no typos!`);
-
-        isEmailSame === credentials.email ?
-        this.signUserUp(credentials) :
-        alert("Email addresses do not match. Please check and try again.");
     }
 
     signUserUp (credentials) {
