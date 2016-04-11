@@ -96,11 +96,6 @@ class Login extends React.Component {
                 <GhostButton onClick={ this.getFormData } buttonText="LOG IN / SIGN UP" />
             </div>
         ) : (
-            <div className="page">
-                <h1>LOADING...</h1>
-            </div>
-
-        ) : (
 
             <div className="page">
                 <h1>LOADING...</h1>
