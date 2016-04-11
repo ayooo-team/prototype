@@ -136,9 +136,9 @@ class SetDeliveryDate extends React.Component {
                     </select>
 
                     <div className="flex-wrapper">
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateDay" style={{ display: this.state.dateSetter }} placeholder="DAY" />
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateMonth" style={{ display: this.state.dateSetter }} placeholder="MONTH" />
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" style={{ display: this.state.dateSetter }} placeholder="YEAR" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateDay" maxLength="2" style={{ display: this.state.dateSetter }} placeholder="DAY" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateMonth" maxLength="2" style={{ display: this.state.dateSetter }} placeholder="MONTH" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" maxLength="4" style={{ display: this.state.dateSetter }} placeholder="YEAR" />
                     </div>
 
                     <GhostButton onClick={ this.getFormData } buttonText="NEXT" />

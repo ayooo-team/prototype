@@ -182,13 +182,13 @@ class Journey extends React.Component {
 
                             <div className="date-container col-7">
 
-                                <input className="input-number " type="text" ref="departureDay" placeholder="DD" />
-                                <input className="input-number " type="text" ref="departureMonth" placeholder="MM" />
-                                <input className="input-number " type="text" ref="departureYear" placeholder="YYYY" />
+                                <input className="input-number " type="text" ref="departureDay" placeholder="DD" maxLength="2" />
+                                <input className="input-number " type="text" ref="departureMonth" placeholder="MM" maxLength="2"/>
+                                <input className="input-number " type="text" ref="departureYear" placeholder="YYYY" maxLength="4"/>
                             </div>
                             <div className="time-container col-5">
-                                <input className="input-number " type="text" ref="departureHour" placeholder="HOUR" />
-                                <input className="input-number " type="text" ref="departureMinutes" placeholder="MIN" />
+                                <input className="input-number " type="text" ref="departureHour" placeholder="HOUR" maxLength="2"/>
+                                <input className="input-number " type="text" ref="departureMinutes" placeholder="MIN" maxLength="2"/>
                             </div>
 
                     </div>
