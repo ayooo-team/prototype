@@ -10,16 +10,24 @@ class Login extends React.Component {
     constructor (props) {
 
         super();
-        this.checkAuthState();
+
+        this.state = { cookie: false }
 
         this.getFormData = this.getFormData.bind(this);
+        this.checkAuthState = this.checkAuthState.bind(this);
+    }
+
+    componentDidMount () {
+        this.checkAuthState();
     }
 
     checkAuthState () {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         const isUserAuthenticated = firebaseApp.getAuth();
-        isUserAuthenticated ? window.location = "/#dashboard" : console.log('user not logged in');
+        isUserAuthenticated ?
+        window.location = "/#dashboard" :
+        this.setState({ cookie: true })
     }
 
     getFormData (event) {
@@ -64,7 +72,8 @@ class Login extends React.Component {
 
     render () {
 
-        return (
+        return this.state && this.state.cookie ? (
+
             <div className="page form">
                 <h1 className="login-title">Log In or Sign Up</h1>
 
@@ -81,7 +90,14 @@ class Login extends React.Component {
                 <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />
 
             </div>
-        );
+
+        ) : (
+
+            <div className="page">
+                <h1>LOADING...</h1>
+            </div>
+
+        )
     }
 };
 
