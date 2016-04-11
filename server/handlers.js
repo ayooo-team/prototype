@@ -1,10 +1,12 @@
 'use strict';
 
 const elasticsearch = require('./db/client.js');
+const Firebase = require('firebase');
 
 function addDeliveryRequest (request, reply) {
 
     var data = request.payload;
+
     if (!request.query.userID) {
 
         return new Error('userID not set');
@@ -13,38 +15,40 @@ function addDeliveryRequest (request, reply) {
 
         return new Error('Payload to server was empty.');
     }
-    console.log(data);
-    data.userID = request.query.userID;
+    const userID = request.query.userID;
 
-    console.log(request.query.type);
+    const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userID);
 
-    const type = request.query.type;
+    firebaseApp.once('value').then((userData) => {
 
-    // elasticsearch.deleteIndex("ayooo")
-    var result = elasticsearch.addDocument(
-        type,
-        data
-    ).then( (result) => {
+        data.customerName = userData.val().name;
+        data.customerEmail = userData.val().email;
+        data.timestamp = Date(data.timestamp);
 
-        reply(result);
+        const type = request.query.type;
+
+        // elasticsearch.deleteIndex("ayooo")
+        var result = elasticsearch.addDocument(
+            type,
+            data
+        ).then( (result) => {
+
+            reply(result);
+        });
     });
 }
 
 function getCSVFile (request, reply) {
 
     let type = request.query;
-    console.log(type);
 
     var data = getData(type, function (data) {
 
+        console.log("returned data",data);
         var sortedByTime = data.sort(function (a, b) {
 
             return a.timestamp < b.timestamp;
         });
-
-        data.timestamp = Date(data.timestamp);
-        console.log("new timestamp?", Date(data.timestamp));
-        console.log("FINAL DATA",data);
 
         var csvFile = toCSV(sortedByTime);
 
@@ -55,29 +59,65 @@ function getCSVFile (request, reply) {
 function getData (type, callback) {
 
     var options = {
-        type: ''
+        type: type
     };
 
-    elasticsearch.search().then((result) => {
+    elasticsearch.search(options)
+        .then((result) => {
 
-        var data = result.hits.hits.map((element) => {
+            var cleanedData = result.hits.hits.map((element) => {
 
-            // get userID from array or object:
-
-            firebaseApp.once('value', (profileSnapshot) => {
-                const userProfile = profileSnapshot.val();
-                element["userName"] = userProfile["name"];
-                element["userEmail"] = userProfile["email"];
-                // push/append to array or object before returning element (line 72)
                 return element._source;
             });
-        });
-
-        callback(data);
-    }).catch((error) => {
+            console.log(cleanedData);
+            callback(cleanedData);
+        }).catch((error) => {
 
         console.error("Error:", error.message);
     });
+}
+
+function getUserProfile (dataArray, callback) {
+
+    // for each bit of data
+    // get USERID
+    // go to firebaseio
+    // get email and username
+    // add to
+    // var result = [];
+
+
+    dataArray.forEach((ayoooRequest, index) => {
+
+        const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/");
+
+        firebaseApp.once('value')
+            .then((snapshot) => {
+
+
+                snapshot.forEach((child) => {
+
+                    if (child.key() === ayoooRequest.userID) {
+
+                        var emailAddress = child.val().email;
+                        var name = child.val().name;
+
+                        ayoooRequest[index].customerEmail = child.val().email;
+                        ayoooRequest[index].customerName = child.val().name;
+                        console.log(ayoooRequest[index]);
+                        return true;
+                    }
+                })
+            })
+
+
+            // console.log(index);
+            // if (index + 1 === dataArray.length) {
+            //
+            //     console.log(dataArray);
+            // }
+    });
+
 }
 
 function toCSV (data) {
