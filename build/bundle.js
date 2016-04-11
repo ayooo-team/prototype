@@ -24915,19 +24915,25 @@
 
 	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this));
 
-	        _this.checkAuthState();
+	        _this.state = { cookie: false };
 
 	        _this.getFormData = _this.getFormData.bind(_this);
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Login, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.checkAuthState();
+	        }
+	    }, {
 	        key: 'checkAuthState',
 	        value: function checkAuthState() {
 
 	            var firebaseApp = new _firebase2.default("https://ayooo.firebaseio.com/");
 	            var isUserAuthenticated = firebaseApp.getAuth();
-	            isUserAuthenticated ? window.location = "/#dashboard" : console.log('user not logged in');
+	            isUserAuthenticated ? window.location = "/#dashboard" : this.setState({ cookie: true });
 	        }
 	    }, {
 	        key: 'getFormData',
@@ -24976,7 +24982,7 @@
 	        key: 'render',
 	        value: function render() {
 
-	            return _react2.default.createElement(
+	            return this.state && this.state.cookie ? _react2.default.createElement(
 	                'div',
 	                { className: 'page form' },
 	                _react2.default.createElement(
@@ -25005,6 +25011,14 @@
 	                    _react2.default.createElement('input', { className: 'form-input', type: 'password', ref: 'password' })
 	                ),
 	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: "LOG IN / SIGN UP" })
+	            ) : _react2.default.createElement(
+	                'div',
+	                { className: 'page' },
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    'LOADING...'
+	                )
 	            );
 	        }
 	    }]);
