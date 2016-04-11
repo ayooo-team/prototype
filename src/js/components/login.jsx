@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Firebase from 'firebase';
+import LoginFields from './login-fields.jsx';
 import GhostButton from './ghost-button.jsx';
 
 class Login extends React.Component {
@@ -11,7 +12,7 @@ class Login extends React.Component {
 
         super();
         this.state = { cookie: false };
-        
+
         this.checkAuthState = this.checkAuthState.bind(this);
         this.getFormData = this.getFormData.bind(this);
     }
@@ -75,19 +76,8 @@ class Login extends React.Component {
         return this.state && this.state.cookie ? (
             <div className="page form">
                 <h1 className="login-title">Log In or Sign Up</h1>
-                <div className="login-wrapper">
-
-                    <div className="form-block">
-                        <label className="col-12 form-label ">Email:</label>
-                        <input className="col-12 form-input" id="login-email-input" type="text" ref="email" />
-
-                        <label className="col-12 form-label">Password:</label>
-                        <input className="col-12 form-input" id="login-password-input" type="password" ref="password" />
-                    </div>
-                </div>
-
+                <LoginFields />
                 <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />
-
             </div>
         ) : (
             <div className="page">

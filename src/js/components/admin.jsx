@@ -2,6 +2,7 @@
 
 import React from 'react';
 import DownloadButton from './download-button.jsx';
+import LoginFields from './login-fields.jsx';
 import GhostButton from './ghost-button.jsx';
 
 class Admin extends React.Component {
@@ -91,31 +92,9 @@ class Admin extends React.Component {
         ) : this.state && this.state.userLoggedIn ? (
 
             <div className="page form">
-
-                <h1 className="login-title">Log In:</h1>
-
-                <div className="form-block">
-                    <label className="form-label login-width-adjust">Email:</label>
-                    <input className="form-input" type="text" ref="email" />
-                </div>
-
-                <div className="form-block">
-                    <label className="form-label">Password:</label>
-                    <input className="form-input" type="password" ref="password" />
-                </div>
-
-
-                <div className="form-block">
-                    <label className="form-label">Password:</label>
-                </div>
-
-                <div className="form-block">
-                    <label className="form-label">Password:</label>
-                    <input className="form-input" type="password" ref="password" />
-                </div>
-
+                <h1 className="admin-login">Log in</h1>
+                <LoginFields />
                 <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN" } />
-
             </div>
 
         ) : (
