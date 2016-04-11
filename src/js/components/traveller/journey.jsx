@@ -133,10 +133,10 @@ class Journey extends React.Component {
 
                 if ( departureMinutes.inRange(0, 59) && arrivalMinutes.inRange(0, 59) ) {
 
-                    var departureHour = departureHour <= 10 ? "0" + departureHour.toString() : departureHour.toString();
-                    var departureMinutes = departureMinutes <= 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
-                    var arrivalHour = arrivalHour <= 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
-                    var arrivalMinutes = arrivalMinutes <= 10? "0" + arrivalMinutes.toString() : arrivalMinutes.toString();
+                    var departureHour = departureHour < 10 ? "0" + departureHour.toString() : departureHour.toString();
+                    var departureMinutes = departureMinutes < 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
+                    var arrivalHour = arrivalHour < 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
+                    var arrivalMinutes = arrivalMinutes < 10? "0" + arrivalMinutes.toString() : arrivalMinutes.toString();
 
                     data["departureTime"] = departureHour + ":" + departureMinutes;
                     data["arrivalTime"] = arrivalHour + ":" + arrivalMinutes;
@@ -182,13 +182,13 @@ class Journey extends React.Component {
 
                             <div className="date-container col-7">
 
-                                <input className="input-number " type="text" ref="departureDay" placeholder="DD" />
-                                <input className="input-number " type="text" ref="departureMonth" placeholder="MM" />
-                                <input className="input-number " type="text" ref="departureYear" placeholder="YYYY" />
+                                <input className="input-number " type="text" ref="departureDay" placeholder="DD" maxLength="2" />
+                                <input className="input-number " type="text" ref="departureMonth" placeholder="MM" maxLength="2" />
+                                <input className="input-number " type="text" ref="departureYear" placeholder="YYYY" maxLength="4" />
                             </div>
                             <div className="time-container col-5">
-                                <input className="input-number " type="text" ref="departureHour" placeholder="HOUR" />
-                                <input className="input-number " type="text" ref="departureMinutes" placeholder="MIN" />
+                                <input className="input-number " type="text" ref="departureHour" placeholder="HOUR" maxLength="2" />
+                                <input className="input-number " type="text" ref="departureMinutes" placeholder="MIN" maxLength="2" />
                             </div>
 
                     </div>
@@ -204,13 +204,13 @@ class Journey extends React.Component {
                         <div className="">
                             <div className="date-container col-7">
 
-                                <input className="input-number" type="text" ref="arrivalDay" placeholder="DD" />
-                                <input className="input-number" type="text" ref="arrivalMonth" placeholder="MM" />
-                                <input className="input-number" type="text" ref="arrivalYear" placeholder="YYYY" />
+                                <input className="input-number" type="text" ref="arrivalDay" placeholder="DD" maxLength="2" />
+                                <input className="input-number" type="text" ref="arrivalMonth" placeholder="MM" maxLength="2" />
+                                <input className="input-number" type="text" ref="arrivalYear" placeholder="YYYY" maxLength="4" />
                             </div>
                             <div className="time-container col-5">
-                                <input className="input-number" type="text" ref="arrivalHour" placeholder="HOUR" />
-                                <input className="input-number" type="text" ref="arrivalMinutes" placeholder="MIN" />
+                                <input className="input-number" type="text" ref="arrivalHour" placeholder="HOUR" maxLength="2" />
+                                <input className="input-number" type="text" ref="arrivalMinutes" placeholder="MIN" maxLength="2" />
                             </div>
                         </div>
                     </div>

@@ -10,21 +10,31 @@ class Login extends React.Component {
     constructor (props) {
 
         super();
-        this.checkAuthState();
+        this.state = { cookie: false };
 
+        this.checkAuthState = this.checkAuthState.bind(this);
         this.getFormData = this.getFormData.bind(this);
+    }
+
+    componentDidMount () {
+
+        this.checkAuthState();
     }
 
     checkAuthState () {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         const isUserAuthenticated = firebaseApp.getAuth();
-        isUserAuthenticated ? window.location = "/#dashboard" : console.log('user not logged in');
+        isUserAuthenticated ?
+            window.location = "/#dashboard" :
+            this.setState({ cookie: true });
     }
 
     getFormData (event) {
 
         event.preventDefault();
+
+        console.log(this.refs);
 
         const credentials = {
             email: this.refs.email.value,
@@ -38,10 +48,15 @@ class Login extends React.Component {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.authWithPassword(credentials, (error, authData) => {
-                error ?
+            error ?
                 ( error.toString() === "Error: The specified user does not exist." ?
+<<<<<<< HEAD
                 this.signUserUp(credentials) : alert(error)) :
                 window.location = "/#dashboard";
+=======
+                    this.signUserUp(credentials) : alert(error)) :
+                    window.location = "/#dashboard";
+>>>>>>> c584c66b2122e0bb5653b716c35d205181267639
         });
     }
 
@@ -51,7 +66,7 @@ class Login extends React.Component {
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.createUser(credentials, (error, userData) => {
             error ? alert(error) : this.createUserInstance(credentials, userData.uid), this.logUserIn(credentials);
-      });
+        });
     }
 
     createUserInstance (credentials, userId) {
@@ -64,22 +79,25 @@ class Login extends React.Component {
 
     render () {
 
-        return (
+        return this.state && this.state.cookie ? (
             <div className="page form">
                 <h1 className="login-title">Log In or Sign Up</h1>
+                    <div className="login-wrapper">
 
-                <div className="form-block">
-                    <label className="form-label login-width-adjust">Email:</label>
-                    <input className="form-input" type="text" ref="email" />
-                </div>
+                        <div className="form-block">
+                            <label className="col-12 form-label ">Email:</label>
+                            <input className="col-12 form-input" id="login-email-input" type="text" ref="email" />
 
-                <div className="form-block">
-                    <label className="form-label">Password:</label>
-                    <input className="form-input" type="password" ref="password" />
-                </div>
+                            <label className="col-12 form-label">Password:</label>
+                            <input className="col-12 form-input" id="login-password-input" type="password" ref="password" />
+                        </div>
+                    </div>
 
-                <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />
-
+                <GhostButton onClick={ this.getFormData } buttonText="LOG IN / SIGN UP" />
+            </div>
+        ) : (
+            <div className="page">
+                <h1>LOADING...</h1>
             </div>
         );
     }

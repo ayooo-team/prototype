@@ -24,6 +24,11 @@ class SetDeliveryDate extends React.Component {
 
         this.state = {
             dateSetter: "none",
+        };
+
+        Number.prototype.inRange = function (lower, upper) {
+
+            return this >= lower && this <= upper;
         }
     }
 
@@ -53,15 +58,15 @@ class SetDeliveryDate extends React.Component {
         let deliveryRequest = {};
 
         if (this.refs.setDeliveryDate.value === "today") {
-            console.log("TODAY");
             const now = new Date();
             const date = now.getDate();
-            const month = now.getMonth() <= 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);
+            const month = now.getMonth() < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);
             const year = now.getFullYear();
             deliveryRequest["deliveryDate"] = date + "/" + month + "/" + year;
             console.log(deliveryRequest["deliveryDate"]);
             this.saveDataToParentState(deliveryRequest["deliveryDate"]);
-            window.location="/#/send-post/price"
+            window.location = "/#/send-post/price";
+
         } else if (this.refs.setDeliveryDate.value === "future") {
             console.log("FUTURE");
             let day = this.refs.deliveryDateDay.value;
@@ -74,12 +79,12 @@ class SetDeliveryDate extends React.Component {
                 let day = parseFloat(this.refs.deliveryDateDay.value);
                 let month = parseFloat(this.refs.deliveryDateMonth.value);
 
-                if ( Math.floor(day/32) !== (0) ) {
+                if ( !day.inRange(1, 31) ) {
 
                     alert("Please input a valid date in");
                 } else {
 
-                    if ( Math.floor(month/13) !== (0) ) {
+                    if ( !month.inRange(1, 12) ) {
 
                         alert("Please input a valid month in number form, e.g. for \"May\", input 5");
                     } else {
@@ -136,9 +141,9 @@ class SetDeliveryDate extends React.Component {
                     </select>
 
                     <div className="flex-wrapper">
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateDay" style={{ display: this.state.dateSetter }} placeholder="DAY" />
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateMonth" style={{ display: this.state.dateSetter }} placeholder="MONTH" />
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" style={{ display: this.state.dateSetter }} placeholder="YEAR" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateDay" maxLength="2" style={{ display: this.state.dateSetter }} placeholder="DD" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateMonth" maxLength="2" style={{ display: this.state.dateSetter }} placeholder="MM" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" maxLength="4" style={{ display: this.state.dateSetter }} placeholder="YYYY" />
                     </div>
 
                     <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
