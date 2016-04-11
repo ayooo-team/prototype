@@ -116,8 +116,8 @@ class PickUp extends React.Component {
                         <option className="form-input" select="selected" value="self">I will</option>
                         <option className="form-input"value="else">Someone Else</option>
                     </select>
-                    <input className="form-input" type="text" ref="pickUpElseName" style={{ display: this.state.pickUpIdentity}} placeholder="Pickup person's name" />
-                    <input className="form-input" type="text" ref="pickUpElseEmail" style={{ display: this.state.pickUpIdentity}} placeholder="Pickup person's email" />
+                    <input className="form-input col-6" type="text" ref="pickUpElseName" style={{ display: this.state.pickUpIdentity}} placeholder="Pickup person's name" />
+                    <input className="form-input col-6" type="text" ref="pickUpElseEmail" style={{ display: this.state.pickUpIdentity}} placeholder="Pickup person's email" />
                 </div>
 
                 <div className="form-block">
@@ -132,8 +132,8 @@ class PickUp extends React.Component {
                       <option className="form-input" select="selected" value="self">I will</option>
                       <option className="form-input"value="else">Someone Else</option>
                     </select>
-                    <input className="form-input" type="text" ref="recipientElseName" style={{ display: this.state.recipientIdentity}} placeholder="Recipient's name" />
-                    <input className="form-input" type="text" ref="recipientElseEmail" style={{ display: this.state.recipientIdentity}} placeholder="Recipient's email" />
+                    <input className="form-input col-6" type="text" ref="recipientElseName" style={{ display: this.state.recipientIdentity}} placeholder="Recipient's name" />
+                    <input className="form-input col-6" type="text" ref="recipientElseEmail" style={{ display: this.state.recipientIdentity}} placeholder="Recipient's email" />
                 </div>
 
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />

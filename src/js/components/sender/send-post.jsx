@@ -17,7 +17,7 @@ class SendPost extends React.Component {
             parcelDetails: "default",
             requestedDate: "default",
             priceData: "default"
-        }
+        };
 
         this.createComponentDataSaverFor = this.createComponentDataSaverFor.bind(this);
         this.attachActionsTo = this.attachActionsTo.bind(this);
