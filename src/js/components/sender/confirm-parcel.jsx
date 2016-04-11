@@ -99,7 +99,7 @@ class ConfirmParcel extends React.Component {
               <div className="page form">
 
                   <div className="form-block">
-                      <label className="form-block-title">FROM:</label>
+                      <h3 className="form-block-title">FROM:</h3>
                       <p className="form-input-data">
                           { "City: " + this.props.pickUpData.fromCity }
                       </p>
@@ -112,7 +112,7 @@ class ConfirmParcel extends React.Component {
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">TO:</label>
+                      <h3 className="form-block-title">TO:</h3>
                       <p className="form-input-data">
                           { "City: " + this.props.pickUpData.toCity }
                       </p>
@@ -125,7 +125,7 @@ class ConfirmParcel extends React.Component {
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">PARCEL SIZE:</label>
+                      <h3 className="form-block-title">PARCEL SIZE:</h3>
                       <p className="form-input-data">
                           { "Description: " + this.props.parcelDetails.parcelDescription }
                       </p>
@@ -138,14 +138,14 @@ class ConfirmParcel extends React.Component {
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">ASKING PRICE:</label>
+                      <h3 className="form-block-title">ASKING PRICE:</h3>
                       <p className="form-input-data">
                           { "Price(£): " + this.props.priceData.price }
                       </p>
                   </div>
 
                   <div className="form-block">
-                      <label className="form-block-title">REQUESTED DATE (DD/MM/YYYY)</label>
+                      <h3 className="form-block-title">REQUESTED DATE (DD/MM/YYYY)</h3>
                       <p className="form-input-data">
                           { "Preferred date of delivery: " + this.props.requestedDate }
                       </p>
