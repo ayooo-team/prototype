@@ -23,7 +23,7 @@ function addDeliveryRequest (request, reply) {
 
         data.customerName = userData.val().name;
         data.customerEmail = userData.val().email;
-        data.timestamp = Date(data.timestamp);
+        data.timestamp = Date(Date.now());
 
         const type = request.query.type;
 
@@ -45,6 +45,7 @@ function getCSVFile (request, reply) {
     var data = getData(type, function (data) {
 
         console.log("returned data",data);
+
         var sortedByTime = data.sort(function (a, b) {
 
             return a.timestamp < b.timestamp;
@@ -56,20 +57,22 @@ function getCSVFile (request, reply) {
     });
 }
 
-function getData (type, callback) {
+function getData (query, callback) {
 
-    var options = {
-        type: type
-    };
-
-    elasticsearch.search(options)
+    var requestedType = query.type;
+    elasticsearch.search()
         .then((result) => {
 
-            var cleanedData = result.hits.hits.map((element) => {
+            var filteredData = result.hits.hits.filter((datum) => {
+
+                return datum._type === requestedType;
+            });
+
+            var cleanedData = filteredData.map((element) => {
 
                 return element._source;
             });
-            console.log(cleanedData);
+
             callback(cleanedData);
         }).catch((error) => {
 

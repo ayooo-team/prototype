@@ -86,8 +86,8 @@ class Admin extends React.Component {
                 <h1 className="admin-header flex-item">App admin</h1><br/>
                 <h3 className="flex-item"> Choose a file to download: </h3>
                 <div className="download-button-wrapper flex-item">
-                    <DownloadButton query="?filename=senders" filename="senders.csv" buttonText="Sender requests" />
-                    <DownloadButton query="?filename=travellers" filename="travellers.csv" buttonText="Traveller requests" />
+                    <DownloadButton query="?filename=senders&type=sender" filename="senders.csv" buttonText="Sender requests" />
+                    <DownloadButton query="?filename=travellers&type=traveller" filename="travellers.csv" buttonText="Traveller requests" />
                 </div>
             </div>
 
