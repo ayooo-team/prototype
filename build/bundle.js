@@ -26733,7 +26733,7 @@
 	                        { className: 'input-title col-7' },
 	                        'MAX WEIGHT:'
 	                    ),
-	                    _react2.default.createElement('input', { className: 'input-number large col-5', type: 'number', ref: 'weight', placeholder: 'HOUR' }),
+	                    _react2.default.createElement('input', { className: 'input-number large col-5', type: 'number', ref: 'weight' }),
 	                    _react2.default.createElement(
 	                        'p',
 	                        { className: 'unit col-2' },
@@ -27195,9 +27195,9 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'flex-wrapper' },
-	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateDay', style: { display: this.state.dateSetter }, placeholder: 'DAY' }),
-	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateMonth', style: { display: this.state.dateSetter }, placeholder: 'MONTH' }),
-	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateYear', style: { display: this.state.dateSetter }, placeholder: 'YEAR' })
+	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateDay', maxLength: '2', style: { display: this.state.dateSetter }, placeholder: 'DAY' }),
+	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateMonth', maxLength: '2', style: { display: this.state.dateSetter }, placeholder: 'MONTH' }),
+	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateYear', maxLength: '4', style: { display: this.state.dateSetter }, placeholder: 'YEAR' })
 	                ),
 	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
 	            );
@@ -27755,15 +27755,15 @@
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'date-container col-7' },
-	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureDay', placeholder: 'DD' }),
-	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureMonth', placeholder: 'MM' }),
-	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureYear', placeholder: 'YYYY' })
+	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureDay', placeholder: 'DD', maxLength: '2' }),
+	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureMonth', placeholder: 'MM', maxLength: '2' }),
+	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureYear', placeholder: 'YYYY', maxLength: '4' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'time-container col-5' },
-	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureHour', placeholder: 'HOUR' }),
-	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureMinutes', placeholder: 'MIN' })
+	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureHour', placeholder: 'HOUR', maxLength: '2' }),
+	                            _react2.default.createElement('input', { className: 'input-number ', type: 'text', ref: 'departureMinutes', placeholder: 'MIN', maxLength: '2' })
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -27791,15 +27791,15 @@
 	                            _react2.default.createElement(
 	                                'div',
 	                                { className: 'date-container col-7' },
-	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalDay', placeholder: 'DD' }),
-	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalMonth', placeholder: 'MM' }),
-	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalYear', placeholder: 'YYYY' })
+	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalDay', placeholder: 'DD', maxLength: '2' }),
+	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalMonth', placeholder: 'MM', maxLength: '2' }),
+	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalYear', placeholder: 'YYYY', maxLength: '4' })
 	                            ),
 	                            _react2.default.createElement(
 	                                'div',
 	                                { className: 'time-container col-5' },
-	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalHour', placeholder: 'HOUR' }),
-	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalMinutes', placeholder: 'MIN' })
+	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalHour', placeholder: 'HOUR', maxLength: '2' }),
+	                                _react2.default.createElement('input', { className: 'input-number', type: 'text', ref: 'arrivalMinutes', placeholder: 'MIN', maxLength: '2' })
 	                            )
 	                        )
 	                    )
