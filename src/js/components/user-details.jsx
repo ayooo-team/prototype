@@ -153,6 +153,11 @@ class UserDetails extends React.Component {
                         <h4 className={ leftColumn }>Nationality</h4>
                         <input className={ rightColumn } type="text" ref="mobileNumber"/>
                     </div>
+
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Mobile Number</h4>
+                        <input className={ rightColumn } type="text" ref="mobileNumber" />
+                    </div>
                 </div>
 
                 <GhostButton onClick={ this.getFormData.bind(this) } buttonText="Submit" />

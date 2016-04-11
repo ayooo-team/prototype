@@ -11,7 +11,9 @@ class Login extends React.Component {
 
         super();
         this.state = { cookie: false };
+        
         this.checkAuthState = this.checkAuthState.bind(this);
+        this.getFormData = this.getFormData.bind(this);
     }
 
     componentDidMount () {

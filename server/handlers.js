@@ -62,8 +62,6 @@ function getData (type, callback) {
 
             // get userID from array or object:
 
-            const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userID);
-
             firebaseApp.once('value', (profileSnapshot) => {
                 const userProfile = profileSnapshot.val();
                 element["userName"] = userProfile["name"];
