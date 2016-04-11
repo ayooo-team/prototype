@@ -54,8 +54,14 @@ class SetDeliveryDate extends React.Component {
 
         if (this.refs.setDeliveryDate.value === "today") {
             console.log("TODAY");
-            const now = Date();
-            deliveryRequest["deliveryDate"] = now.split(" ").splice(1, 3).join(" ");
+            const now = new Date();
+            const date = now.getDate();
+            const month = now.getMonth() <= 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);
+            const year = now.getFullYear();
+            deliveryRequest["deliveryDate"] = date + "/" + month + "/" + year;
+            console.log(deliveryRequest["deliveryDate"]);
+            this.saveDataToParentState(deliveryRequest["deliveryDate"]);
+            window.location="/#/send-post/price"
         } else if (this.refs.setDeliveryDate.value === "future") {
             console.log("FUTURE");
             let day = this.refs.deliveryDateDay.value;
@@ -98,6 +104,8 @@ class SetDeliveryDate extends React.Component {
         } else {
             console.log("ANYTIME");
             deliveryRequest["deliveryDate"]= "anytime";
+            this.saveDataToParentState(deliveryRequest["deliveryDate"]);
+            window.location="/#/send-post/price"
         }
 
     }
