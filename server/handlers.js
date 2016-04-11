@@ -16,11 +16,13 @@ function addDeliveryRequest (request, reply) {
     console.log(data);
     data.userID = request.query.userID;
 
-    const type = request.query.type || "type";
+    console.log(request.query.type);
+
+    const type = request.query.type;
 
     // elasticsearch.deleteIndex("ayooo")
     var result = elasticsearch.addDocument(
-        "type",
+        type,
         data
     ).then( (result) => {
 
