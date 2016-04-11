@@ -24917,6 +24917,7 @@
 
 	        _this.state = { cookie: false };
 
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        _this.getFormData = _this.getFormData.bind(_this);
 	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        return _this;
@@ -24925,6 +24926,12 @@
 	    _createClass(Login, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            this.checkAuthState();
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+
 	            this.checkAuthState();
 	        }
 	    }, {
@@ -24940,6 +24947,8 @@
 	        value: function getFormData(event) {
 
 	            event.preventDefault();
+
+	            console.log(this.refs);
 
 	            var credentials = {
 	                email: this.refs.email.value,
@@ -24992,25 +25001,25 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'form-block' },
+	                    { className: 'login-wrapper' },
 	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label login-width-adjust' },
-	                        'Email:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'email' })
+	                        'div',
+	                        { className: 'form-block' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-12 form-label ' },
+	                            'Email:'
+	                        ),
+	                        _react2.default.createElement('input', { className: 'col-12 form-input', id: 'login-email-input', type: 'text', ref: 'email' }),
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-12 form-label' },
+	                            'Password:'
+	                        ),
+	                        _react2.default.createElement('input', { className: 'col-12 form-input', id: 'login-password-input', type: 'password', ref: 'password' })
+	                    )
 	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Password:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'password', ref: 'password' })
-	                ),
-	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: "LOG IN / SIGN UP" })
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'LOG IN / SIGN UP' })
 	            ) : _react2.default.createElement(
 	                'div',
 	                { className: 'page' },
@@ -25584,21 +25593,21 @@
 	        key: 'render',
 	        value: function render() {
 
-	            var leftColumn = (0, _classnames2.default)("form-block-title", "label", "col-4");
-	            var rightColumn = (0, _classnames2.default)("col-6");
+	            var leftColumn = (0, _classnames2.default)("form-block-title", "label", "col-12");
+	            var rightColumn = (0, _classnames2.default)("col-12");
 
 	            return this.state ? _react2.default.createElement(
 	                'div',
-	                { className: 'page' },
-	                _react2.default.createElement(
-	                    'h3',
-	                    null,
-	                    'It seems we\'re still missing a few bits of information from you... To make a post, please fill in the empty fields.'
-	                ),
+	                { className: 'user-details-page data-collection-page' },
 	                _react2.default.createElement(
 	                    'h1',
 	                    null,
 	                    'USER DETAILS'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'It seems we\'re still missing a few bits of information from you... To make a post, please fill in the empty fields.'
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -25612,57 +25621,61 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'form-block row' },
+	                    { className: 'user-details' },
 	                    _react2.default.createElement(
-	                        'h4',
-	                        { className: leftColumn },
-	                        'Age'
+	                        'div',
+	                        { className: 'form-block row' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            { className: leftColumn },
+	                            'Age'
+	                        ),
+	                        _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'age', defaultValue: this.state.savedAge })
 	                    ),
-	                    _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'age', defaultValue: this.state.savedAge })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block row' },
 	                    _react2.default.createElement(
-	                        'h4',
-	                        { className: leftColumn },
-	                        'Profession'
+	                        'div',
+	                        { className: 'form-block row' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            { className: leftColumn },
+	                            'Profession'
+	                        ),
+	                        _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'profession', defaultValue: this.state.savedProfession })
 	                    ),
-	                    _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'profession', defaultValue: this.state.savedProfession })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block row' },
 	                    _react2.default.createElement(
-	                        'h4',
-	                        { className: leftColumn },
-	                        'Nationality'
+	                        'div',
+	                        { className: 'form-block row' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            { className: leftColumn },
+	                            'Nationality'
+	                        ),
+	                        _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'nationality', defaultValue: this.state.savedNationality })
 	                    ),
-	                    _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'nationality', defaultValue: this.state.savedNationality })
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block row' },
 	                    _react2.default.createElement(
-	                        'h4',
-	                        { className: leftColumn },
-	                        'Mobile Number'
-	                    ),
-	                    _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'mobileNumber', defaultValue: this.state.savedMobileNumber })
+	                        'div',
+	                        { className: 'form-block row' },
+	                        _react2.default.createElement(
+	                            'h4',
+	                            { className: leftColumn },
+	                            'Mobile Number'
+	                        ),
+	                        _react2.default.createElement('input', { className: rightColumn, type: 'text', ref: 'mobileNumber', defaultValue: this.state.savedMobileNumber })
+	                    )
 	                ),
 	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData.bind(this), buttonText: 'Submit' })
 	            ) : _react2.default.createElement(
 	                'div',
-	                { className: 'page data-collection-page' },
-	                _react2.default.createElement(
-	                    'h3',
-	                    null,
-	                    'To ensure that our community is trustworthy, we record information of every member\'s identity. To make a post, please tell us who you are.'
-	                ),
+	                { className: 'user-details-page data-collection-page' },
 	                _react2.default.createElement(
 	                    'h1',
 	                    null,
 	                    'USER DETAILS'
+	                ),
+	                _react2.default.createElement(
+	                    'p',
+	                    null,
+	                    'To ensure that our community is trustworthy, we record information of every member\'s identity. To make a post, please tell us who you are.'
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -25869,6 +25882,8 @@
 
 	            event.preventDefault();
 
+	            console.log(this.refs);
+
 	            var credentials = {
 	                email: this.refs.email.value,
 	                password: this.refs.password.value
@@ -25895,6 +25910,8 @@
 	        key: 'render',
 	        value: function render() {
 
+	            console.log(this.state);
+
 	            return this.state && this.state.pageReady ? _react2.default.createElement(
 	                'div',
 	                { className: 'page' },
@@ -25912,38 +25929,38 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'download-button-wrapper flex-item' },
-	                    _react2.default.createElement(_downloadButton2.default, { query: '?filename=senders', filename: 'senders.csv', buttonText: 'Sender requests' }),
-	                    _react2.default.createElement(_downloadButton2.default, { query: '?filename=travellers', filename: 'travellers.csv', buttonText: 'Traveller requests' })
+	                    _react2.default.createElement(_downloadButton2.default, { query: '?filename=senders&type=sender', filename: 'senders.csv', buttonText: 'Sender requests' }),
+	                    _react2.default.createElement(_downloadButton2.default, { query: '?filename=travellers&type=traveller', filename: 'travellers.csv', buttonText: 'Traveller requests' })
 	                )
 	            ) : this.state && this.state.userLoggedIn ? _react2.default.createElement(
 	                'div',
 	                { className: 'page form' },
 	                _react2.default.createElement(
 	                    'h1',
-	                    { className: 'login-title' },
-	                    'Log In:'
+	                    { className: 'admin-login' },
+	                    'Log in'
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'form-block' },
+	                    { className: 'login-wrapper' },
 	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label login-width-adjust' },
-	                        'Email:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'email' })
+	                        'div',
+	                        { className: 'form-block' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-12 form-label ' },
+	                            'Email:'
+	                        ),
+	                        _react2.default.createElement('input', { className: 'col-12 form-input', id: 'login-email-input', type: 'text', ref: 'email' }),
+	                        _react2.default.createElement(
+	                            'label',
+	                            { className: 'col-12 form-label' },
+	                            'Password:'
+	                        ),
+	                        _react2.default.createElement('input', { className: 'col-12 form-input', id: 'login-password-input', type: 'password', ref: 'password' })
+	                    )
 	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-block' },
-	                    _react2.default.createElement(
-	                        'label',
-	                        { className: 'form-label' },
-	                        'Password:'
-	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'password', ref: 'password' })
-	                ),
-	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: "LOG IN" })
+	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'LOG IN' })
 	            ) : _react2.default.createElement(
 	                'div',
 	                { className: 'page' },
@@ -26263,8 +26280,8 @@
 	                            'Someone Else'
 	                        )
 	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'pickUpElseName', style: { display: this.state.pickUpIdentity }, placeholder: 'Pickup person\'s name' }),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'pickUpElseEmail', style: { display: this.state.pickUpIdentity }, placeholder: 'Pickup person\'s email' })
+	                    _react2.default.createElement('input', { className: 'form-input col-6', type: 'text', ref: 'pickUpElseName', style: { display: this.state.pickUpIdentity }, placeholder: 'Pickup person\'s name' }),
+	                    _react2.default.createElement('input', { className: 'form-input col-6', type: 'text', ref: 'pickUpElseEmail', style: { display: this.state.pickUpIdentity }, placeholder: 'Pickup person\'s email' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -26299,8 +26316,8 @@
 	                            'Someone Else'
 	                        )
 	                    ),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'recipientElseName', style: { display: this.state.recipientIdentity }, placeholder: 'Recipient\'s name' }),
-	                    _react2.default.createElement('input', { className: 'form-input', type: 'text', ref: 'recipientElseEmail', style: { display: this.state.recipientIdentity }, placeholder: 'Recipient\'s email' })
+	                    _react2.default.createElement('input', { className: 'form-input col-6', type: 'text', ref: 'recipientElseName', style: { display: this.state.recipientIdentity }, placeholder: 'Recipient\'s name' }),
+	                    _react2.default.createElement('input', { className: 'form-input col-6', type: 'text', ref: 'recipientElseEmail', style: { display: this.state.recipientIdentity }, placeholder: 'Recipient\'s email' })
 	                ),
 	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
 	            );
@@ -27074,6 +27091,11 @@
 	        _this.state = {
 	            dateSetter: "none"
 	        };
+
+	        Number.prototype.inRange = function (lower, upper) {
+
+	            return this >= lower && this <= upper;
+	        };
 	        return _this;
 	    }
 
@@ -27107,10 +27129,9 @@
 	            var deliveryRequest = {};
 
 	            if (this.refs.setDeliveryDate.value === "today") {
-	                console.log("TODAY");
 	                var now = new Date();
 	                var date = now.getDate();
-	                var month = now.getMonth() <= 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;
+	                var month = now.getMonth() < 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;
 	                var year = now.getFullYear();
 	                deliveryRequest["deliveryDate"] = date + "/" + month + "/" + year;
 	                console.log(deliveryRequest["deliveryDate"]);
@@ -27128,12 +27149,12 @@
 	                    var _day = parseFloat(this.refs.deliveryDateDay.value);
 	                    var _month2 = parseFloat(this.refs.deliveryDateMonth.value);
 
-	                    if (Math.floor(_day / 32) !== 0) {
+	                    if (!_day.inRange(1, 31)) {
 
 	                        alert("Please input a valid date in");
 	                    } else {
 
-	                        if (Math.floor(_month2 / 13) !== 0) {
+	                        if (!_month2.inRange(1, 12)) {
 
 	                            alert("Please input a valid month in number form, e.g. for \"May\", input 5");
 	                        } else {
@@ -27209,9 +27230,9 @@
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'flex-wrapper' },
-	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateDay', maxLength: '2', style: { display: this.state.dateSetter }, placeholder: 'DAY' }),
-	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateMonth', maxLength: '2', style: { display: this.state.dateSetter }, placeholder: 'MONTH' }),
-	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateYear', maxLength: '4', style: { display: this.state.dateSetter }, placeholder: 'YEAR' })
+	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateDay', maxLength: '2', style: { display: this.state.dateSetter }, placeholder: 'DD' }),
+	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateMonth', maxLength: '2', style: { display: this.state.dateSetter }, placeholder: 'MM' }),
+	                    _react2.default.createElement('input', { className: 'col-4 form-input flex-item', type: 'text', ref: 'deliveryDateYear', maxLength: '4', style: { display: this.state.dateSetter }, placeholder: 'YYYY' })
 	                ),
 	                _react2.default.createElement(_ghostButton2.default, { onClick: this.getFormData, buttonText: 'NEXT' })
 	            );
@@ -27357,7 +27378,7 @@
 	                    'div',
 	                    { className: 'form-block' },
 	                    _react2.default.createElement(
-	                        'label',
+	                        'h3',
 	                        { className: 'form-block-title' },
 	                        'FROM:'
 	                    ),
@@ -27381,7 +27402,7 @@
 	                    'div',
 	                    { className: 'form-block' },
 	                    _react2.default.createElement(
-	                        'label',
+	                        'h3',
 	                        { className: 'form-block-title' },
 	                        'TO:'
 	                    ),
@@ -27405,7 +27426,7 @@
 	                    'div',
 	                    { className: 'form-block' },
 	                    _react2.default.createElement(
-	                        'label',
+	                        'h3',
 	                        { className: 'form-block-title' },
 	                        'PARCEL SIZE:'
 	                    ),
@@ -27429,7 +27450,7 @@
 	                    'div',
 	                    { className: 'form-block' },
 	                    _react2.default.createElement(
-	                        'label',
+	                        'h3',
 	                        { className: 'form-block-title' },
 	                        'ASKING PRICE:'
 	                    ),
@@ -27443,7 +27464,7 @@
 	                    'div',
 	                    { className: 'form-block' },
 	                    _react2.default.createElement(
-	                        'label',
+	                        'h3',
 	                        { className: 'form-block-title' },
 	                        'REQUESTED DATE (DD/MM/YYYY)'
 	                    ),
@@ -27709,10 +27730,10 @@
 
 	                    if (departureMinutes.inRange(0, 59) && arrivalMinutes.inRange(0, 59)) {
 
-	                        var departureHour = departureHour <= 10 ? "0" + departureHour.toString() : departureHour.toString();
-	                        var departureMinutes = departureMinutes <= 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
-	                        var arrivalHour = arrivalHour <= 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
-	                        var arrivalMinutes = arrivalMinutes <= 10 ? "0" + arrivalMinutes.toString() : arrivalMinutes.toString();
+	                        var departureHour = departureHour < 10 ? "0" + departureHour.toString() : departureHour.toString();
+	                        var departureMinutes = departureMinutes < 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
+	                        var arrivalHour = arrivalHour < 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
+	                        var arrivalMinutes = arrivalMinutes < 10 ? "0" + arrivalMinutes.toString() : arrivalMinutes.toString();
 
 	                        data["departureTime"] = departureHour + ":" + departureMinutes;
 	                        data["arrivalTime"] = arrivalHour + ":" + arrivalMinutes;
@@ -28095,7 +28116,7 @@
 
 
 	// module
-	exports.push([module.id, "h1, h2, h3, h4 {\n  margin: 0;\n  font-weight: normal; }\n\nh1, h2, h3, h4, p {\n  text-align: center; }\n\np {\n  font-size: 1em; }\n\n* {\n  font-family: 'Roboto', sans-serif;\n  box-sizing: border-box; }\n\n.display-none {\n  display: none; }\n\n.line-break {\n  border: 0;\n  height: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  border-bottom: 1px solid rgba(255, 255, 255, 0.3);\n  width: 100%; }\n\nhtml, body {\n  padding: 0;\n  margin: 0; }\n\ninput:focus, textarea:focus {\n  outline: none; }\n\nbutton {\n  margin: 0;\n  background-color: transparent; }\n  button:active {\n    background-color: transparent; }\n\n.col-1 {\n  width: 8.33%; }\n\n.col-2 {\n  width: 16.66%; }\n\n.col-3 {\n  width: 25%; }\n\n.col-4 {\n  width: 33.33%; }\n\n.col-5 {\n  width: 41.66%; }\n\n.col-6 {\n  width: 50%; }\n\n.col-7 {\n  width: 58.33%; }\n\n.col-8 {\n  width: 66.66%; }\n\n.col-9 {\n  width: 75%; }\n\n.col-10 {\n  width: 83.33%; }\n\n.col-11 {\n  width: 91.66%; }\n\n.col-12 {\n  width: 100%; }\n\n[class*=\"col-\"] {\n  float: left; }\n\n.row:after {\n  content: \"\";\n  clear: both;\n  display: block; }\n\n.page {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: column;\n  height: 100%; }\n  .page .page-header {\n    font-size: 1.3em;\n    padding: 2vh 0;\n    margin: 0; }\n\n.left {\n  text-align: left; }\n\n.flex-column-wrapper {\n  -webkit-flex-direction: column;\n  flex-direction: column;\n  -webkit-align-items: flex-start;\n  align-items: flex-start; }\n\n.flex-container {\n  display: flex; }\n\n.flex-item {\n  flex: 1; }\n\n.app-container {\n  width: 100vw;\n  height: 100vh; }\n\n.ghost-button {\n  display: block;\n  text-align: center;\n  font-size: 1.2em;\n  width: 90vw;\n  max-width: 450px;\n  height: 8vh;\n  margin: 0.5em auto;\n  border-color: #b1e5b1;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  cursor: pointer;\n  color: #65b465; }\n  .ghost-button a {\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n    margin: auto 0; }\n  .ghost-button span {\n    height: 8vh;\n    line-height: 8vh; }\n  .ghost-button a:link, .ghost-button a:visited {\n    text-decoration: none;\n    color: inherit; }\n  .ghost-button:focus {\n    outline: 0; }\n\n.form {\n  padding: 5vw;\n  height: 100%; }\n\n.form-block {\n  min-height: 10vh;\n  position: relative; }\n  .form-block .form-block-title {\n    text-align: left;\n    margin: 1.5vh 0; }\n  .form-block .form-input-data {\n    margin: 0;\n    font-size: 5vmin; }\n  .form-block input[type=text] {\n    height: 6vh;\n    font-size: 5vmin;\n    display: block;\n    margin: auto; }\n  .form-block input[type=text][class*=\"col-\"] {\n    margin: 3vmin 0; }\n\n.label {\n  display: block;\n  text-align: left;\n  padding-left: 2vw;\n  font-size: 7vmin; }\n\n.weight-input-container .input-number {\n  font-size: 1em; }\n\n.input-number {\n  width: 15vw;\n  height: 7vw;\n  font-size: 0.7em;\n  display: inline !important; }\n\n.unit {\n  font-size: 1.1em;\n  text-align: left;\n  margin-top: 3vmin;\n  padding-left: 0.5vmin; }\n\n/*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/\ninput::-webkit-outer-spin-button,\ninput::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0; }\n\n.login-title {\n  font-weight: lighter;\n  margin: 40px; }\n\n.login-width-adjust {\n  margin: 1em 2em; }\n\n.radio-container {\n  width: 100%; }\n  .radio-container .radio-row {\n    padding: 2vh 1vh; }\n    .radio-container .radio-row.selected {\n      background-color: #b1e5b1; }\n    .radio-container .radio-row:hover {\n      cursor: pointer; }\n    .radio-container .radio-row .radio-image {\n      padding-left: 3vw; }\n    .radio-container .radio-row .radio-block-title, .radio-container .radio-row .radio-block-text {\n      text-align: left;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-block-title {\n      font-weight: 600;\n      margin: 0; }\n    .radio-container .radio-row p {\n      margin: 0;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-selected-tick {\n      width: 4vh;\n      height: 4vh;\n      margin-top: 2vh; }\n\n.radio-block {\n  margin: 3vh 2vh;\n  width: 90vw; }\n  .radio-block .description {\n    flex-grow: 3;\n    margin: auto; }\n    .radio-block .description * {\n      text-align: left; }\n\n.set-size {\n  font-style: italic;\n  border-color: #b1e5b1;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  padding: 3px;\n  color: #65b465; }\n\n.dashboard-container {\n  width: 100vw;\n  height: 100vh;\n  margin: auto; }\n  .dashboard-container h1, .dashboard-container h4 {\n    font-weight: lighter; }\n  .dashboard-container h4 {\n    letter-spacing: 0.1em;\n    padding-left: 0.1em; }\n  .dashboard-container h1 {\n    letter-spacing: 0.2em;\n    padding-left: 0.2em;\n    font-size: 3.5em; }\n\n.logo {\n  display: block;\n  height: 25vh;\n  margin: 0 auto;\n  padding-top: 6vh;\n  -webkit-filter: drop-shadow(0.4em 0.4em 0.4em #555);\n  filter: drop-shadow(0.4em 0.4em 0.4em #555); }\n\n.user-details {\n  margin: 5vw; }\n\n.input.col-6 {\n  width: 60%; }\n\n.download-button-wrapper {\n  margin-bottom: 10vh; }\n\n.admin-header {\n  margin-top: 5vh; }\n\n.journey-form {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: column;\n  height: 90%;\n  padding: 5vw; }\n\n.page-header.price {\n  font-size: 8vmin; }\n\n.price-input {\n  height: 9vh;\n  font-size: 10vmin;\n  margin: 1.5vmin 0 1vmin 0; }\n\n.price-area {\n  padding: 5vmin; }\n  .price-area .input-title {\n    font-size: 6vmin; }\n  .price-area span {\n    font-size: 8vmin;\n    text-align: right;\n    padding: 0 2vw 0 0;\n    margin: 5vmin 0 1vmin 0; }\n\n.page-header.price {\n  font-size: 7vmin; }\n\n.price-area {\n  padding: 5vmin; }\n  .price-area .input-title {\n    font-size: 6vmin; }\n  .price-area span {\n    font-size: 7vmin;\n    text-align: right;\n    padding: 0 2vw 0 0; }\n\n.radio-container {\n  width: 100%; }\n  .radio-container .radio-row {\n    padding: 2vh 1vh; }\n    .radio-container .radio-row.selected {\n      background-color: #b1e5b1; }\n    .radio-container .radio-row:hover {\n      cursor: pointer; }\n    .radio-container .radio-row .radio-image {\n      padding-left: 3vw; }\n    .radio-container .radio-row .radio-block-title, .radio-container .radio-row .radio-block-text {\n      text-align: left;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-block-title {\n      font-weight: 600;\n      margin: 0; }\n    .radio-container .radio-row p {\n      margin: 0;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-selected-tick {\n      width: 4vh;\n      height: 4vh;\n      margin-top: 2vh; }\n\n.radio-block {\n  margin: 3vh 2vh;\n  width: 90vw; }\n  .radio-block .description {\n    flex-grow: 3;\n    margin: auto; }\n    .radio-block .description * {\n      text-align: left; }\n\n.set-size {\n  font-style: italic;\n  border-color: #b1e5b1;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  padding: 3px;\n  color: #65b465; }\n\n.set-delivery-date-container {\n  padding: 5vmin; }\n", ""]);
+	exports.push([module.id, "h1, h2, h3, h4 {\n  margin: 0;\n  font-weight: normal; }\n\nh1, h2, h3, h4, p {\n  text-align: center; }\n\np {\n  font-size: 1em; }\n\n* {\n  font-family: 'Roboto', sans-serif;\n  box-sizing: border-box; }\n\n.display-none {\n  display: none; }\n\n.line-break {\n  border: 0;\n  height: 0;\n  border-top: 1px solid rgba(0, 0, 0, 0.1);\n  border-bottom: 1px solid rgba(255, 255, 255, 0.3);\n  width: 100%; }\n\nhtml, body {\n  padding: 0;\n  margin: 0; }\n\ninput:focus, textarea:focus {\n  outline: none; }\n\nbutton {\n  margin: 0;\n  background-color: transparent; }\n  button:active {\n    background-color: transparent; }\n\n.col-1 {\n  width: 8.33%; }\n\n.col-2 {\n  width: 16.66%; }\n\n.col-3 {\n  width: 25%; }\n\n.col-4 {\n  width: 33.33%; }\n\n.col-5 {\n  width: 41.66%; }\n\n.col-6 {\n  width: 50%; }\n\n.col-7 {\n  width: 58.33%; }\n\n.col-8 {\n  width: 66.66%; }\n\n.col-9 {\n  width: 75%; }\n\n.col-10 {\n  width: 83.33%; }\n\n.col-11 {\n  width: 91.66%; }\n\n.col-12 {\n  width: 100%; }\n\n[class*=\"col-\"] {\n  float: left; }\n\n.row:after {\n  content: \"\";\n  clear: both;\n  display: block; }\n\n.page {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: column;\n  height: 100%; }\n  .page .page-header {\n    font-size: 1.3em;\n    padding: 2vh 0;\n    margin: 0; }\n\n.left {\n  text-align: left; }\n\n.flex-column-wrapper {\n  -webkit-flex-direction: column;\n  flex-direction: column;\n  -webkit-align-items: flex-start;\n  align-items: flex-start; }\n\n.flex-container {\n  display: flex; }\n\n.flex-item {\n  flex: 1; }\n\n.app-container {\n  width: 100vw;\n  height: 100vh; }\n\n.ghost-button {\n  display: block;\n  text-align: center;\n  font-size: 1.2em;\n  width: 90vw;\n  max-width: 450px;\n  height: 8vh;\n  margin: 0.5em auto;\n  border-color: #b1e5b1;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  cursor: pointer;\n  color: #65b465; }\n  .ghost-button a {\n    display: inline-block;\n    width: 100%;\n    height: 100%;\n    margin: auto 0; }\n  .ghost-button span {\n    height: 8vh;\n    line-height: 8vh; }\n  .ghost-button a:link, .ghost-button a:visited {\n    text-decoration: none;\n    color: inherit; }\n  .ghost-button:focus {\n    outline: 0; }\n\n.form {\n  padding: 5vw;\n  height: 100%; }\n\n.form-block {\n  min-height: 10vh;\n  position: relative; }\n  .form-block .form-block-title {\n    text-align: left;\n    margin: 1.5vh 0; }\n  .form-block .form-input-data {\n    margin: 0;\n    font-size: 5vmin; }\n  .form-block input[type=text] {\n    height: 6vh;\n    font-size: 4.5vmin;\n    display: block;\n    margin: auto; }\n  .form-block input[type=text][class*=\"col-\"] {\n    margin: 3vmin 0; }\n\n.label {\n  display: block;\n  text-align: left;\n  padding-left: 2vw;\n  font-size: 7vmin; }\n\n.weight-input-container .input-number {\n  font-size: 1em; }\n\n.input-number {\n  width: 15vw;\n  height: 7vw;\n  font-size: 0.7em;\n  display: inline !important; }\n\n.unit {\n  font-size: 1.1em;\n  text-align: left;\n  margin-top: 3vmin;\n  padding-left: 0.5vmin; }\n\n/*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/\ninput::-webkit-outer-spin-button,\ninput::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0; }\n\n.login-title {\n  font-weight: lighter;\n  margin: 3vmin; }\n\n#login-email-input, #login-password-input {\n  height: 7vh;\n  font-size: 5vmin;\n  display: block;\n  margin: 3vmin 0 7vmin 0; }\n\n.login-wrapper .form-block .form-label {\n  font-size: 7vmin;\n  font-weight: lighter; }\n\n.radio-container {\n  width: 100%; }\n  .radio-container .radio-row {\n    padding: 2vh 1vh; }\n    .radio-container .radio-row.selected {\n      background-color: #b1e5b1; }\n    .radio-container .radio-row:hover {\n      cursor: pointer; }\n    .radio-container .radio-row .radio-image {\n      padding-left: 3vw; }\n    .radio-container .radio-row .radio-block-title, .radio-container .radio-row .radio-block-text {\n      text-align: left;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-block-title {\n      font-weight: 600;\n      margin: 0; }\n    .radio-container .radio-row p {\n      margin: 0;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-selected-tick {\n      width: 4vh;\n      height: 4vh;\n      margin-top: 2vh; }\n\n.radio-block {\n  margin: 3vh 2vh;\n  width: 90vw; }\n  .radio-block .description {\n    flex-grow: 3;\n    margin: auto; }\n    .radio-block .description * {\n      text-align: left; }\n\n.set-size {\n  font-style: italic;\n  border-color: #b1e5b1;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  padding: 3px;\n  color: #65b465; }\n\n.dashboard-container {\n  width: 100vw;\n  height: 100vh;\n  margin: auto; }\n  .dashboard-container h1, .dashboard-container h4 {\n    font-weight: lighter; }\n  .dashboard-container h4 {\n    letter-spacing: 0.1em;\n    padding-left: 0.1em; }\n  .dashboard-container h1 {\n    letter-spacing: 0.2em;\n    padding-left: 0.2em;\n    font-size: 3.5em; }\n\n.logo {\n  display: block;\n  height: 25vh;\n  margin: 0 auto;\n  padding-top: 6vh;\n  -webkit-filter: drop-shadow(0.4em 0.4em 0.4em #555);\n  filter: drop-shadow(0.4em 0.4em 0.4em #555); }\n\n.user-details-page {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: column;\n  padding: 5vw; }\n\n.user-details .form-block > h4 {\n  font-size: 4vmin; }\n\n.input.col-6 {\n  width: 60%; }\n\n.download-button-wrapper {\n  margin-bottom: 10vh; }\n\n.admin-header {\n  margin-top: 5vh; }\n\n.admin-login {\n  font-weight: lighter; }\n\n.journey-form {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: column;\n  height: 90%;\n  padding: 5vw; }\n\n.page-header.price {\n  font-size: 8vmin; }\n\n.price-input {\n  height: 9vh;\n  font-size: 10vmin;\n  margin: 1.5vmin 0 1vmin 0; }\n\n.price-area {\n  padding: 5vmin; }\n  .price-area .input-title {\n    font-size: 6vmin; }\n  .price-area span {\n    font-size: 8vmin;\n    text-align: right;\n    padding: 0 2vw 0 0;\n    margin: 5vmin 0 1vmin 0; }\n\n.page-header.price {\n  font-size: 7vmin; }\n\n.price-area {\n  padding: 5vmin; }\n  .price-area .input-title {\n    font-size: 6vmin; }\n  .price-area span {\n    font-size: 7vmin;\n    text-align: right;\n    padding: 0 2vw 0 0; }\n\n.radio-container {\n  width: 100%; }\n  .radio-container .radio-row {\n    padding: 2vh 1vh; }\n    .radio-container .radio-row.selected {\n      background-color: #b1e5b1; }\n    .radio-container .radio-row:hover {\n      cursor: pointer; }\n    .radio-container .radio-row .radio-image {\n      padding-left: 3vw; }\n    .radio-container .radio-row .radio-block-title, .radio-container .radio-row .radio-block-text {\n      text-align: left;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-block-title {\n      font-weight: 600;\n      margin: 0; }\n    .radio-container .radio-row p {\n      margin: 0;\n      padding: 1vw; }\n    .radio-container .radio-row .radio-selected-tick {\n      width: 4vh;\n      height: 4vh;\n      margin-top: 2vh; }\n\n.radio-block {\n  margin: 3vh 2vh;\n  width: 90vw; }\n  .radio-block .description {\n    flex-grow: 3;\n    margin: auto; }\n    .radio-block .description * {\n      text-align: left; }\n\n.set-size {\n  font-style: italic;\n  border-color: #b1e5b1;\n  border-style: solid;\n  border-width: thin;\n  border-radius: 6px;\n  padding: 3px;\n  color: #65b465; }\n\n.set-delivery-date-container {\n  padding: 5vmin; }\n\n.user-details-page {\n  display: flex;\n  justify-content: space-around;\n  flex-direction: column;\n  padding: 5vw; }\n\n.user-details .form-block > h4 {\n  font-size: 4vmin; }\n\n.input.col-6 {\n  width: 60%; }\n", ""]);
 
 	// exports
 
