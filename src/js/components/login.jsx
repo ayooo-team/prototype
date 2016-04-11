@@ -10,16 +10,22 @@ class Login extends React.Component {
     constructor (props) {
 
         super();
-        this.checkAuthState();
+        this.state = { cookie: false };
+        this.checkAuthState = this.checkAuthState.bind(this);
+    }
 
-        this.getFormData = this.getFormData.bind(this);
+    componentDidMount () {
+
+        this.checkAuthState();
     }
 
     checkAuthState () {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         const isUserAuthenticated = firebaseApp.getAuth();
-        isUserAuthenticated ? window.location = "/#dashboard" : console.log('user not logged in');
+        isUserAuthenticated ?
+            window.location = "/#dashboard" :
+            this.setState({ cookie: true });
     }
 
     getFormData (event) {
@@ -51,7 +57,7 @@ class Login extends React.Component {
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.createUser(credentials, (error, userData) => {
             error ? alert(error) : this.createUserInstance(credentials, userData.uid), this.logUserIn(credentials);
-      });
+        });
     }
 
     createUserInstance (credentials, userId) {
