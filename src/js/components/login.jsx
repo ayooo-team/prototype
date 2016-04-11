@@ -35,6 +35,8 @@ class Login extends React.Component {
 
         event.preventDefault();
 
+        console.log(this.refs);
+
         const credentials = {
             email: this.refs.email.value,
             password: this.refs.password.value
@@ -76,8 +78,18 @@ class Login extends React.Component {
         return this.state && this.state.cookie ? (
             <div className="page form">
                 <h1 className="login-title">Log In or Sign Up</h1>
-                <LoginFields />
-                <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN / SIGN UP" } />
+                    <div className="login-wrapper">
+
+                        <div className="form-block">
+                            <label className="col-12 form-label ">Email:</label>
+                            <input className="col-12 form-input" id="login-email-input" type="text" ref="email" />
+
+                            <label className="col-12 form-label">Password:</label>
+                            <input className="col-12 form-input" id="login-password-input" type="password" ref="password" />
+                        </div>
+                    </div>
+        
+                <GhostButton onClick={ this.getFormData } buttonText="LOG IN / SIGN UP" />
             </div>
         ) : (
             <div className="page">

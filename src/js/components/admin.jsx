@@ -2,8 +2,8 @@
 
 import React from 'react';
 import DownloadButton from './download-button.jsx';
-import LoginFields from './login-fields.jsx';
 import GhostButton from './ghost-button.jsx';
+
 
 class Admin extends React.Component {
 
@@ -53,6 +53,8 @@ class Admin extends React.Component {
 
         event.preventDefault();
 
+        console.log(this.refs);
+
         const credentials = {
             email: this.refs.email.value,
             password: this.refs.password.value
@@ -76,6 +78,8 @@ class Admin extends React.Component {
 
     render () {
 
+        console.log(this.state);
+
         return this.state && this.state.pageReady ? (
             <div className="page">
 
@@ -93,8 +97,18 @@ class Admin extends React.Component {
 
             <div className="page form">
                 <h1 className="admin-login">Log in</h1>
-                <LoginFields />
-                <GhostButton onClick={ this.getFormData } buttonText={ "LOG IN" } />
+                    <div className="login-wrapper">
+
+                        <div className="form-block">
+                            <label className="col-12 form-label ">Email:</label>
+                            <input className="col-12 form-input" id="login-email-input" type="text" ref="email" />
+
+                            <label className="col-12 form-label">Password:</label>
+                            <input className="col-12 form-input" id="login-password-input" type="password" ref="password" />
+                        </div>
+                    </div>
+
+                <GhostButton onClick={ this.getFormData } buttonText="LOG IN" />
             </div>
 
         ) : (
