@@ -24,6 +24,11 @@ class SetDeliveryDate extends React.Component {
 
         this.state = {
             dateSetter: "none",
+        };
+
+        Number.prototype.inRange = function (lower, upper) {
+
+            return this >= lower && this <= upper;
         }
     }
 
@@ -53,9 +58,16 @@ class SetDeliveryDate extends React.Component {
         let deliveryRequest = {};
 
         if (this.refs.setDeliveryDate.value === "today") {
-            console.log("TODAY");
-            const now = Date();
-            deliveryRequest["deliveryDate"] = now.split(" ").splice(1, 3).join(" ");
+
+            const now = new Date();
+            const date = now.getDate();
+            const month = now.getMonth() <= 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);
+            const year = now.getFullYear();
+            deliveryRequest["deliveryDate"] = date + "/" + month + "/" + year;
+            console.log(deliveryRequest["deliveryDate"]);
+            this.saveDataToParentState(deliveryRequest["deliveryDate"]);
+            window.location = "/#/send-post/price";
+
         } else if (this.refs.setDeliveryDate.value === "future") {
             console.log("FUTURE");
             let day = this.refs.deliveryDateDay.value;
@@ -68,21 +80,21 @@ class SetDeliveryDate extends React.Component {
                 let day = parseFloat(this.refs.deliveryDateDay.value);
                 let month = parseFloat(this.refs.deliveryDateMonth.value);
 
-                if ( Math.floor(day/31) !== (0) ) {
+                if ( !day.inRange(1, 31) ) {
 
                     alert("Please input a valid date in");
                 } else {
 
-                    if ( Math.floor(month/12) !== (0) ) {
+                    if ( !month.inRange(1, 12) ) {
 
                         alert("Please input a valid month in number form, e.g. for \"May\", input 5");
                     } else {
 
                         if ( year.match(fourDigits) ) {
 
-                            deliveryRequest["deliveryDate"]= deliveryDateDay + "/" + deliveryDateMonth + "/" + deliveryDateYear;
+                            deliveryRequest["deliveryDate"]= day + "/" + month + "/" + year;
 
-                            this.checkInput(data, (result) => {
+                            this.checkInput(deliveryRequest, (result) => {
 
                                 result ? (this.saveDataToParentState(deliveryRequest["deliveryDate"]), window.location="/#/send-post/price") : alert("Please complete all fields.");
                             });
@@ -98,6 +110,8 @@ class SetDeliveryDate extends React.Component {
         } else {
             console.log("ANYTIME");
             deliveryRequest["deliveryDate"]= "anytime";
+            this.saveDataToParentState(deliveryRequest["deliveryDate"]);
+            window.location="/#/send-post/price"
         }
 
     }
@@ -128,9 +142,9 @@ class SetDeliveryDate extends React.Component {
                     </select>
 
                     <div className="flex-wrapper">
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateDay" style={{ display: this.state.dateSetter }} placeholder="DAY" />
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateMonth" style={{ display: this.state.dateSetter }} placeholder="MONTH" />
-                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" style={{ display: this.state.dateSetter }} placeholder="YEAR" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateDay" maxLength="2" style={{ display: this.state.dateSetter }} placeholder="DAY" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateMonth" maxLength="2" style={{ display: this.state.dateSetter }} placeholder="MONTH" />
+                        <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" maxLength="4" style={{ display: this.state.dateSetter }} placeholder="YEAR" />
                     </div>
 
                     <GhostButton onClick={ this.getFormData } buttonText="NEXT" />

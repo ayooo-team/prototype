@@ -44,10 +44,10 @@ class Login extends React.Component {
 
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.authWithPassword(credentials, (error, authData) => {
-                error ?
+            error ?
                 ( error.toString() === "Error: The specified user does not exist." ?
-                this.signUserUp(credentials) : alert(error)) :
-                window.location = "/#dashboard";
+                    this.signUserUp(credentials) : alert(error)) :
+                    window.location = "/#dashboard";
         });
     }
 
