@@ -133,10 +133,10 @@ class Journey extends React.Component {
 
                 if ( departureMinutes.inRange(0, 59) && arrivalMinutes.inRange(0, 59) ) {
 
-                    var departureHour = departureHour <= 10 ? "0" + departureHour.toString() : departureHour.toString();
-                    var departureMinutes = departureMinutes <= 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
-                    var arrivalHour = arrivalHour <= 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
-                    var arrivalMinutes = arrivalMinutes <= 10? "0" + arrivalMinutes.toString() : arrivalMinutes.toString();
+                    var departureHour = departureHour < 10 ? "0" + departureHour.toString() : departureHour.toString();
+                    var departureMinutes = departureMinutes < 10 ? "0" + departureMinutes.toString() : departureMinutes.toString();
+                    var arrivalHour = arrivalHour < 10 ? "0" + arrivalHour.toString() : arrivalHour.toString();
+                    var arrivalMinutes = arrivalMinutes < 10? "0" + arrivalMinutes.toString() : arrivalMinutes.toString();
 
                     data["departureTime"] = departureHour + ":" + departureMinutes;
                     data["arrivalTime"] = arrivalHour + ":" + arrivalMinutes;
