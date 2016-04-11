@@ -61,7 +61,7 @@ class SetDeliveryDate extends React.Component {
 
             const now = new Date();
             const date = now.getDate();
-            const month = now.getMonth() <= 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);
+            const month = now.getMonth() < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);
             const year = now.getFullYear();
             deliveryRequest["deliveryDate"] = date + "/" + month + "/" + year;
             console.log(deliveryRequest["deliveryDate"]);
