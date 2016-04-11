@@ -151,7 +151,12 @@ class UserDetails extends React.Component {
 
                     <div className="form-block row">
                         <h4 className={ leftColumn }>Nationality</h4>
-                        <input className={ rightColumn } type="text" ref="mobileNumber"/>
+                        <input className={ rightColumn } type="text" ref="nationality" />
+                    </div>
+
+                    <div className="form-block row">
+                        <h4 className={ leftColumn }>Mobile Number</h4>
+                        <input className={ rightColumn } type="text" ref="mobileNumber" />
                     </div>
                 </div>
 
