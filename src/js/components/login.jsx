@@ -3,7 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Firebase from 'firebase';
-import LoginFields from './login-fields.jsx';
 import GhostButton from './ghost-button.jsx';
 
 class Login extends React.Component {
@@ -88,7 +87,7 @@ class Login extends React.Component {
                             <input className="col-12 form-input" id="login-password-input" type="password" ref="password" />
                         </div>
                     </div>
-        
+
                 <GhostButton onClick={ this.getFormData } buttonText="LOG IN / SIGN UP" />
             </div>
         ) : (
