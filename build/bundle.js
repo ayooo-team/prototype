@@ -27427,13 +27427,11 @@
 	                method: 'POST',
 	                url: 'delivery?type=sender&userID=' + userID,
 	                data: totalData,
-	                success: function success(data) {
-
-	                    alert("Thank you! AYOOO will be in touch soon!");
-
-	                    window.location = "/#/dashboard";
+	                success: function success(response) {
+	                    response === 'ok' ? (alert("Thank you! AYOOO will be in touch soon!"), window.location = "/#/dashboard") : alert("Oops, something happened! Please send your request again.");
 	                },
-	                error: function error() {
+	                error: function error(_error) {
+	                    console.log(_error);
 	                    alert("There was a problem. Please send your request again.");
 	                }
 	            });
@@ -28032,11 +28030,8 @@
 	                method: 'POST',
 	                url: 'delivery?type=traveller&userID=' + userID,
 	                data: totalData,
-	                success: function success(data) {
-
-	                    alert("Thank you! AYOOO will be in touch soon!");
-
-	                    window.location = "/#/dashboard";
+	                success: function success(response) {
+	                    response === 'ok' ? (alert("Thank you! AYOOO will be in touch soon!"), window.location = "/#/dashboard") : alert("Oops, something happened! Please send your request again.");
 	                },
 	                error: function error(_error) {
 	                    console.log(_error);
