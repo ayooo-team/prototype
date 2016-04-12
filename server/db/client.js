@@ -27,7 +27,7 @@ function deleteIndex (indexName) {
     }, function (error, response) {
         console.log('RESPONSE', response);
         console.log('ERROR', error);
-    }););
+    });
 }
 
 function indexExists () {
@@ -37,7 +37,7 @@ function indexExists () {
     }, function (error, response) {
         console.log('RESPONSE', response);
         console.log('ERROR', error);
-    }););
+    });
 }
 
 function search () {
@@ -47,7 +47,7 @@ function search () {
     }, function (error, response) {
         console.log('RESPONSE', response);
         console.log('ERROR', error);
-    }););
+    });
 }
 
 function addDocument (type, payload) {
@@ -59,7 +59,7 @@ function addDocument (type, payload) {
     }, function (error, response) {
         console.log('RESPONSE', response);
         console.log('ERROR', error);
-    }););
+    });
 }
 
 module.exports = {
