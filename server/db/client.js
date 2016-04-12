@@ -12,63 +12,55 @@ var indexName = "ayooo";
 
 function initIndex () {
 
-    return client.indices.create({
+    client.indices.create({
         index: indexName
     }, function (error, response) {
-        console.log('RESPONSE', response);
-        console.log('ERROR', error);
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
 function deleteIndex (indexName) {
 
-    return client.indices.delete({
+    client.indices.delete({
         index: indexName
     }, function (error, response) {
-        console.log('RESPONSE', response);
-        console.log('ERROR', error);
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
 function indexExists () {
 
-    return client.indices.exists({
+    client.indices.exists({
         index: indexName
     }, function (error, response) {
-        console.log('RESPONSE', response);
-        console.log('ERROR', error);
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
-function search () {
+function searchDatabaseFor () {
 
-    return client.search({
+    client.search({
         index: indexName
     }, function (error, response) {
-        console.log('RESPONSE', response);
-        console.log('ERROR', error);
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
-function addDocument (type, payload) {
+function addDocument (type, payload, callback) {
 
-    console.log('TYPE', type);
-    console.log('PAYLOAD', payload);
-
-    return client.index({
+    client.create({
         index: indexName,
         type: type,
         body: payload
     }, function (error, response) {
-        console.log('RESPONSE', response);
-        console.log('ERROR', error);
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
 module.exports = {
+     addDocument: addDocument,
+     searchDatabaseFor: searchDatabaseFor,
      initIndex: initIndex,
      deleteIndex: deleteIndex,
-     indexExists: indexExists,
-     addDocument: addDocument,
-     search: search
+     indexExists: indexExists
  };
