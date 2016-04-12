@@ -144,9 +144,9 @@ class ConfirmParcel extends React.Component {
                   </div>
 
                   <div className="form-block">
-                      <h3 className="form-block-title">REQUESTED DATE (DD/MM/YYYY)</h3>
+                      <h3 className="form-block-title">REQUESTED DATE: </h3>
                       <p className="form-input-data">
-                          { "Preferred date of delivery: " + this.props.requestedDate }
+                          { "Date(DD/MM/YYYY): " + this.props.requestedDate }
                       </p>
                   </div>
 
