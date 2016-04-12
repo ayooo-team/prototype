@@ -5,13 +5,13 @@
 
 .form-block {
 
-    min-height: 10vh;
+    min-height: 80px;
     // border: 1px solid blue;
     position: relative;
 
     .form-block-title {
         text-align: left;
-        margin: 1.5vh 0;
+        margin: 10px 0;
     }
 
 
@@ -21,18 +21,18 @@
 
     .form-input-data {
         margin: 0;
-        font-size: 5vmin;
+        font-size: 1.2em;
     }
 
     input[type=text] {
-        height: 6vh;
-        font-size: 4.5vmin;
+        height: 40px;
+        font-size: 1.2em;
         display: block;
         margin: auto;
     }
 
     input[type=text][class*="col-"] { // only targets inputs of col-2
-        margin: 3vmin 0;
+        margin: 10px 0;
     }
 }
 
@@ -40,7 +40,7 @@
     display: block;
     text-align: left;
     padding-left: 2vw;
-    font-size: 7vmin;
+    font-size: 1.5em;
 }
 
 .weight-input-container {
@@ -51,7 +51,7 @@
 
 .input-number {
     width: 15vw;
-    height: 7vw;
+    height: 40px;
     font-size: 0.7em;
     display: inline !important;
 

@@ -1,12 +1,13 @@
 .login-title {
     font-weight: lighter;
-    margin: 20px 3vmin 30px 3vmin;
+    margin: 20px auto;
+    margin-bottom: 30px;
 }
 
 #login-email-input, #login-password-input {
 
         height: 40px;
-        font-size: 1em;
+        font-size: 1.5em;
         display: block;
         margin: 3vmin 0 7vmin 0;
 }
