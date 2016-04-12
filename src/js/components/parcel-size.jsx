@@ -122,7 +122,7 @@ class ParcelSize extends React.Component {
 
                   <div className="weight-input-container row">
                       <h4 className="input-title col-7">MAX WEIGHT:</h4>
-                      <input className="input-number large col-5" type="number" ref="weight" />
+                      <input className="input-number" type="number" ref="weight" />
                       <p className="unit col-2">kg</p>
                   </div>
               </div>
