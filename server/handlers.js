@@ -5,6 +5,7 @@ const Firebase = require('firebase');
 
 function addDeliveryRequest (request, reply) {
 
+    console.log('adding delivery request')
     var data = request.payload;
 
     if (!request.query.userID) {

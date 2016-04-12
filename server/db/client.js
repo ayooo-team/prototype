@@ -52,6 +52,9 @@ function search () {
 
 function addDocument (type, payload) {
 
+    console.log('TYPE', type);
+    console.log('PAYLOAD', payload);
+
     return client.index({
         index: indexName,
         type: type,
