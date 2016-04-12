@@ -108,36 +108,39 @@ class ParcelDetails extends React.Component {
 
           <div className="page form">
 
-                <div className="form-block">
-                    <h4 className="label page-header">
-                        PARCEL DETAILS:
-                    </h4>
-                    <input className={ inputSize12 } type="text" ref="parcelDescription" placeholder="List what is inside the parcel." defaultValue={ this.props.parcelDetails["tempDescription"] } />
-                </div>
+                <div className="journey-form">
 
-                <LineBreak />
+                    <div className="form-block">
+                        <h4 className="label page-header">
+                            PARCEL DETAILS:
+                        </h4>
+                        <input className={ inputSize12 } type="text" ref="parcelDescription" placeholder="List what is inside the parcel." defaultValue={ this.props.parcelDetails["tempDescription"] } />
+                    </div>
 
-                <div className="form-block">
-                    <h4 className={ labelSize8 }>
-                        Weight:
-                    </h4>
-                    <div className="input-and-unit">
-                        <input className={ inputNumberSize3 } type="text" ref="parcelWeight" defaultValue={ this.props.parcelDetails["tempWeight"] } />
-                        <p className={ unitSize1 } type="text">
-                            kg
-                        </p>
+                    <LineBreak />
+
+                    <div className="form-block">
+                        <h4 className={ labelSize8 }>
+                            Weight:
+                        </h4>
+                        <div className="input-and-unit">
+                            <input className={ inputNumberSize3 } type="text" ref="parcelWeight" defaultValue={ this.props.parcelDetails["tempWeight"] } />
+                            <p className={ unitSize1 } type="text">
+                                kg
+                            </p>
+                        </div>
+                    </div>
+
+                    <LineBreak />
+
+                    <div className="form-block">
+                        <h4 className={ labelSize4 }>
+                            Size:
+                        </h4>
+                        <div className={ setSize } type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>{ this.props.parcelSize["chosenOption"] } &#8594; </div>
                     </div>
                 </div>
-
-                <LineBreak />
-
-                <div className="form-block">
-                    <h4 className={ labelSize4 }>
-                        Size:
-                    </h4>
-                    <div className={ setSize } type="text" ref="parcelSize" onClick={ this.tempSaveFilledFields }>{ this.props.parcelSize["chosenOption"] } &#8594; </div>
-                </div>
-
+                
                 <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
 
             </div>
