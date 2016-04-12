@@ -114,15 +114,17 @@ class ParcelSize extends React.Component {
 
           <div className="page data-collection-page">
 
-              <h3 className="page-header">DEFINE YOUR CAPACITY</h3>
-              <div className="radio-container">
-                  { radioDiv }
-              </div>
+              <div className="journey-form">
+                  <h3 className="page-header">DEFINE YOUR CAPACITY</h3>
+                  <div className="radio-container">
+                      { radioDiv }
+                  </div>
 
-              <div className="weight-input-container row">
-                  <h4 className="input-title col-7">MAX WEIGHT:</h4>
-                  <input className="input-number large col-5" type="number" ref="weight" />
-                  <p className="unit col-2">kg</p>
+                  <div className="weight-input-container row">
+                      <h4 className="input-title col-7">MAX WEIGHT:</h4>
+                      <input className="input-number large col-5" type="number" ref="weight" />
+                      <p className="unit col-2">kg</p>
+                  </div>
               </div>
 
               <GhostButton onClick={ this.storeRadioOptionAndWeight } buttonText="NEXT" />
@@ -133,10 +135,13 @@ class ParcelSize extends React.Component {
 
           <div className="page data-collection-page">
 
-              <h3 className="page-header">DEFINE YOUR CAPACITY</h3>
-              <div className="radio-container">
-                  { radioDiv }
+              <div className="journey-form">
+                  <h3 className="page-header">DEFINE YOUR CAPACITY</h3>
+                  <div className="radio-container">
+                      { radioDiv }
+                  </div>
               </div>
+
 
               <GhostButton onClick={ this.storeRadioOptionOnly } buttonText="BACK" />
 
