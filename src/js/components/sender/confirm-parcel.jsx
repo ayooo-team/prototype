@@ -59,7 +59,6 @@ class ConfirmParcel extends React.Component {
 
         const userID = this.getUserID();
 
-
         let totalData = {
             timestamp:         Date.now(),
             userID:            userID,

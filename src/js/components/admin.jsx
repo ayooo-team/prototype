@@ -4,7 +4,6 @@ import React from 'react';
 import DownloadButton from './download-button.jsx';
 import GhostButton from './ghost-button.jsx';
 
-
 class Admin extends React.Component {
 
     constructor (props) {
@@ -91,8 +90,6 @@ class Admin extends React.Component {
                 </div>
             </div>
 
-
-
         ) : this.state && this.state.userLoggedIn ? (
 
             <div className="page form">
@@ -118,6 +115,7 @@ class Admin extends React.Component {
             </div>
         )
     }
+
 }
 
 export default Admin;

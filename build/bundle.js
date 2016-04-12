@@ -24990,10 +24990,16 @@
 
 	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        _this.getFormData = _this.getFormData.bind(_this);
+	        _this.checkAuthState = _this.checkAuthState.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(Login, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.checkAuthState();
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
 
@@ -27194,7 +27200,6 @@
 	            var deliveryRequest = {};
 
 	            if (this.refs.setDeliveryDate.value === "today") {
-
 	                var now = new Date();
 	                var date = now.getDate();
 	                var month = now.getMonth() < 10 ? "0" + (now.getMonth() + 1) : now.getMonth() + 1;
@@ -27981,8 +27986,8 @@
 	    }, {
 	        key: 'getUserID',
 	        value: function getUserID() {
-	            var storage = localStorage.getItem("firebase:session::ayooo");
 
+	            var storage = localStorage.getItem("firebase:session::ayooo");
 	            return JSON.parse(storage).uid;
 	        }
 	    }, {

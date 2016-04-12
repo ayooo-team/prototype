@@ -58,7 +58,6 @@ class SetDeliveryDate extends React.Component {
         let deliveryRequest = {};
 
         if (this.refs.setDeliveryDate.value === "today") {
-
             const now = new Date();
             const date = now.getDate();
             const month = now.getMonth() < 10 ? "0" + (now.getMonth() + 1) : (now.getMonth() + 1);

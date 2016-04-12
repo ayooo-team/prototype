@@ -34,8 +34,8 @@ class ConfirmTravel extends React.Component {
     }
 
     getUserID () {
-        const storage = localStorage.getItem("firebase:session::ayooo");
 
+        const storage = localStorage.getItem("firebase:session::ayooo");
         return JSON.parse(storage).uid;
     }
 

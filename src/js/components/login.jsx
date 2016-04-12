@@ -14,6 +14,11 @@ class Login extends React.Component {
 
         this.checkAuthState = this.checkAuthState.bind(this);
         this.getFormData = this.getFormData.bind(this);
+        this.checkAuthState = this.checkAuthState.bind(this);
+    }
+
+    componentDidMount () {
+        this.checkAuthState();
     }
 
     componentDidMount () {
@@ -91,10 +96,12 @@ class Login extends React.Component {
                 <GhostButton onClick={ this.getFormData } buttonText="LOG IN / SIGN UP" />
             </div>
         ) : (
+
             <div className="page">
                 <h1>LOADING...</h1>
             </div>
-        );
+
+        )
     }
 };
 
