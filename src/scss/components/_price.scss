@@ -3,9 +3,11 @@
 }
 
 .price-input {
-    height: 9vh;
-    font-size: 10vmin;
-    margin: 1.5vmin 0 1vmin 0;
+    height: 40px;
+    width: 90px;
+    font-size: 1.2em;
+    margin: 10px 0 5px 0;
+    text-align: right;
 }
 
 .price-area {
@@ -18,7 +20,7 @@
         font-size: 8vmin;
         text-align: right;
         padding: auto;
-        margin: auto;
+        margin: 18px 0;
     }
 }
 
