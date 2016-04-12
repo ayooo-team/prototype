@@ -79,13 +79,13 @@ class ConfirmParcel extends React.Component {
             method: 'POST',
             url: 'delivery?type=sender&userID=' + userID,
             data: totalData,
-            success: (data) => {
-
-                alert("Thank you! AYOOO will be in touch soon!");
-
-                window.location = "/#/dashboard";
+            success: (response) => {
+                response === 'ok' ?
+                ( alert("Thank you! AYOOO will be in touch soon!"), window.location = "/#/dashboard" ) :
+                alert("Oops, something happened! Please send your request again.");
             },
-            error: () => {
+            error: (error) => {
+                console.log(error);
                 alert("There was a problem. Please send your request again.");
             }
         });
