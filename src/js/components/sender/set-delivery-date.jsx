@@ -132,6 +132,8 @@ class SetDeliveryDate extends React.Component {
 
             <div className="page form-block set-delivery-date-container">
 
+                <div className="journey-form">
+
                     <label className="col-12 page-header">When do you need your parcel to be delivered?</label>
 
                     <select className="col-12" ref="setDeliveryDate" id="setDeliveryDate" onChange={ this.ifFuture }>
@@ -146,7 +148,8 @@ class SetDeliveryDate extends React.Component {
                         <input className="col-4 form-input flex-item" type="text" ref="deliveryDateYear" maxLength="4" style={{ display: this.state.dateSetter }} placeholder="YYYY" />
                     </div>
 
-                    <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
+                </div>
+                <GhostButton onClick={ this.getFormData } buttonText="NEXT" />
             </div>
         );
     }
