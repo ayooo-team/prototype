@@ -5,7 +5,6 @@ const Firebase = require('firebase');
 
 function addDeliveryRequest (request, reply) {
 
-    console.log('adding delivery request')
     var data = request.payload;
 
     if (!request.query.userID) {
@@ -16,25 +15,20 @@ function addDeliveryRequest (request, reply) {
 
         return new Error('Payload to server was empty.');
     }
-    const userID = request.query.userID;
 
-    const firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userID);
+    var userID = request.query.userID;
+    var firebaseApp = new Firebase("https://ayooo.firebaseio.com/users/" + userID);
 
     firebaseApp.once('value').then((userData) => {
 
+        var type = request.query.type;
         data.customerName = userData.val().name;
         data.customerEmail = userData.val().email;
         data.timestamp = Date(Date.now());
 
-        const type = request.query.type;
-
         // elasticsearch.deleteIndex("ayooo")
-        var result = elasticsearch.addDocument(
-            type,
-            data
-        ).then( (result) => {
-
-            reply(result);
+        elasticsearch.addDocument(type, data, (response) => {
+            reply(response);
         });
     });
 }
@@ -44,8 +38,6 @@ function getCSVFile (request, reply) {
     let type = request.query;
 
     var data = getData(type, function (data) {
-
-        console.log("returned data",data);
 
         var sortedByTime = data.sort(function (a, b) {
 
@@ -61,7 +53,7 @@ function getCSVFile (request, reply) {
 function getData (query, callback) {
 
     var requestedType = query.type;
-    elasticsearch.search()
+    elasticsearch.searchDatabaseFor()
         .then((result) => {
 
             var filteredData = result.hits.hits.filter((datum) => {
