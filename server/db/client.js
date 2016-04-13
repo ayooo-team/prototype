@@ -37,12 +37,14 @@ function indexExists () {
     });
 }
 
-function searchDatabaseFor () {
+function searchDatabaseFor (callback) {
 
     client.search({
         index: indexName
     }, function (error, response) {
-        return error ? callback("notOk") : callback("ok");
+        console.log("RESPONSE", response);
+        console.log("ERROR", error);
+        return error ? callback(JSON.stringify(error)) : callback(JSON.stringify(response));
     });
 }
 

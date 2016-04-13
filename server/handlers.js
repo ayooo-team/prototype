@@ -37,7 +37,7 @@ function getCSVFile (request, reply) {
 
     let type = request.query;
 
-    var data = getData(type, function (data) {
+    var data = getData(type, (data) => {
 
         var sortedByTime = data.sort(function (a, b) {
 
@@ -45,7 +45,6 @@ function getCSVFile (request, reply) {
         });
 
         var csvFile = toCSV(sortedByTime);
-
         reply(csvFile);
     });
 }
@@ -53,23 +52,21 @@ function getCSVFile (request, reply) {
 function getData (query, callback) {
 
     var requestedType = query.type;
-    elasticsearch.searchDatabaseFor()
-        .then((result) => {
+    elasticsearch.searchDatabaseFor((result) => {
 
-            var filteredData = result.hits.hits.filter((datum) => {
+        if (result) {
 
+            var resultObject = JSON.parse(result);
+            var filteredData = resultObject.hits.hits.filter((datum) => {
                 return datum._type === requestedType;
             });
 
             var cleanedData = filteredData.map((element) => {
-
                 return element._source;
             });
-
             callback(cleanedData);
-        }).catch((error) => {
+        }
 
-        console.error("Error:", error.message);
     });
 }
 
