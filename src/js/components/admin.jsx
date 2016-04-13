@@ -20,19 +20,15 @@ class Admin extends React.Component {
     }
 
     componentDidMount () {
-
         this.getUserID();
     }
 
     getUserID (callback) {
-
         const storedInfo = localStorage.getItem("firebase:session::ayooo");
 
         storedInfo ?
         this.checkIfAdmin(JSON.parse(storedInfo).uid) :
-        this.setState({
-            userLoggedIn: true
-        })
+        ( alert("You are not authorised to view this page."), this.setState({ userLoggedIn: true }) );
     }
 
     checkIfAdmin(userID) {
@@ -44,15 +40,13 @@ class Admin extends React.Component {
             const adminID = adminDetails["id"];
             userID === adminID ?
             this.setState({ pageReady: true }) :
-            this.setState({ userLoggedIn: true })
+            ( alert("You are not authorised to view this page."), this.setState({ userLoggedIn: true }) );
         });
     }
 
     getFormData (event) {
 
         event.preventDefault();
-
-        console.log(this.refs);
 
         const credentials = {
             email: this.refs.email.value,
@@ -64,8 +58,13 @@ class Admin extends React.Component {
 
     logUserIn (credentials) {
 
+        if (localStorage.getItem("firebase:session::ayooo")) {
+            localStorage.removeItem("firebase:session::ayooo");
+        }
+
         const firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
         firebaseApp.authWithPassword(credentials, (error, authData) => {
+
             if (authData) {
                 const userID = authData.uid;
                 this.checkIfAdmin(userID);
@@ -76,8 +75,6 @@ class Admin extends React.Component {
     }
 
     render () {
-
-        console.log(this.state);
 
         return this.state && this.state.pageReady ? (
             <div className="page">
