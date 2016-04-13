@@ -25921,24 +25921,23 @@
 	    _createClass(Admin, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-
+	            console.log("ONCE COMPONENT HAS MOUNTED");
 	            this.getUserID();
 	        }
 	    }, {
 	        key: 'getUserID',
 	        value: function getUserID(callback) {
-
+	            console.log("GETTING ID");
 	            var storedInfo = localStorage.getItem("firebase:session::ayooo");
 
-	            storedInfo ? this.checkIfAdmin(JSON.parse(storedInfo).uid) : this.setState({
-	                userLoggedIn: true
-	            });
+	            storedInfo ? this.checkIfAdmin(JSON.parse(storedInfo).uid) : (alert("You are not authorised to view this page."), this.setState({ userLoggedIn: true }));
 	        }
 	    }, {
 	        key: 'checkIfAdmin',
 	        value: function checkIfAdmin(userID) {
 	            var _this2 = this;
 
+	            console.log("CHECKING IF ADMIN", userID);
 	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/admin");
 
 	            firebaseApp.once('value', function (adminInfo) {
@@ -25953,7 +25952,7 @@
 
 	            event.preventDefault();
 
-	            console.log(this.refs);
+	            console.log("GETTING FORM DATA");
 
 	            var credentials = {
 	                email: this.refs.email.value,
@@ -25967,8 +25966,10 @@
 	        value: function logUserIn(credentials) {
 	            var _this3 = this;
 
+	            console.log("LOGGING IN WITH CRED");
 	            var firebaseApp = new Firebase("https://ayooo.firebaseio.com/");
 	            firebaseApp.authWithPassword(credentials, function (error, authData) {
+	                console.log("AUTHDATA", authData);
 	                if (authData) {
 	                    var userID = authData.uid;
 	                    _this3.checkIfAdmin(userID);
@@ -25980,8 +25981,6 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-
-	            console.log(this.state);
 
 	            return this.state && this.state.pageReady ? _react2.default.createElement(
 	                'div',
