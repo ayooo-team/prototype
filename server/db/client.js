@@ -1,59 +1,68 @@
 'use strict';
 
 var elasticsearch = require('elasticsearch');
+var connectionToElasticSearch = process.env.SEARCHBOX_SSL_URL || 'localhost:9200';
 
-const client = new elasticsearch.Client({
-    host: 'localhost:9200',
+var client = new elasticsearch.Client({
+    host: connectionToElasticSearch,
     log: 'error'
 });
 
-const indexName = "ayooo";
+var indexName = "ayooo";
 
 function initIndex () {
 
-    return client.indices.create({
+    client.indices.create({
         index: indexName
+    }, function (error, response) {
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
 function deleteIndex (indexName) {
 
-    return client.indices.delete({
+    client.indices.delete({
         index: indexName
+    }, function (error, response) {
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
 function indexExists () {
 
-    return client.indices.exists({
+    client.indices.exists({
         index: indexName
+    }, function (error, response) {
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
-function search () {
+function searchDatabaseFor (callback) {
 
-    return client.search({
+    client.search({
         index: indexName
+    }, function (error, response) {
+        console.log("RESPONSE", response);
+        console.log("ERROR", error);
+        return error ? callback(JSON.stringify(error)) : callback(JSON.stringify(response));
     });
 }
 
-function addDocument (type, payload) {
+function addDocument (type, payload, callback) {
 
-    return client.index({
+    client.create({
         index: indexName,
         type: type,
-        body: payload,
-        suggest: {
-            input: payload.item.split(" "),
-            output: payload.item
-        }
+        body: payload
+    }, function (error, response) {
+        return error ? callback("notOk") : callback("ok");
     });
 }
 
 module.exports = {
+     addDocument: addDocument,
+     searchDatabaseFor: searchDatabaseFor,
      initIndex: initIndex,
      deleteIndex: deleteIndex,
-     indexExists: indexExists,
-     addDocument: addDocument,
-     search: search
+     indexExists: indexExists
  };

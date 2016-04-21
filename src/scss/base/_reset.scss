@@ -1,24 +1,20 @@
 html, body {
     padding: 0;
     margin: 0;
-    width: 100%;
+    // width: 100%;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-*, *:before, *:after {
-  box-sizing: inherit;
-}
-
-h1, h2, h3, h4 {
-    margin: 0;
+input:focus, textarea:focus {
+    outline: none;
 }
 
 button {
     margin: 0;
     background-color: transparent;
+
+    &:active {
+        background-color: transparent;
+    }
 }
 
 // div {

@@ -24,19 +24,6 @@ module.exports = [
     {
         method: 'GET',
         path: '/download',
-        handler: function (request, reply) {
-
-            var data = handlers.getData(function (data) {
-
-                var sortedByTime = data.sort(function (a, b) {
-
-                    return a.timestamp < b.timestamp;
-                });
-
-                var csvFile = handlers.toCSV(sortedByTime);
-                
-                reply(csvFile);
-            });
-        }
+        handler: handlers.getCSVFile
     }
 ];

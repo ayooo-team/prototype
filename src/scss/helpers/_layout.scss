@@ -1,0 +1,39 @@
+.page {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    min-height: 500px;
+
+    h1:first-of-type,
+    h2:first-of-type,
+    h3:first-of-type {
+
+        // padding: 2vh;
+    }
+
+    .page-header {
+        font-size: 1.3em;
+        padding: 20px 0;
+        margin: 0;
+    }
+}
+
+.left {
+    text-align: left;
+}
+
+
+.flex-column-wrapper {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-item {
+    flex: 1;
+}

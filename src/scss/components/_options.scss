@@ -1,0 +1,63 @@
+.radio-container {
+
+    width: 100%;
+
+    .radio-row {
+
+        padding: 2vh 1vh;
+
+        &.selected {
+            background-color: $light-green;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .radio-image {
+            padding-left: 3vw;
+        }
+
+        .radio-block-title, .radio-block-text {
+            text-align: left;
+            padding: 1vw;
+        }
+
+        .radio-block-title {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+            padding: 1vw;
+        }
+
+        .radio-selected-tick {
+            width: 4vh;
+            height: 4vh;
+            margin-top: 2vh;
+        }
+    }
+}
+
+
+.radio-block {
+
+    margin: 3vh 2vh;
+    width: 90vw;
+
+    .description {
+
+        flex-grow: 3;
+        margin: auto;
+
+        h4, p {
+            // width: 60vw;
+        }
+
+        * {
+            text-align: left;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+.dashboard-container {
+
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+
+    h1, h4 {
+        font-weight: lighter;
+    }
+
+    h4 {
+        letter-spacing: 0.1em;
+        padding-left: 0.1em;
+    }
+
+    h1 {
+        letter-spacing: 0.2em;
+        padding-left: 0.2em;
+        font-size: 3.5em;
+    }
+}
+
+.logo {
+    display: block;
+    height: 25vh;
+    margin: 0 auto;
+    padding-top: 6vh;
+    -webkit-filter: drop-shadow(0.4em 0.4em 0.4em #555);
+    filter: drop-shadow(0.4em 0.4em 0.4em #555);
+}

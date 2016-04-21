@@ -1,0 +1,19 @@
+.user-details-page {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 5vw;
+}
+
+.user-details {
+
+    .form-block > h4 {
+
+        font-size: 4vmin;
+    }
+
+}
+
+.input.col-6 {
+    width: 60%;
+}

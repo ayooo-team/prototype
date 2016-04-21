@@ -2,18 +2,20 @@
 
 import React from 'react';
 
-class TravelPost extends React.Component {
+class SendPost extends React.Component {
 
     constructor (props) {
 
-        super ();
+        super();
 
         this.state = {
-            type: "travel",
-            pageType: "/#travel-post",
-            pricePageDescription: "What is the minimum price you would make a delivery for?",
-            journeyData: "default",
+            type: "send",
+            pageType: "/#send-post",
+            pricePageDescription: "What is the maximum price you are willing to pay?",
+            pickUpData: "default",
             parcelSize: "default",
+            parcelDetails: "default",
+            requestedDate: "default",
             priceData: "default"
         };
 
@@ -38,11 +40,15 @@ class TravelPost extends React.Component {
             type: this.state.type,
             pageType: this.state.pageType,
             pricePageDescription: this.state.pricePageDescription,
-            saveJourneyData: this.createComponentDataSaverFor("journeyData"),
+            savePickUpData: this.createComponentDataSaverFor("pickUpData"),
+            saveParcelDetails: this.createComponentDataSaverFor("parcelDetails"),
             saveParcelSize: this.createComponentDataSaverFor("parcelSize"),
+            saveRequestedDate: this.createComponentDataSaverFor("requestedDate"),
             savePriceData: this.createComponentDataSaverFor("priceData"),
-            journeyData: this.state.journeyData,
+            pickUpData: this.state.pickUpData,
+            parcelDetails: this.state.parcelDetails,
             parcelSize: this.state.parcelSize,
+            requestedDate: this.state.requestedDate,
             priceData: this.state.priceData
         });
     }
@@ -55,4 +61,4 @@ class TravelPost extends React.Component {
     }
 }
 
-export default TravelPost;
+export default SendPost;

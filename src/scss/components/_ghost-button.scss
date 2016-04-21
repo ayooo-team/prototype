@@ -1,21 +1,36 @@
 .ghost-button {
+    display: block;
     text-align: center;
-    font-size: 0.8em;
-    width: 300px;
-    height: 30px;
-    padding: 0.7em;
-    margin: 3em auto 0em auto;
-    border-color: $dark-green;
+    font-size: 1.2em;
+    width: 90vw;
+    max-width: 450px;
+    height: 50px;
+    margin: 0.5em auto;
+    border-color: $light-green;
     border-style: solid;
     border-width: thin;
     border-radius: 6px;
     cursor: pointer;
+    color: $dark-green;
+
+    a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        margin: auto 0;
+    }
+
+    span {
+        height: 8vh;
+        line-height: 8vh;
+    }
 
     a:link, a:visited {
         text-decoration: none;
-        color: $dark-green;
+        color: inherit;
     }
-    &:hover {
-        border-color: $light-green;
+
+    &:focus {
+        outline: 0;
     }
 }

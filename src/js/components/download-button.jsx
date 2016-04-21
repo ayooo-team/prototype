@@ -9,7 +9,9 @@ const DownloadButton = (props) => {
     return (
         <button className="ghost-button">
             <a href={ href } download={ props.filename }>
-                { props.buttonText }
+                <span>
+                    { props.buttonText }
+                </span>
             </a>
         </button>
     );

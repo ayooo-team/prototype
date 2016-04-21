@@ -1,57 +1,83 @@
 .form {
-    width: 100%;
-    margin: auto;
-    text-align: center;
-}
-
-label {
-    font-size: 1.3em;
-    text-align: left;
-    display: block;
-    margin: 1em;
+    padding: 5vw;
+    min-height: 450px;
 }
 
 .form-block {
-    width: 100vw;
-}
 
-.form-input {
-    font-size: 1.2em;
-    line-height: 1.5em;
-    min-width: 100%;
-    display: block;
+    min-height: 80px;
+    padding: 2px;
+    // border: 1px solid blue;
+    position: relative;
 
-    &:focus {
-        outline: none;
-    }
-}
-
-@media (min-width: 460px) {
-    label {
-        font-size: 1em;
+    .form-block-title {
         text-align: left;
+        margin: 10px 0;
     }
 
-    .form-input {
+
+    .form-input { // input-text
+
+    }
+
+    .form-input-data {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    input[type=text] {
+        height: 40px;
         font-size: 1em;
-        line-height: 1.5em;
-        min-width: 40%;
-        display: inline-block;
+        display: block;
+        margin: auto;
+    }
+
+    input[type=text][class*="col-"] { // only targets inputs of col-2
+        margin: 10px 0;
     }
 }
 
-
-.flex-container {
-    display: flex;
+.label {
+    display: block;
+    text-align: left;
+    font-size: 1.2em;
 }
 
-.flex-wrapper {
-    display: flex;
-    flex: 1;
-    margin: auto;
+.weight-input-container {
+    padding: 5px;
+    h4{
+        margin: 15px 0px;
+    }
+    .input-number {
+        font-size: 1em;
+    }
 }
 
-.flex-item {
-    flex: 1;
-    max-width: 10vw;
+.input-number {
+    width: 15vw;
+    height: 40px;
+    font-size: 0.7em;
+    display: inline !important;
+    margin: 2px;
+
+
+    &.large {
+        // width: 20vw;
+        // height: 12vw;
+    }
+}
+
+.unit {
+    margin: 19px 2px;
+    font-size: 1.1em;
+    text-align: left;
+    padding-left: 0.5vmin;
+}
+
+
+/*http://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
