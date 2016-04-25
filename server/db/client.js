@@ -19,7 +19,7 @@ function initIndex () {
     });
 }
 
-function deleteIndex (indexName) {
+function deleteIndex (indexName, callback) {
 
     client.indices.delete({
         index: indexName
@@ -37,14 +37,23 @@ function indexExists () {
     });
 }
 
-function searchDatabaseFor (callback) {
+function searchDatabaseFor (type, callback) {
 
     client.search({
-        index: indexName
+        index: indexName,
+        type: type,
+        size: '10000'
     }, function (error, response) {
-        console.log("RESPONSE", response);
-        console.log("ERROR", error);
-        return error ? callback(JSON.stringify(error)) : callback(JSON.stringify(response));
+        if (error) {
+            callback("errorFromElasticSearch: ", JSON.stringify(error));
+        } else {
+            var data = response["hits"]["hits"];
+            if ( data === '[]' ) {
+                callback("emptyArray");
+            } else {
+                callback(JSON.stringify(response));
+            }
+        }
     });
 }
 
@@ -65,4 +74,4 @@ module.exports = {
      initIndex: initIndex,
      deleteIndex: deleteIndex,
      indexExists: indexExists
- };
+};
