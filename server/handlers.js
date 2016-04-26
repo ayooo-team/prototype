@@ -26,7 +26,9 @@ function addDeliveryRequest (request, reply) {
         data.customerEmail = userData.val().email;
         data.timestamp = Date(Date.now());
 
-        // elasticsearch.deleteIndex("ayooo")
+        // elasticsearch.deleteIndex("ayooo", (response) => {
+        //     console.log("@@@@@@@@", response);
+        // });
         elasticsearch.addDocument(type, data, (response) => {
             reply(response);
         });
@@ -52,21 +54,17 @@ function getCSVFile (request, reply) {
 function getData (query, callback) {
 
     var requestedType = query.type;
-    elasticsearch.searchDatabaseFor((result) => {
+    elasticsearch.searchDatabaseFor(requestedType, (result) => {
 
-        if (result) {
-
-            var resultObject = JSON.parse(result);
-            var filteredData = resultObject.hits.hits.filter((datum) => {
-                return datum._type === requestedType;
-            });
-
-            var cleanedData = filteredData.map((element) => {
+        if (!result) {
+            callback("no result from elasticsearch");
+        } else {
+            var data = result["hits"]["hits"];
+            var cleanedData = data.map((element) => {
                 return element._source;
             });
             callback(cleanedData);
         }
-
     });
 }
 
@@ -87,7 +85,6 @@ function getUserProfile (dataArray, callback) {
         firebaseApp.once('value')
             .then((snapshot) => {
 
-
                 snapshot.forEach((child) => {
 
                     if (child.key() === ayoooRequest.userID) {
@@ -103,7 +100,6 @@ function getUserProfile (dataArray, callback) {
                 })
             })
 
-
             // console.log(index);
             // if (index + 1 === dataArray.length) {
             //
@@ -116,17 +112,14 @@ function getUserProfile (dataArray, callback) {
 function toCSV (data) {
 
     if (typeof data !== 'string' && typeof data !== 'object') {
-
         throw new Error("Argument must be a string or an object");
     }
 
     if (typeof data === 'string') {
-
         data = JSON.parse(data);
     }
 
     if (!Array.isArray(data)) {
-
         data = [data];
     }
 
