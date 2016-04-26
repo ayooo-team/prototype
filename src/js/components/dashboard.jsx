@@ -29,9 +29,9 @@ class Dashboard extends React.Component {
                 <h1>AYOOO</h1>
                 <h4>How are you using the app today?</h4>
                 <div className="button-wrapper">
-                    <GhostButton pageLink="/travel-post" buttonText="Send a Parcel" />
+                    <GhostButton pageLink="/travel-post" buttonText="Deliver a Parcel" />
 
-                    <GhostButton pageLink="/send-post" buttonText="Deliver a Parcel" />
+                    <GhostButton pageLink="/send-post" buttonText="Send a Parcel" />
                 </div>
 
 
