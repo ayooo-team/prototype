@@ -45,13 +45,14 @@ function searchDatabaseFor (type, callback) {
         size: '10000'
     }, function (error, response) {
         if (error) {
-            callback("errorFromElasticSearch: ", JSON.stringify(error));
+            var errorMessage = "errorFromElasticSearch: " + error;
+            callback(errorMessage);
         } else {
             var data = response["hits"]["hits"];
             if ( data === '[]' ) {
                 callback("emptyArray");
             } else {
-                callback(JSON.stringify(response));
+                callback(response);
             }
         }
     });

@@ -59,7 +59,7 @@ function getData (query, callback) {
         if (!result) {
             callback("no result from elasticsearch");
         } else {
-            var data = JSON.parse(result)["hits"]["hits"];
+            var data = result["hits"]["hits"];
             var cleanedData = data.map((element) => {
                 return element._source;
             });
